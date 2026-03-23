@@ -11,7 +11,7 @@ author_email = "shadrovv@gmail.com"
 [tool.briefcase.app.arsenal]
 formal_name = "Arsenal"
 description = "Arsenal"
-long_description = "Arsenal methodology for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders, primarily those undergoing compulsory treatment and involuntarily hospitalized. The main focus of the technique is to identify targets for therapeutic intervention and track the dynamics of those changes that were achieved during this intervention."
+long_description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders, primarily those undergoing compulsory treatment and involuntarily hospitalized. The main focus of the technique is to identify targets for therapeutic intervention and track the dynamics of those changes that were achieved during this intervention."
 sources = [
     "src/arsenal",
 ]

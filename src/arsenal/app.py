@@ -13,6 +13,7 @@ from textual.css.query import NoMatches
 from rich.style import Style
 from rich.text import Text
 from pathlib import Path
+from platformdirs import user_documents_path
 from datetime import datetime
 import json
 import uuid
@@ -69,14 +70,13 @@ ScrollBar.renderer = SlimScrollBarRender
 # Задаем хранение и обработку данных
 class DataManager:
     def __init__(self):
-        # Определяем базовую папку (кроссплатформенно)
-        self.base_dir = Path.home() / ".arsenal_data"
+        # Автоматически находит правильный путь к Документам
+        self.base_dir = user_documents_path() / ".arsenal_data"
         self.db_path = self.base_dir / "arsenal_database.json"
         self.reports_dir = self.base_dir / "arsenal_reports"
         
-        # Создаем структуру папок сразу при запуске
-        self.base_dir.mkdir(exist_ok=True)
-        self.reports_dir.mkdir(exist_ok=True)
+        self.base_dir.mkdir(parents=True, exist_ok=True)
+        self.reports_dir.mkdir(parents=True, exist_ok=True)
         self.data = self.load_data()
 
     def load_data(self):
