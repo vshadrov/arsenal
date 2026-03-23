@@ -20,22 +20,26 @@ jobs:
       
       - name: Install Briefcase
         run: |
-          # В Linux используем системный пип, в остальных - обычный
-          python3 -m pip install briefcase
+          # Используем флаг для обхода ограничений системы
+          python3 -m pip install briefcase --break-system-packages
 
       - name: Build App
         run: |
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            # Для Linux вызываем через python3 -m briefcase
+            # Собираем Linux
             python3 -m briefcase package linux appimage --no-input --no-docker
             python3 -m briefcase package linux system --no-input
           elif [ "${{ matrix.os }}" = "windows-latest" ]; then
+            # Windows (здесь флаг не нужен, но briefcase вызывается так же)
             briefcase package windows app --no-input
           else
-            briefcase package macOS app --no-input --adhoc-sign
+            # macOS (тоже добавляем --break-system-packages если нужно, 
+            # но briefcase обычно справляется сам)
+            python3 -m briefcase package macOS app --no-input --adhoc-sign
           fi
         shell: bash
-        
+
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
