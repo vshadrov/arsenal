@@ -23,17 +23,16 @@ jobs:
       - name: Build App
         run: |
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            # Собираем AppImage и DEB (system)
             briefcase package linux appimage --no-input
             briefcase package linux system --no-input
           elif [ "${{ matrix.os }}" = "windows-latest" ]; then
-            # Собираем установщик MSI для Windows
             briefcase package windows msi --no-input
           else
-            # Собираем приложение для macOS
-            briefcase package macOS app --no-input
+            # Добавляем флаг --adhoc-sign для macOS
+            briefcase package macOS app --no-input --adhoc-sign
           fi
         shell: bash
+
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
