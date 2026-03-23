@@ -1,0 +1,722 @@
+Date/Time:       2026-03-23 08:53:58 
+Command line:    /home/shadrov/arsenal_project/venv/bin/briefcase update linux -r
+
+OS Release:      Linux 6.17.0-19-generic
+OS Version:      #19-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar  6 14:02:58 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-6.17.0-19-generic-x86_64-with-glibc2.42
+
+Python exe:      /home/shadrov/arsenal_project/venv/bin/python3
+Python version:  3.13.7 (main, Mar  3 2026, 12:19:54) [GCC 15.2.0]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.4.1
+Target platform: linux
+Target format:   system
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=en_US
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	LANG=en_US.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	OLDPWD=/home/shadrov/arsenal_project/resources
+	PATH=/home/shadrov/arsenal_project/venv/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PS1=(venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ 
+	PWD=/home/shadrov/arsenal_project
+	QT_ACCESSIBILITY=1
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/2905,unix/T480:/tmp/.ICE-unix/2905
+	SHELL=/bin/bash
+	SHLVL=1
+	TERM=xterm-256color
+	USER=shadrov
+	VIRTUAL_ENV=/home/shadrov/arsenal_project/venv
+	VIRTUAL_ENV_PROMPT=venv
+	VTE_VERSION=8003
+	WINDOWID=92274691
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xubuntu:/usr/share/xfce4:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	_=/home/shadrov/arsenal_project/venv/bin/briefcase
+
+pyproject.toml:
+# This project was generated with 0.4.1 using template: https://github.com/beeware/briefcase-template @ v0.4.1
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.1.0"
+url = "https://github.com/vshadrov/arsenal"
+license.file = "LICENSE"
+author = "Василий Шадров"
+author_email = "shadrovv@gmail.com"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Арсенал"
+description = "МОДРОП Арсенал"
+long_description = "Методика Арсенал для оценки динамики риска опасного поведения и совершения повторных общественно опасных деяний пациентами с психическими расстройствами, в первую очередь - проходящими принудительное лечение и госпитализированными в недобровольном порядке. Основным фокусом внимания методики является выявление мишеней для терапевтического воздействия и отслеживание динамики тех изменений, которых удалось добиться в ходе этого воздействия."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+console_app = true
+main_module = "arsenal.app"
+main_function = "main"
+formal_main = "arsenal.app:main"
+
+requires = [
+    "textual", 
+]
+test_requires = [
+    "pytest",
+]
+icon = "resources/arsenal"
+
+[tool.briefcase.app.arsenal.macOS]
+icon = "resources/arsenal"
+universal_build = true
+requires = [
+    # Add your macOS-specific app requirements here
+]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux]
+icon = "resources/images/arsenal"
+requires = [
+    # Add your Linux-specific app requirements here
+]
+console_app = true
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.debian]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.rhel]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.suse]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.arch]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.flatpak]
+icon = "resources/images/arsenal"
+flatpak_runtime = "org.freedesktop.Platform"
+flatpak_runtime_version = "25.08"
+flatpak_sdk = "org.freedesktop.Sdk"
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+icon = "resources/arsenal"
+requires = [
+    # Add your Windows-specific app requirements here
+]
+console = true
+categories = ["Office"]
+
+# Mobile deployments
+[tool.briefcase.app.arsenal.iOS]
+supported = false
+
+[tool.briefcase.app.arsenal.android]
+supported = false
+
+# Web deployments
+[tool.briefcase.app.arsenal.web]
+supported = false
+
+Briefcase Log:
+[08:52:19]                                                                                                                                                             system.py:190
+           [arsenal] Finalizing application configuration...                                                                                                           system.py:190
+           Targeting ubuntu:questing (Vendor base debian)                                                                                                              system.py:202
+           Targeting glibc 2.42                                                                                                                                        system.py:238
+           Targeting Python3.13                                                                                                                                        system.py:242
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     /usr/bin/python3 -c 'import sys; print(sys.version)'                                                                                            subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     3.13.7 (main, Mar  3 2026, 12:19:54) [GCC 15.2.0]                                                                                               subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     dpkg -s python3-dev                                                                                                                             subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     Package: python3-dev                                                                                                                            subprocess.py:839
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:839
+           >>>     Priority: optional                                                                                                                              subprocess.py:839
+           >>>     Section: python                                                                                                                                 subprocess.py:839
+           >>>     Installed-Size: 149                                                                                                                             subprocess.py:839
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:839
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:839
+           >>>     Multi-Arch: allowed                                                                                                                             subprocess.py:839
+           >>>     Source: python3-defaults                                                                                                                        subprocess.py:839
+           >>>     Version: 3.13.7-1                                                                                                                               subprocess.py:839
+           >>>     Replaces: python3 (<< 3.9.2-1~), python3.1 (<< 3.1.2+20100706-3)                                                                                subprocess.py:839
+           >>>     Depends: python3 (= 3.13.7-1), libpython3-dev (= 3.13.7-1), python3.13-dev (>= 3.13.7-1~), libjs-sphinxdoc (>= 8.2)                             subprocess.py:839
+           >>>     Breaks: python3 (<< 3.9.2-1~)                                                                                                                   subprocess.py:839
+           >>>     Description: header files and a static library for Python (default)                                                                             subprocess.py:839
+           >>>      Header files, a static library and development tools for building                                                                              subprocess.py:839
+           >>>      Python modules, extending the Python interpreter or embedding Python                                                                           subprocess.py:839
+           >>>      in applications.                                                                                                                               subprocess.py:839
+           >>>      .                                                                                                                                              subprocess.py:839
+           >>>      This package is a dependency package, which depends on Debian's default                                                                        subprocess.py:839
+           >>>      Python 3 version's headers (currently v3.13).                                                                                                  subprocess.py:839
+           >>>     Original-Maintainer: Matthias Klose <doko@debian.org>                                                                                           subprocess.py:839
+           >>>     Built-Using: sphinx (= 8.2.3-1ubuntu2)                                                                                                          subprocess.py:839
+           >>>     Homepage: https://www.python.org/                                                                                                               subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     dpkg -s dpkg-dev                                                                                                                                subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     Package: dpkg-dev                                                                                                                               subprocess.py:839
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:839
+           >>>     Priority: optional                                                                                                                              subprocess.py:839
+           >>>     Section: utils                                                                                                                                  subprocess.py:839
+           >>>     Installed-Size: 1778                                                                                                                            subprocess.py:839
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:839
+           >>>     Architecture: all                                                                                                                               subprocess.py:839
+           >>>     Multi-Arch: foreign                                                                                                                             subprocess.py:839
+           >>>     Source: dpkg                                                                                                                                    subprocess.py:839
+           >>>     Version: 1.22.21ubuntu3.1                                                                                                                       subprocess.py:839
+           >>>     Provides: dpkg-build-api (= 0), dpkg-build-api (= 1)                                                                                            subprocess.py:839
+           >>>     Depends: perl:any, libdpkg-perl (= 1.22.21ubuntu3.1), tar (>= 1.28-1), bzip2, xz-utils (>= 5.4.0), patch (>= 2.7), make, binutils,              subprocess.py:839
+           lto-disabled-list                                                                                                                                                        
+           >>>     Recommends: build-essential, gcc | c-compiler, fakeroot, gnupg | sq | sqop | rsop | gosop | pgpainless-cli | gpg-sq, gpgv | sqv | sqopv | rsopv subprocess.py:839
+           | sopv | gosop | pgpainless-cli | gpgv-sq, libalgorithm-merge-perl                                                                                                       
+           >>>     Suggests: debian-keyring, debian-tag2upload-keyring                                                                                             subprocess.py:839
+           >>>     Breaks: debhelper (<< 10.10.1~), gosop (<< 1.1.0~), libsop-java-java (<< 4.0.7~), pgpainless-cli (<< 1.3.13~), rsop (<< 0.4.0~), sq (<<         subprocess.py:839
+           0.40.0~), sqop (<< 0.27.2~), sqv (<< 1.3.0~)                                                                                                                             
+           >>>     Conffiles:                                                                                                                                      subprocess.py:839
+           >>>      /etc/dpkg/shlibs.default 1a2b9d0a869e2aa885ae3621c557fb95                                                                                      subprocess.py:839
+           >>>      /etc/dpkg/shlibs.override 84b1e69080569cc5c613a50887af5200                                                                                     subprocess.py:839
+           >>>     Description: Debian package development tools                                                                                                   subprocess.py:839
+           >>>      This package provides the development tools (including dpkg-source)                                                                            subprocess.py:839
+           >>>      required to unpack, build and upload Debian source packages.                                                                                   subprocess.py:839
+           >>>      .                                                                                                                                              subprocess.py:839
+           >>>      Most Debian source packages will require additional tools to build;                                                                            subprocess.py:839
+           >>>      for example, most packages need make and the C compiler gcc.                                                                                   subprocess.py:839
+           >>>     Homepage: https://wiki.debian.org/Teams/Dpkg                                                                                                    subprocess.py:839
+           >>>     Original-Maintainer: Dpkg Developers <debian-dpkg@lists.debian.org>                                                                             subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     dpkg -s g++                                                                                                                                     subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     Package: g++                                                                                                                                    subprocess.py:839
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:839
+           >>>     Priority: optional                                                                                                                              subprocess.py:839
+           >>>     Section: devel                                                                                                                                  subprocess.py:839
+           >>>     Installed-Size: 13                                                                                                                              subprocess.py:839
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:839
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:839
+           >>>     Source: gcc-defaults (1.229ubuntu1)                                                                                                             subprocess.py:839
+           >>>     Version: 4:15.2.0-4ubuntu1                                                                                                                      subprocess.py:839
+           >>>     Provides: c++-compiler                                                                                                                          subprocess.py:839
+           >>>     Depends: cpp (= 4:15.2.0-4ubuntu1), cpp-x86-64-linux-gnu (= 4:15.2.0-4ubuntu1), gcc (= 4:15.2.0-4ubuntu1), g++-15 (>= 15.2.0-2~),               subprocess.py:839
+           g++-x86-64-linux-gnu (= 4:15.2.0-4ubuntu1), gcc-15 (>= 15.2.0-2~)                                                                                                        
+           >>>     Suggests: g++-multilib                                                                                                                          subprocess.py:839
+           >>>     Description: GNU C++ compiler                                                                                                                   subprocess.py:839
+           >>>      This is the GNU C++ compiler, a fairly portable optimizing compiler for C++.                                                                   subprocess.py:839
+           >>>      .                                                                                                                                              subprocess.py:839
+           >>>      This is a dependency package providing the default GNU C++ compiler.                                                                           subprocess.py:839
+           >>>     Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>                                                                       subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     dpkg -s gcc                                                                                                                                     subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     Package: gcc                                                                                                                                    subprocess.py:839
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:839
+           >>>     Priority: optional                                                                                                                              subprocess.py:839
+           >>>     Section: devel                                                                                                                                  subprocess.py:839
+           >>>     Installed-Size: 37                                                                                                                              subprocess.py:839
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:839
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:839
+           >>>     Source: gcc-defaults (1.229ubuntu1)                                                                                                             subprocess.py:839
+           >>>     Version: 4:15.2.0-4ubuntu1                                                                                                                      subprocess.py:839
+           >>>     Provides: c-compiler                                                                                                                            subprocess.py:839
+           >>>     Depends: cpp (= 4:15.2.0-4ubuntu1), cpp-x86-64-linux-gnu (= 4:15.2.0-4ubuntu1), gcc-15 (>= 15.2.0-2~), gcc-x86-64-linux-gnu (=                  subprocess.py:839
+           4:15.2.0-4ubuntu1)                                                                                                                                                       
+           >>>     Recommends: libc6-dev | libc-dev                                                                                                                subprocess.py:839
+           >>>     Suggests: gcc-multilib, make, manpages-dev, autoconf, automake, libtool, flex, bison, gdb, gcc-doc                                              subprocess.py:839
+           >>>     Conflicts: gcc-doc (<< 1:2.95.3)                                                                                                                subprocess.py:839
+           >>>     Description: GNU C compiler                                                                                                                     subprocess.py:839
+           >>>      This is the GNU C compiler, a fairly portable optimizing compiler for C.                                                                       subprocess.py:839
+           >>>      .                                                                                                                                              subprocess.py:839
+           >>>      This is a dependency package providing the default GNU C compiler.                                                                             subprocess.py:839
+           >>>     Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>                                                                       subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     dpkg -s libc6-dev                                                                                                                               subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     Package: libc6-dev                                                                                                                              subprocess.py:839
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:839
+           >>>     Priority: optional                                                                                                                              subprocess.py:839
+           >>>     Section: libdevel                                                                                                                               subprocess.py:839
+           >>>     Installed-Size: 14413                                                                                                                           subprocess.py:839
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:839
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:839
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:839
+           >>>     Source: glibc                                                                                                                                   subprocess.py:839
+           >>>     Version: 2.42-0ubuntu3.1                                                                                                                        subprocess.py:839
+           >>>     Replaces: libc6 (<= 2.32-1)                                                                                                                     subprocess.py:839
+           >>>     Provides: libc-dev (= 2.42-0ubuntu3.1)                                                                                                          subprocess.py:839
+           >>>     Depends: libc6 (= 2.42-0ubuntu3.1), libc-dev-bin (= 2.42-0ubuntu3.1), linux-libc-dev, libcrypt-dev, rpcsvc-proto                                subprocess.py:839
+           >>>     Suggests: glibc-doc, manpages-dev                                                                                                               subprocess.py:839
+           >>>     Breaks: binutils (<< 2.38), catch (<< 1.12.2-0.1), heimdal-multidev (<= 7.7.0+dfsg-4), igblast (<= 1.19.0-1), libassimp-dev (<= 5.2.4~ds0-1),   subprocess.py:839
+           libasyncns-dev (<= 0.8-6build2), libatm1-dev (<= 1:2.5.1-4), libaws20-dev (<= 20.2-2+b1), libboinc-app-dev (<= 7.20.2+dfsg-1), libbson-dev (<=                           
+           1.22.0-1), libc6-dev-amd64-cross (<< 2.42~), libcups2-dev (<= 2.4.2-1), libdeal.ii-dev (<= 9.4.0-1), libdkim-dev (<= 1:1.0.21-4build3),                                  
+           libdolfin-dev-common (<= 2019.2.0~git20220407.d29e24d-5), libeckit-dev (<= 1.20.0-1), libfclib-dev (<= 3.1.0+dfsg-2), libfltk1.3-dev (<= 1.3.8-4+b1),                    
+           libghc-resolv-dev (<= 0.1.2.0-3), libghc-resolv-prof (<= 0.1.2.0-3), libglib2.0-dev (<= 2.72.3-1), libgloox-dev (<= 1.0.24-2+b1), libhesiod-dev (<=                      
+           3.2.1-3.1+b1), libinfinity-0.7-dev (<= 0.7.2-1build1), libinsighttoolkit4-dev (<= 4.13.3withdata-dfsg2-3+b1), libinsighttoolkit5-dev (<= 5.2.1-5+b1),                    
+           libismrmrd-dev (<= 1.8.0-2), libldap-dev (<= 2.5.12+dfsg-2), liblog4cplus-dev (<= 2.0.7-1), libloudmouth1-dev (<= 1.5.4-1), libmgl-dev (<= 8.0.1-2),                     
+           libmimalloc2.0 (<= 2.0.6+ds-1), libminc-dev (<= 2.4.03-5), libmongoc-dev (<= 1.22.1-1), libmrpt-ros1bridge-dev (<= 1:2.4.9+ds-4+b2), libmysqlclient-dev                  
+           (<= 8.0.29-1), libnetcdf-dev (<= 1:4.9.0-3), libnetcdf-mpi-dev (<= 1:4.9.0-1), libnetcdf-pnetcdf-dev (<= 1:4.9.0-1), libnfsidmap-dev (<= 1:2.6.1-2),                     
+           libns3-dev (<= 3.36.1+dfsg-4), libola-dev (<= 0.10.8.nojsmin-2), libopenafs-dev (<= 1.8.8.1-3), libopendkim-dev (<= 2.11.0~beta2-7), libopendmarc-dev                    
+           (<= 1.4.2-1), libopenms-dev (<= 2.6.0+cleaned1-3build4), libopenzwave1.6-dev (<= 1.6.1914+ds-1), libpg-query-dev (<= 13-2.1.2-2), librbl-dev (<=                         
+           2.11.0~beta2-7), libre-dev (<= 1.1.0-1build1), libshishi-dev (<= 1.0.2-11), libslurm-dev (<= 21.08.8.2-1), libsocksd0-dev (<= 1.4.2+dfsg-7build7),                       
+           libspf2-dev (<= 1.2.10-7.1+b1), libstrophe-dev (<= 0.12.1-2), libtaningia-dev (<= 0.2.2-2), libtrilinos-amesos-dev (<= 13.2.0-3),                                        
+           libtrilinos-amesos2-dev (<= 13.2.0-3), libtrilinos-anasazi-dev (<= 13.2.0-3), libtrilinos-aztecoo-dev (<= 13.2.0-3), libtrilinos-belos-dev (<=                           
+           13.2.0-3), libtrilinos-epetra-dev (<= 13.2.0-3), libtrilinos-epetraext-dev (<= 13.2.0-3), libtrilinos-galeri-dev (<= 13.2.0-3), libtrilinos-ifpack-dev                   
+           (<= 13.2.0-3), libtrilinos-ifpack2-dev (<= 13.2.0-3), libtrilinos-intrepid-dev (<= 13.2.0-3), libtrilinos-intrepid2-dev (<= 13.2.0-3),                                   
+           libtrilinos-isorropia-dev (<= 13.2.0-3), libtrilinos-kokkos-dev (<= 13.2.0-3), libtrilinos-kokkos-kernels-dev (<= 13.2.0-3), libtrilinos-komplex-dev                     
+           (<= 13.2.0-3), libtrilinos-ml-dev (<= 13.2.0-3), libtrilinos-moertel-dev (<= 13.2.0-3), libtrilinos-muelu-dev (<= 13.2.0-3), libtrilinos-nox-dev (<=                     
+           13.2.0-3), libtrilinos-phalanx-dev (<= 13.2.0-3), libtrilinos-pike-dev (<= 13.2.0-3), libtrilinos-piro-dev (<= 13.2.0-3), libtrilinos-pliris-dev (<=                     
+           13.2.0-3), libtrilinos-rol-dev (<= 13.2.0-3), libtrilinos-rtop-dev (<= 13.2.0-3), libtrilinos-rythmos-dev (<= 13.2.0-3), libtrilinos-sacado-dev (<=                      
+           13.2.0-3), libtrilinos-shylu-dev (<= 13.2.0-3), libtrilinos-stokhos-dev (<= 13.2.0-3), libtrilinos-stratimikos-dev (<= 13.2.0-3), libtrilinos-teko-dev                   
+           (<= 13.2.0-3), libtrilinos-teuchos-dev (<= 13.2.0-3), libtrilinos-thyra-dev (<= 13.2.0-3), libtrilinos-tpetra-dev (<= 13.2.0-3),                                         
+           libtrilinos-trilinoscouplings-dev (<= 13.2.0-3), libtrilinos-triutils-dev (<= 13.2.0-3), libtrilinos-xpetra-dev (<= 13.2.0-3), libtrilinos-zoltan2-dev                   
+           (<= 13.2.0-3), libvbr-dev (<= 2.11.0~beta2-7), libvisp-dev (<= 3.5.0-2+b1), libvotca-dev (<= 2022-3), libvtk6-dev (<= 6.3.0+dfsg2-8.1+b1), libvtk7-dev                   
+           (<= 7.1.1+dfsg2-10.2), open-vm-tools-dev (<= 2:12.0.5-2), pidgin-librvp (<= 0.9.7cvs-3), proftpd-dev (<= 1.3.7d+dfsg-2), slurm-wlm-basic-plugins-dev                     
+           (<= 21.08.8.2-1)                                                                                                                                                         
+           >>>     Conflicts: libc0.3-dev, libc6.1-dev                                                                                                             subprocess.py:839
+           >>>     Description: GNU C Library: Development Libraries and Header Files                                                                              subprocess.py:839
+           >>>      Contains the symlinks, headers, and object files needed to compile                                                                             subprocess.py:839
+           >>>      and link programs which use the standard C library.                                                                                            subprocess.py:839
+           >>>     Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>                                                                       subprocess.py:839
+           >>>     Homepage: https://www.gnu.org/software/libc/libc.html                                                                                           subprocess.py:839
+           >>>     Original-Vcs-Browser: https://salsa.debian.org/glibc-team/glibc                                                                                 subprocess.py:839
+           >>>     Original-Vcs-Git: https://salsa.debian.org/glibc-team/glibc.git                                                                                 subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     dpkg -s make                                                                                                                                    subprocess.py:839
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+           >>> Command Output:                                                                                                                                     subprocess.py:839
+           >>>     Package: make                                                                                                                                   subprocess.py:839
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:839
+           >>>     Priority: optional                                                                                                                              subprocess.py:839
+           >>>     Section: devel                                                                                                                                  subprocess.py:839
+           >>>     Installed-Size: 444                                                                                                                             subprocess.py:839
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:839
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:839
+           >>>     Multi-Arch: allowed                                                                                                                             subprocess.py:839
+           >>>     Source: make-dfsg                                                                                                                               subprocess.py:839
+           >>>     Version: 4.4.1-2                                                                                                                                subprocess.py:839
+           >>>     Replaces: make-guile                                                                                                                            subprocess.py:839
+           >>>     Depends: libc6 (>= 2.38)                                                                                                                        subprocess.py:839
+           >>>     Suggests: make-doc                                                                                                                              subprocess.py:839
+           >>>     Conflicts: make-guile                                                                                                                           subprocess.py:839
+           >>>     Description: utility for directing compilation                                                                                                  subprocess.py:839
+           >>>      GNU Make is a utility which controls the generation of executables                                                                             subprocess.py:839
+           >>>      and other target files of a program from the program's source                                                                                  subprocess.py:839
+           >>>      files. It determines automatically which pieces of a large program                                                                             subprocess.py:839
+           >>>      need to be (re)created, and issues the commands to (re)create                                                                                  subprocess.py:839
+           >>>      them. Make can be used to organize any task in which targets (files)                                                                           subprocess.py:839
+           >>>      are to be automatically updated based on input files whenever the                                                                              subprocess.py:839
+           >>>      corresponding input is newer --- it is not limited to building                                                                                 subprocess.py:839
+           >>>      computer programs. Indeed, Make is a general purpose dependency                                                                                subprocess.py:839
+           >>>      solver.                                                                                                                                        subprocess.py:839
+           >>>     Original-Maintainer: Stephen Kitt <skitt@debian.org>                                                                                            subprocess.py:839
+           >>>     Homepage: https://www.gnu.org/software/make/                                                                                                    subprocess.py:839
+           >>> Return code: 0                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+                                                                                                                                                                        update.py:63
+           [arsenal] Updating application code...                                                                                                                       update.py:63
+           Installing src/arsenal... started                                                                                                                           create.py:745
+           Installing src/arsenal... done                                                                                                                              create.py:745
+                                                                                                                                                                        update.py:67
+           [arsenal] Updating requirements...                                                                                                                           update.py:67
+           Installing app requirements... started                                                                                                                      create.py:668
+                                                                                                                                                                   subprocess.py:839
+           >>> Running Command:                                                                                                                                    subprocess.py:839
+           >>>     /home/shadrov/arsenal_project/venv/bin/python3 -u -X utf8 -m pip install --disable-pip-version-check --upgrade --no-user                        subprocess.py:839
+           --target=/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages textual                                                  
+           >>> Working Directory:                                                                                                                                  subprocess.py:839
+           >>>     /home/shadrov/arsenal_project                                                                                                                   subprocess.py:839
+[08:52:34] WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by                                      subprocess.py:196
+           'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/textual/                                                
+[08:52:50] WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by                                      subprocess.py:196
+           'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/textual/                                                
+[08:53:06] WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by                                      subprocess.py:196
+           'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/textual/                                                
+[08:53:23] WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by                                      subprocess.py:196
+           'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/textual/                                                
+[08:53:42] WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by                                      subprocess.py:196
+           'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/textual/                                                
+[08:53:57] ERROR: Could not find a version that satisfies the requirement textual (from versions: none)                                                            subprocess.py:196
+           ERROR: No matching distribution found for textual                                                                                                       subprocess.py:196
+           >>> Return code: 1                                                                                                                                      subprocess.py:839
+                                                                                                                                                                   subprocess.py:839
+           Installing app requirements... errored                                                                                                                      create.py:668
+                                                                                                                                                                      __main__.py:42
+           Unable to install requirements. This may be because one of your                                                                                            __main__.py:43
+           requirements is invalid, or because pip was unable to connect                                                                                              __main__.py:43
+           to the PyPI server.                                                                                                                                        __main__.py:43
+           Saving log... started                                                                                                                                      console.py:443
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/commands/create.py:613 in _pip_install                                                                 │
+│                                                                                                                                                                                  │
+│    610 │   │   │   ``subprocess.run`` when invoking pip.                                                                                                                         │
+│    611 │   │   """                                                                                                                                                               │
+│    612 │   │   try:                                                                                                                                                              │
+│ ❱  613 │   │   │   self.tools[app].app_context.run(                                                                                                                              │
+│    614 │   │   │   │   [                                                                                                                                                         │
+│    615 │   │   │   │   │   sys.executable,                                                                                                                                       │
+│    616 │   │   │   │   │   "-u",                                                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────╮                                      │
+│ │               app = <com.arsenal.arsenal v2.1.0 AppConfig>                                                                              │                                      │
+│ │ app_packages_path = PosixPath('/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages') │                                      │
+│ │      install_hint = ''                                                                                                                  │                                      │
+│ │          pip_args = ['textual']                                                                                                         │                                      │
+│ │        pip_kwargs = {}                                                                                                                  │                                      │
+│ │              self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0>                                │                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                      │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/integrations/subprocess.py:145 in inner                                                                │
+│                                                                                                                                                                                  │
+│   142 │   │   │   with sub.tools.console.release_console_control():                                                                                                              │
+│   143 │   │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                              │
+│   144 │   │   else:                                                                                                                                                              │
+│ ❱ 145 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   146 │                                                                                                                                                                          │
+│   147 │   return inner                                                                                                                                                           │
+│   148                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────── locals ──────────────────────────────────────────────╮                                                                            │
+│ │                    args = [                                                                       │                                                                            │
+│ │                           │   '/home/shadrov/arsenal_project/venv/bin/python3',                   │                                                                            │
+│ │                           │   '-u',                                                               │                                                                            │
+│ │                           │   '-X',                                                               │                                                                            │
+│ │                           │   'utf8',                                                             │                                                                            │
+│ │                           │   '-m',                                                               │                                                                            │
+│ │                           │   'pip',                                                              │                                                                            │
+│ │                           │   'install',                                                          │                                                                            │
+│ │                           │   '--disable-pip-version-check',                                      │                                                                            │
+│ │                           │   '--upgrade',                                                        │                                                                            │
+│ │                           │   '--no-user',                                                        │                                                                            │
+│ │                           │   ... +2                                                              │                                                                            │
+│ │                           ]                                                                       │                                                                            │
+│ │ remove_dynamic_elements = False                                                                   │                                                                            │
+│ │                     sub = <briefcase.integrations.subprocess.Subprocess object at 0x7903fd61e120> │                                                                            │
+│ │            wrapped_args = ()                                                                      │                                                                            │
+│ │          wrapped_kwargs = {'check': True, 'encoding': 'UTF-8'}                                    │                                                                            │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                            │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/integrations/subprocess.py:539 in run                                                                  │
+│                                                                                                                                                                                  │
+│   536 │   │   # caller sets stream_output=False, then ensure_console_is_safe() will                                                                                              │
+│   537 │   │   # disable any dynamic console elements while the command runs.                                                                                                     │
+│   538 │   │   if stream_output:                                                                                                                                                  │
+│ ❱ 539 │   │   │   return self._run_and_stream_output(args, filter_func=filter_func, **kwargs)                                                                                    │
+│   540 │   │                                                                                                                                                                      │
+│   541 │   │   # Can't filter non-streamed output.                                                                                                                                │
+│   542 │   │   if filter_func:                                                                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────── locals ─────────────────────────────────────────╮                                                                                      │
+│ │          args = [                                                                       │                                                                                      │
+│ │                 │   '/home/shadrov/arsenal_project/venv/bin/python3',                   │                                                                                      │
+│ │                 │   '-u',                                                               │                                                                                      │
+│ │                 │   '-X',                                                               │                                                                                      │
+│ │                 │   'utf8',                                                             │                                                                                      │
+│ │                 │   '-m',                                                               │                                                                                      │
+│ │                 │   'pip',                                                              │                                                                                      │
+│ │                 │   'install',                                                          │                                                                                      │
+│ │                 │   '--disable-pip-version-check',                                      │                                                                                      │
+│ │                 │   '--upgrade',                                                        │                                                                                      │
+│ │                 │   '--no-user',                                                        │                                                                                      │
+│ │                 │   ... +2                                                              │                                                                                      │
+│ │                 ]                                                                       │                                                                                      │
+│ │   filter_func = None                                                                    │                                                                                      │
+│ │        kwargs = {'check': True, 'encoding': 'UTF-8'}                                    │                                                                                      │
+│ │          self = <briefcase.integrations.subprocess.Subprocess object at 0x7903fd61e120> │                                                                                      │
+│ │ stream_output = True                                                                    │                                                                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────╯                                                                                      │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/integrations/subprocess.py:616 in _run_and_stream_output                                               │
+│                                                                                                                                                                                  │
+│   613 │   │   self._log_return_code(return_code)                                                                                                                                 │
+│   614 │   │                                                                                                                                                                      │
+│   615 │   │   if check and return_code:                                                                                                                                          │
+│ ❱ 616 │   │   │   raise subprocess.CalledProcessError(return_code, args, stderr=stderr)                                                                                          │
+│   617 │   │                                                                                                                                                                      │
+│   618 │   │   return subprocess.CompletedProcess(args, return_code, stderr=stderr)                                                                                               │
+│   619                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ────────────────────────────────────────────╮                                                                               │
+│ │        args = [                                                                                │                                                                               │
+│ │               │   '/home/shadrov/arsenal_project/venv/bin/python3',                            │                                                                               │
+│ │               │   '-u',                                                                        │                                                                               │
+│ │               │   '-X',                                                                        │                                                                               │
+│ │               │   'utf8',                                                                      │                                                                               │
+│ │               │   '-m',                                                                        │                                                                               │
+│ │               │   'pip',                                                                       │                                                                               │
+│ │               │   'install',                                                                   │                                                                               │
+│ │               │   '--disable-pip-version-check',                                               │                                                                               │
+│ │               │   '--upgrade',                                                                 │                                                                               │
+│ │               │   '--no-user',                                                                 │                                                                               │
+│ │               │   ... +2                                                                       │                                                                               │
+│ │               ]                                                                                │                                                                               │
+│ │       check = True                                                                             │                                                                               │
+│ │ filter_func = None                                                                             │                                                                               │
+│ │      kwargs = {'encoding': 'UTF-8', 'stdout': -1, 'stderr': -2, 'bufsize': 1}                  │                                                                               │
+│ │     process = <Popen: returncode: 1 args: ['/home/shadrov/arsenal_project/venv/bin/python3...> │                                                                               │
+│ │ return_code = 1                                                                                │                                                                               │
+│ │        self = <briefcase.integrations.subprocess.Subprocess object at 0x7903fd61e120>          │                                                                               │
+│ │      stderr = None                                                                             │                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['/home/shadrov/arsenal_project/venv/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', '--target=/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages', 'textual']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/__main__.py:27 in main                                                                                 │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────╮                                  │
+│ │       command = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0>                                        │                                  │
+│ │       console = <briefcase.console.Console object at 0x7903fd952ba0>                                                                        │                                  │
+│ │             e = RequirementsInstallError()                                                                                                  │                                  │
+│ │ extra_cmdline = ['-r']                                                                                                                      │                                  │
+│ │       options = {'update_requirements': True, 'update_support': False, 'update_stub': False, 'update_resources': False, 'test_mode': False} │                                  │
+│ │     overrides = {}                                                                                                                          │                                  │
+│ │        result = 200                                                                                                                         │                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                  │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/commands/update.py:121 in __call__                                                                     │
+│                                                                                                                                                                                  │
+│   118 │   │                                                                                                                                                                      │
+│   119 │   │   state = None                                                                                                                                                       │
+│   120 │   │   for _, app_obj in sorted(apps_to_update.items()):                                                                                                                  │
+│ ❱ 121 │   │   │   state = self.update_app(                                                                                                                                       │
+│   122 │   │   │   │   app_obj,                                                                                                                                                   │
+│   123 │   │   │   │   update_requirements=update_requirements,                                                                                                                   │
+│   124 │   │   │   │   update_resources=update_resources,                                                                                                                         │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                   │
+│ │                   _ = 'arsenal'                                                                            │                                                                   │
+│ │                 app = None                                                                                 │                                                                   │
+│ │            app_name = None                                                                                 │                                                                   │
+│ │             app_obj = <com.arsenal.arsenal v2.1.0 AppConfig>                                               │                                                                   │
+│ │      apps_to_update = {'arsenal': <com.arsenal.arsenal v2.1.0 AppConfig>}                                  │                                                                   │
+│ │            debugger = None                                                                                 │                                                                   │
+│ │             options = {}                                                                                   │                                                                   │
+│ │                self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0> │                                                                   │
+│ │               state = None                                                                                 │                                                                   │
+│ │           test_mode = False                                                                                │                                                                   │
+│ │ update_requirements = True                                                                                 │                                                                   │
+│ │    update_resources = False                                                                                │                                                                   │
+│ │         update_stub = False                                                                                │                                                                   │
+│ │      update_support = False                                                                                │                                                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                   │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/commands/update.py:68 in update_app                                                                    │
+│                                                                                                                                                                                  │
+│    65 │   │                                                                                                                                                                      │
+│    66 │   │   if update_requirements:                                                                                                                                            │
+│    67 │   │   │   self.console.info("Updating requirements...", prefix=app.app_name)                                                                                             │
+│ ❱  68 │   │   │   self.install_app_requirements(app=app)                                                                                                                         │
+│    69 │   │                                                                                                                                                                      │
+│    70 │   │   if update_resources:                                                                                                                                               │
+│    71 │   │   │   self.console.info("Updating application resources...", prefix=app.app_name)                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                   │
+│ │                 app = <com.arsenal.arsenal v2.1.0 AppConfig>                                               │                                                                   │
+│ │             options = {}                                                                                   │                                                                   │
+│ │                self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0> │                                                                   │
+│ │ update_requirements = True                                                                                 │                                                                   │
+│ │    update_resources = False                                                                                │                                                                   │
+│ │         update_stub = False                                                                                │                                                                   │
+│ │      update_support = False                                                                                │                                                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                   │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/commands/create.py:722 in install_app_requirements                                                     │
+│                                                                                                                                                                                  │
+│    719 │   │   else:                                                                                                                                                             │
+│    720 │   │   │   try:                                                                                                                                                          │
+│    721 │   │   │   │   app_packages_path = self.app_packages_path(app)                                                                                                           │
+│ ❱  722 │   │   │   │   self._install_app_requirements(app, requires, app_packages_path)                                                                                          │
+│    723 │   │   │   except KeyError as e:                                                                                                                                         │
+│    724 │   │   │   │   raise BriefcaseCommandError(                                                                                                                              │
+│    725 │   │   │   │   │   "Application path index file does not define "                                                                                                        │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────────────────╮                        │
+│ │                             app = <com.arsenal.arsenal v2.1.0 AppConfig>                                                                              │                        │
+│ │               app_packages_path = PosixPath('/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages') │                        │
+│ │ requirement_installer_args_path = None                                                                                                                │                        │
+│ │               requirements_path = None                                                                                                                │                        │
+│ │                        requires = ['textual']                                                                                                         │                        │
+│ │                            self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0>                                │                        │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                        │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/platforms/linux/__init__.py:227 in _install_app_requirements                                           │
+│                                                                                                                                                                                  │
+│   224 │   │   │   │   localized_requires.append(requirement)                                                                                                                     │
+│   225 │   │                                                                                                                                                                      │
+│   226 │   │   # Continue with the default app requirement handling.                                                                                                              │
+│ ❱ 227 │   │   return super()._install_app_requirements(                                                                                                                          │
+│   228 │   │   │   app,                                                                                                                                                           │
+│   229 │   │   │   requires=localized_requires,                                                                                                                                   │
+│   230 │   │   │   app_packages_path=app_packages_path,                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────────────╮                                │
+│ │                     app = <com.arsenal.arsenal v2.1.0 AppConfig>                                                                              │                                │
+│ │       app_packages_path = PosixPath('/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages') │                                │
+│ │                  kwargs = {}                                                                                                                  │                                │
+│ │ local_requirements_path = PosixPath('/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/_requirements')                              │                                │
+│ │      localized_requires = ['textual']                                                                                                         │                                │
+│ │             requirement = 'textual'                                                                                                           │                                │
+│ │                requires = ['textual']                                                                                                         │                                │
+│ │                    self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0>                                │                                │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/commands/create.py:669 in _install_app_requirements                                                    │
+│                                                                                                                                                                                  │
+│    666 │   │   # Install requirements                                                                                                                                            │
+│    667 │   │   if requires:                                                                                                                                                      │
+│    668 │   │   │   with self.console.wait_bar(progress_message):                                                                                                                 │
+│ ❱  669 │   │   │   │   self._pip_install(                                                                                                                                        │
+│    670 │   │   │   │   │   app,                                                                                                                                                  │
+│    671 │   │   │   │   │   app_packages_path=app_packages_path,                                                                                                                  │
+│    672 │   │   │   │   │   pip_args=(                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────╮                                      │
+│ │               app = <com.arsenal.arsenal v2.1.0 AppConfig>                                                                              │                                      │
+│ │ app_packages_path = PosixPath('/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages') │                                      │
+│ │      install_hint = ''                                                                                                                  │                                      │
+│ │          pip_args = None                                                                                                                │                                      │
+│ │        pip_kwargs = None                                                                                                                │                                      │
+│ │  progress_message = 'Installing app requirements...'                                                                                    │                                      │
+│ │          requires = ['textual']                                                                                                         │                                      │
+│ │              self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0>                                │                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                      │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project/venv/lib/python3.13/site-packages/briefcase/commands/create.py:635 in _pip_install                                                                 │
+│                                                                                                                                                                                  │
+│    632 │   │   │   │   **pip_kwargs,                                                                                                                                             │
+│    633 │   │   │   )                                                                                                                                                             │
+│    634 │   │   except subprocess.CalledProcessError as e:                                                                                                                        │
+│ ❱  635 │   │   │   raise RequirementsInstallError(install_hint=install_hint) from e                                                                                              │
+│    636 │                                                                                                                                                                         │
+│    637 │   def _install_app_requirements(                                                                                                                                        │
+│    638 │   │   self,                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────╮                                      │
+│ │               app = <com.arsenal.arsenal v2.1.0 AppConfig>                                                                              │                                      │
+│ │ app_packages_path = PosixPath('/home/shadrov/arsenal_project/build/arsenal/ubuntu/questing/arsenal-2.1.0/usr/lib/arsenal/app_packages') │                                      │
+│ │      install_hint = ''                                                                                                                  │                                      │
+│ │          pip_args = ['textual']                                                                                                         │                                      │
+│ │        pip_kwargs = {}                                                                                                                  │                                      │
+│ │              self = <briefcase.platforms.linux.system.LinuxSystemUpdateCommand object at 0x7903fd61c6e0>                                │                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+RequirementsInstallError: Unable to install requirements. This may be because one of your
+requirements is invalid, or because pip was unable to connect
+to the PyPI server.
+
