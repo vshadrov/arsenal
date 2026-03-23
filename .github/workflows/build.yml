@@ -12,34 +12,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
       - name: Install System Dependencies (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
-          sudo apt install -y python3-dev build-essential libffi-dev git
+          sudo apt install -y python3-dev python3-pip build-essential libffi-dev git
       
       - name: Install Briefcase
-        run: pip install briefcase
+        run: |
+          # В Linux используем системный пип, в остальных - обычный
+          python3 -m pip install briefcase
 
       - name: Build App
         run: |
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            # Для AppImage флаг нужен
-            briefcase package linux appimage --no-input --no-docker
-            # Для System (DEB) флаг НЕ нужен
-            briefcase package linux system --no-input
+            # Для Linux вызываем через python3 -m briefcase
+            python3 -m briefcase package linux appimage --no-input --no-docker
+            python3 -m briefcase package linux system --no-input
           elif [ "${{ matrix.os }}" = "windows-latest" ]; then
             briefcase package windows app --no-input
           else
             briefcase package macOS app --no-input --adhoc-sign
           fi
         shell: bash
-
+        
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
