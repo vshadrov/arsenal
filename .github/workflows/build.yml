@@ -29,16 +29,16 @@ jobs:
       - name: Build App
         run: |
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            # Добавляем --no-docker, чтобы собирать в родной среде GitHub
+            # Для AppImage флаг нужен
             briefcase package linux appimage --no-input --no-docker
-            briefcase package linux system --no-input --no-docker
+            # Для System (DEB) флаг НЕ нужен
+            briefcase package linux system --no-input
           elif [ "${{ matrix.os }}" = "windows-latest" ]; then
             briefcase package windows app --no-input
           else
             briefcase package macOS app --no-input --adhoc-sign
           fi
         shell: bash
-
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
