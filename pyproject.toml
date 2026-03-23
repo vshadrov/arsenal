@@ -5,13 +5,13 @@ bundle = "com.arsenal"
 version = "2.1.0"
 url = "https://github.com/vshadrov/arsenal"
 license.file = "LICENSE"
-author = "Василий Шадров"
+author = "Vasily Shadrov"
 author_email = "shadrovv@gmail.com"
 
 [tool.briefcase.app.arsenal]
 formal_name = "Arsenal"
-description = "МОДРОП Арсенал"
-long_description = "Методика Арсенал для оценки динамики риска опасного поведения и совершения повторных общественно опасных деяний пациентами с психическими расстройствами, в первую очередь - проходящими принудительное лечение и госпитализированными в недобровольном порядке. Основным фокусом внимания методики является выявление мишеней для терапевтического воздействия и отслеживание динамики тех изменений, которых удалось добиться в ходе этого воздействия."
+description = "arsenal"
+long_description = "arsenal"
 sources = [
     "src/arsenal",
 ]
