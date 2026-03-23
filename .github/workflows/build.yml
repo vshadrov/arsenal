@@ -16,6 +16,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Install System Dependencies (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          sudo apt install -y python3-dev build-essential libffi-dev git
       
       - name: Install Briefcase
         run: pip install briefcase
