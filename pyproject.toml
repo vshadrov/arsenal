@@ -18,7 +18,9 @@ sources = [
 test_sources = [
     "tests",
 ]
-console_app = "arsenal.app:main"
+console_app = true
+main_module = "arsenal.app"
+main_function = "main"
 
 requires = [
     "textual", 
