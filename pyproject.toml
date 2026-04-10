@@ -5,7 +5,7 @@ bundle = "com.arsenal"
 version = "2.2.0"
 url = "https://github.com/vshadrov/arsenal"
 license.file = "COPYING"
-author = "Shadrov V. V. SPb PBSTIN"
+author = "Arsenal"
 author_email = "shadrov@pbstin.ru"
 
 [tool.briefcase.app.arsenal]
@@ -23,7 +23,9 @@ main_module = "arsenal.app"
 main_function = "main"
 
 requires = [
-    "textual", 
+    "textual",
+    "rich",
+    "typing-extensions",
 ]
 test_requires = [
     "pytest",
