@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (C) 2024-2026 Василий Валерьевич Шадров
+# Лицензия GPL-3.0-or-later
 
 from textual import on, events
 from textual.app import App, ComposeResult
@@ -13,7 +15,6 @@ from textual.css.query import NoMatches
 from rich.style import Style
 from rich.text import Text
 from pathlib import Path
-from platformdirs import user_documents_path
 from datetime import datetime
 import json
 import uuid
@@ -22,8 +23,10 @@ import platform
 import tempfile
 import shutil
 import subprocess
-import sys
 import textwrap
+from openpyxl import Workbook
+from openpyxl.styles import Font, Alignment, PatternFill
+from openpyxl.utils import get_column_letter
 
 
 class SlimScrollBarRender(ScrollBarRender):
@@ -70,13 +73,14 @@ ScrollBar.renderer = SlimScrollBarRender
 # Задаем хранение и обработку данных
 class DataManager:
     def __init__(self):
-        # Автоматически находит правильный путь к Документам
-        self.base_dir = user_documents_path() / ".arsenal_data"
+        # Определяем базовую папку (кроссплатформенно)
+        self.base_dir = Path.home() / ".arsenal_data"
         self.db_path = self.base_dir / "arsenal_database.json"
         self.reports_dir = self.base_dir / "arsenal_reports"
         
-        self.base_dir.mkdir(parents=True, exist_ok=True)
-        self.reports_dir.mkdir(parents=True, exist_ok=True)
+        # Создаем структуру папок сразу при запуске
+        self.base_dir.mkdir(exist_ok=True)
+        self.reports_dir.mkdir(exist_ok=True)
         self.data = self.load_data()
 
     def load_data(self):
@@ -918,7 +922,7 @@ class Rate1Screen(Screen):
             
             year = int(year_str)
             current_year = datetime.now().year
-            if year < current_year - 100 or year > current_year - 14:
+            if year < current_year - 113 or year > current_year - 14:
                 return False
             
             return True
@@ -1768,7 +1772,12 @@ class Rate2Screen(Screen):
         self._last_f_time = 0
         self._last_button_time = 0
         self._last_action_time = 0
-        
+        self._is_mounted = False
+        self._is_navigating = False
+        self._last_next_time = 0
+        self._last_prev_time = 0
+        self._last_button_time = 0
+
         # Данные
         self.primary_assessments = []  # Список доступных первичных оценок
         self.selected_assessment = None  # Выбранная первичная оценка
@@ -1784,6 +1793,56 @@ class Rate2Screen(Screen):
         self.last_saved_file = None
         
         self.load_rater_data()
+
+    def _get_selected_assessment(self) -> dict:
+        """Получает выбранную оценку из списка, игнорируя спейсеры"""
+        try:
+            list_view = self.query_one("#assessment_list", ListView)
+            if list_view.index is not None:
+                # Индекс элемента в ListView
+                idx = list_view.index
+                
+                # Определяем, является ли элемент спейсером
+                # Спейсеры добавляются после каждого элемента, кроме последнего
+                # Поэтому реальный индекс = idx // 2, если idx четный
+                if idx % 2 == 0:  # Четный индекс - возможно реальный элемент
+                    actual_index = idx // 2
+                    if actual_index < len(self.primary_assessments):
+                        return self.primary_assessments[actual_index]
+                # Если индекс нечетный - это спейсер, возвращаем None
+                return None
+        except NoMatches:
+            pass
+        return None
+    
+    def _select_assessment(self, assessment: dict) -> None:
+        """Выбирает оценку и обновляет данные"""
+        if not assessment:
+            return
+            
+        self.selected_assessment = assessment
+        self.form_data["patient"] = assessment["patient"]
+        self.form_data["primary"] = assessment["assessment"]
+        
+        # Заполняем активные факторы (с оценкой > 0)
+        self.active_factors = []
+        primary_factors = assessment["assessment"].get("factors", {})
+        for i in range(1, 9):
+            f_key = f"f{i}"
+            score = primary_factors.get(f_key, {}).get("score", 0)
+            if score > 0:
+                stage = primary_factors.get(f_key, {}).get("stage")
+                if stage == 5:
+                    stage = None
+                comment = primary_factors.get(f_key, {}).get("comment", "")
+                self.active_factors.append({
+                    "factor": i,
+                    "primary_score": score,
+                    "primary_stage": stage,
+                    "primary_comment": comment
+                })
+                if f_key not in self.form_data["factors"]:
+                    self.form_data["factors"][f_key] = {"stage": stage, "comment": ""}
 
     def load_rater_data(self):
         """Загружает данные последнего специалиста"""
@@ -1821,6 +1880,7 @@ class Rate2Screen(Screen):
 
     def on_mount(self) -> None:
         """При монтировании загружаем список первичных оценок"""
+        self._is_mounted = True
         self.load_primary_assessments()
         self.update_step()
 
@@ -2031,13 +2091,14 @@ class Rate2Screen(Screen):
         list_view = ListView(id="assessment_list")
         container.mount(list_view)
         
-        # Добавляем элементы с отступами (каждый элемент отделен пустым строковым элементом)
+        # Добавляем элементы с отступами
         for i, ass in enumerate(self.primary_assessments):
             item = ListItem(Static(ass["display"]), id=f"item_{i}")
             list_view.append(item)
             # Добавляем пустой элемент для отступа (кроме последнего)
             if i < len(self.primary_assessments) - 1:
                 spacer = ListItem(Static(""), disabled=True, classes="spacer")
+                spacer.disabled = True  # Делаем спейсер невыбираемым
                 list_view.append(spacer)
         
         # Добавляем кнопку
@@ -2275,9 +2336,17 @@ class Rate2Screen(Screen):
 
     @on(ListView.Selected)
     def handle_list_selected(self, event: ListView.Selected) -> None:
-        """Обработка выбора пациента из списка"""
+        """Обработка выбора пациента из списка (Enter или клик)"""
         if self.step_index == 0 and event.item:
-            self.action_next_step()
+            # Получаем выбранную оценку
+            selected = self._get_selected_assessment()
+            if selected:
+                self._select_assessment(selected)
+                # Автоматически переходим к следующему шагу
+                self.call_after_refresh(self.action_next_step)
+            else:
+                # Если выбран спейсер, игнорируем
+                event.stop()
 
     def save_current_state(self) -> None:
         """Сохраняет данные из текущих виджетов"""
@@ -2421,31 +2490,37 @@ class Rate2Screen(Screen):
         return "█" * total + " " * (24 - total)
 
     def action_next_step(self) -> None:
-        """Переход к следующему шагу"""
+        """Переход к следующему шагу - с защитой от падений"""
         import time
         current_time = time.time()
         
-        if hasattr(self, '_last_action_time'):
-            if current_time - self._last_action_time < 0.3:
+        if hasattr(self, '_last_next_time'):
+            if current_time - self._last_next_time < 0.3:
+                self._release_navigation_lock()
                 return
-        
-        self._last_action_time = current_time
+        self._last_next_time = current_time
         
         try:
+            if not hasattr(self, '_is_mounted') or not self._is_mounted:
+                self._release_navigation_lock()
+                return
+                
             self.save_current_state()
-            
+                
             # Проверка обязательных полей
             if self.step_index == 0:
+                # Проверяем, что оценка выбрана
                 if not self.selected_assessment:
                     self.app.custom_notify("Выберите первичную оценку!", severity="warning")
+                    self._release_navigation_lock()
                     return
-                # Убираем проверку на active_factors, так как теперь в списке только оценки с факторами > 0
                 
             elif self.step_index == 1:
                 if not self.form_data["rater"]:
                     self.app.custom_notify("Введите данные специалиста!", severity="warning")
+                    self._release_navigation_lock()
                     return
-            
+                
             elif 2 <= self.step_index <= self.max_steps + 1 and self.active_factors:
                 if self.current_factor_index < len(self.active_factors):
                     factor_info = self.active_factors[self.current_factor_index]
@@ -2471,14 +2546,32 @@ class Rate2Screen(Screen):
                 self.action_save_final()
                 return
             
-            # Переход к следующему шагу
             max_total_steps = self.max_steps + 2
             if self.step_index < max_total_steps:
                 self.step_index += 1
-                self.update_step()
+                self.call_after_refresh(self._safe_update_step)
             
         except Exception as e:
             self.app.custom_notify(f"Ошибка: {e}", severity="error")
+            self._release_navigation_lock()
+
+    def _safe_update_step(self):
+        """Безопасное обновление шага"""
+        try:
+            container = self.query_one("#input_container")
+            if container:
+                for child in list(container.children):
+                    try:
+                        child.remove()
+                    except Exception:
+                        pass
+                self.update_step()
+        except NoMatches:
+            pass
+        except Exception as e:
+            print(f"Error updating step: {e}")
+        finally:
+            self._release_navigation_lock()
 
     def action_prev_step(self) -> None:
         """Переход к предыдущему шагу - НЕ ВЫХОДИМ НА ШАГ ВЫБОРА ПАЦИЕНТА"""
@@ -2816,11 +2909,16 @@ class Rate2Screen(Screen):
 
     @on(Button.Pressed)
     def handle_button(self, event: Button.Pressed) -> None:
-        """Обработчик нажатия на любую кнопку"""
+        """Обработчик нажатия на любую кнопку - с полной блокировкой"""
         button_id = event.button.id
         
         import time
         current_time = time.time()
+        
+        # Блокируем все нажатия, если идет навигация
+        if self._is_navigating:
+            event.stop()
+            return
         
         if hasattr(self, '_last_button_time'):
             if current_time - self._last_button_time < 0.5:
@@ -2831,51 +2929,51 @@ class Rate2Screen(Screen):
         
         # Обработка кнопки "Далее" на шаге 0
         if button_id == "btn_next" and self.step_index == 0:
-            # Сначала сохраняем выбранный элемент из списка
-            try:
-                list_view = self.query_one("#assessment_list", ListView)
-                if list_view.index is not None:
-                    # Учитываем спейсеры - реальный индекс в данных
-                    actual_index = list_view.index // 2 if list_view.index < len(self.primary_assessments) * 2 - 1 else list_view.index // 2
-                    if actual_index < len(self.primary_assessments):
-                        selected = self.primary_assessments[actual_index]
-                        self.selected_assessment = selected
-                        self.form_data["patient"] = selected["patient"]
-                        self.form_data["primary"] = selected["assessment"]
-                        
-                        # Заполняем активные факторы (с оценкой > 0)
-                        self.active_factors = []
-                        primary_factors = selected["assessment"].get("factors", {})
-                        for i in range(1, 9):
-                            f_key = f"f{i}"
-                            score = primary_factors.get(f_key, {}).get("score", 0)
-                            if score > 0:
-                                stage = primary_factors.get(f_key, {}).get("stage")
-                                if stage == 5:
-                                    stage = None
-                                comment = primary_factors.get(f_key, {}).get("comment", "")
-                                self.active_factors.append({
-                                    "factor": i,
-                                    "primary_score": score,
-                                    "primary_stage": stage,
-                                    "primary_comment": comment
-                                })
-                                if f_key not in self.form_data["factors"]:
-                                    self.form_data["factors"][f_key] = {"stage": stage, "comment": ""}
-                    else:
-                        self.app.custom_notify("Выберите первичную оценку!", severity="warning")
-                        return
-                else:
-                    self.app.custom_notify("Выберите первичную оценку!", severity="warning")
-                    return
-            except NoMatches:
-                self.app.custom_notify("Выберите первичную оценку!", severity="warning")
-                return
-            
-            # Если все ок - переходим к следующему шагу
-            self.call_after_refresh(self.action_next_step)
+            # Получаем выбранную оценку
+            selected = self._get_selected_assessment()
+            if selected:
+                self._select_assessment(selected)
+                self._is_navigating = True
+                self.call_after_refresh(self._safe_action_next_step)
+            else:
+                self.app.custom_notify("Выберите первичную оценку из списка!", severity="warning")
             return
         
+        # Обработка других кнопок с номером шага
+        if button_id and button_id.startswith("btn_next_"):
+            try:
+                btn_step = int(button_id.split("_")[-1])
+                if btn_step != self.step_index:
+                    event.stop()
+                    return
+            except (ValueError, IndexError):
+                pass
+            
+            self._is_navigating = True
+            self.call_after_refresh(self._safe_action_next_step)
+            
+        elif button_id and button_id.startswith("btn_save_"):
+            try:
+                btn_step = int(button_id.split("_")[-1])
+                if btn_step != self.step_index:
+                    event.stop()
+                    return
+            except (ValueError, IndexError):
+                pass
+            
+            if self.step_index == self.max_steps + 2:
+                try:
+                    ta = self.query_one(f"#ta_conclusion_{self.step_index}", TextArea)
+                    self.form_data["conclusion"] = ta.text
+                except NoMatches:
+                    pass
+            
+            self._is_navigating = True
+            self.call_after_refresh(self._safe_action_save_final)
+        
+        elif button_id == "btn_back":
+            self.action_go_back()
+            
         # Обработка других кнопок с номером шага
         if button_id and button_id.startswith("btn_next_"):
             try:
@@ -2908,6 +3006,24 @@ class Rate2Screen(Screen):
         
         elif button_id == "btn_back":
             self.action_go_back()
+
+    def _safe_action_next_step(self):
+        """Безопасное выполнение перехода вперед"""
+        try:
+            self.action_next_step()
+        finally:
+            self.call_after_refresh(self._release_navigation_lock)
+
+    def _safe_action_save_final(self):
+        """Безопасное выполнение сохранения"""
+        try:
+            self.action_save_final()
+        finally:
+            self.call_after_refresh(self._release_navigation_lock)
+
+    def _release_navigation_lock(self):
+        """Снимаем блокировку навигации"""
+        self._is_navigating = False
 
 class ConfirmDialog(ModalScreen[bool]):
     """Простой диалог подтверждения"""
@@ -3956,45 +4072,53 @@ class DataScreen(Screen):
             with Vertical(id="data_buttons_panel") as btn_col:
                 btn_col.border_title = "Действия"
                 with Vertical(id="data_buttons_container"):
-                    yield Button("1. Импорт данных на этот компьютер      ", id="btn_import")
-                    yield Button("2. Экспорт данных с этого компьютера    ", id="btn_export")
-                    yield Button("3. Импорт данных из старой версии       ", id="btn_import_old")
-                    yield Button("", id="btn_spacer1", disabled=True, classes="spacer")
+                    yield Button("1. Импорт данных на этот компьютер     ", id="btn_import")
+                    yield Button("2. Экспорт данных с этого компьютера   ", id="btn_export")
+                    yield Button("3. Импорт данных из старой версии      ", id="btn_import_old")
+                    yield Button("4. Вывод таблицы оценок                ", id="btn_export_table")
+                    yield Button("5. Вывод обезличенных данных           ", id="btn_export_anonymous")
                     yield Button("", id="btn_spacer2", disabled=True, classes="spacer")
-                    yield Button("", id="btn_spacer3", disabled=True, classes="spacer")
-                    yield Button("", id="btn_spacer4", disabled=True, classes="spacer")
-                    yield Button("В. Назад                                 ", id="btn_back")
+                    yield Button("В. Назад                               ", id="btn_back")
         yield Footer(show_command_palette=False)
-    
+        
     # Словарь описаний для кнопок
     DATA_DESCRIPTIONS = {
         "btn_import": "Импорт данных на этот компьютер.\n\n"
-                     "Эта функция объединяет данные из папки \"Арсенал - данные\", "
-                     "которая должна находиться в папке Документы, с вашими текущими данными.\n\n"
-                     "Для импорта нужно:\n"
-                     "1. Провести экспорт данных на другом компьютере и перенести папку \"Арсенал - данные\" в папку Документы на этом компьютере;\n"
-                     "2. Запустить эту функцию, она объединяет файлы заключений и базу данных.\n\n"
-                     "После импорта все данные будут доступны в программе.",
+                    "Эта функция объединяет данные из папки \"Арсенал - данные\", "
+                    "которая должна находиться в папке Документы, с вашими текущими данными.\n\n"
+                    "Для импорта нужно:\n"
+                    "1. Провести экспорт данных на другом компьютере и перенести папку \"Арсенал - данные\" в папку Документы на этом компьютере;\n"
+                    "2. Запустить эту функцию, она объединяет файлы заключений и базу данных.\n\n"
+                    "После импорта все данные будут доступны в программе.",
         
         "btn_export": "Экспорт данных с этого компьютера.\n\n"
-                     "Эта функция создает папку \"Арсенал - данные\" в папке Документы и копирует туда все ваши данные для переноса на другой компьютер.\n\n"
-                     "В папку копируются:\n"
-                     "1. Все файлы заключений из папки arsenal_reports\n"
-                     "2. Файл базы данных arsenal_database.json\n\n"
-                     "После завершения экспорта вы можете скопировать папку \"Арсенал - данные\" на другой компьютер и выполнить там импорт данных.",
+                    "Эта функция создает папку \"Арсенал - данные\" в папке Документы и копирует туда все ваши данные для переноса на другой компьютер.\n\n"
+                    "В папку копируются:\n"
+                    "1. Все файлы заключений из папки arsenal_reports\n"
+                    "2. Файл базы данных arsenal_database.json\n\n"
+                    "После завершения экспорта вы можете скопировать папку \"Арсенал - данные\" на другой компьютер и выполнить там импорт данных.",
         
         "btn_import_old": "Импорт данных из старой версии программы.\n\n"
-                         "Эта функция предназначена для переноса данных из программы на Bash "
-                         "(версия v1.0) в новый формат.\n\n"
-                         "Для импорта нужно:\n"
-                         "1. Скопировать папку с данными, экспортированными из старой программы, в папку Документы\n"
-                         "2. Запустить эту функцию\n\n"
-                         "Программа прочитает файл 'Журнал.txt' из старой версии и преобразует его "
-                         "в формат новой базы данных, а также скопирует файлы отображения заключений.",
+                        "Эта функция предназначена для переноса данных из программы на Bash "
+                        "(версия v1.0) в новый формат, используемый данной программой.\n\n"
+                        "Для импорта нужно:\n"
+                        "1. Скопировать папку с данными, экспортированными из старой программы, в папку Документы\n"
+                        "2. Запустить эту функцию\n\n"
+                        "Программа прочитает файл 'Журнал.txt' из старой версии и преобразует его "
+                        "в формат новой базы данных, а также скопирует файлы отображения заключений.\n\n"
+                        "Если вы использовали версию программы v0.х, не все данные могут быть перенесены корректно.",
+        
+        "btn_export_table": "Эта функция создает в папке Документы Excel-файл arsenal_data.xlsx со всеми данными о проведенных оценках.\n\n"
+                        "Для повторных оценок указывается в том числе дата первичной оценки, на основе которой она была проведена, вместо оценок по каждому фактору приводятся пересчитанные баллы, учитывающие вновь установленную стадию изменения.\n\n"
+                        "В таблице каждая строка соответствует одной оценке. Используйте сортировку и фильтры для анализа данных.",
+        
+        "btn_export_anonymous": "Эта функция создает в папке Документы Excel-файл arsenal_data_anonymous.xlsx с обезличенными данными о всех проведенных оценках.\n\n"
+                            "В таблицу не включаются ФИО и год рождения пациентов, они обозначаются только уникальным идентификатором (uid), что облегчает использование данных в научных целях.\n\n"
+                            "В таблице каждая строка соответствует одной оценке. Используйте сортировку и фильтры для анализа данных.",
         
         "btn_back": "Вернуться в главное меню."
     }
-    
+        
     def on_descendant_focus(self, event: events.Focus) -> None:
         """Срабатывает при фокусе на любой кнопке"""
         target = getattr(event, "control", None) or getattr(event, "node", None)
@@ -4025,9 +4149,13 @@ class DataScreen(Screen):
             self.export_data()
         elif btn_id == "btn_import_old":
             self.import_old_data()
+        elif btn_id == "btn_export_table":
+            self.export_table(anonymous=False)
+        elif btn_id == "btn_export_anonymous":
+            self.export_table(anonymous=True)
         elif btn_id == "btn_back":
             self.app.pop_screen()
-    
+        
     # --- Вспомогательные функции ---
     
     def get_documents_dir(self) -> Path:
@@ -4511,6 +4639,211 @@ class DataScreen(Screen):
                 candidate = f"{base_id}_{counter:04d}"
         
         return candidate        
+    
+    def export_table(self, anonymous: bool = False) -> None:
+        """Создает Excel-таблицу с данными оценок"""
+        try:
+            # Загружаем базу данных
+            db_path = self.app.results.db_path
+            if not db_path.exists():
+                self.notify_error("База данных не найдена. Сначала проведите хотя бы одну оценку.")
+                return
+            
+            with open(db_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            if not data:
+                self.notify_error("База данных пуста. Сначала проведите хотя бы одну оценку.")
+                return
+            
+            # Создаем Excel-файл
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Оценки Арсенал"
+            
+            # Определяем заголовки столбцов
+            if anonymous:
+                headers = [
+                    "uid пациента",
+                    "ID оценки",
+                    "Тип оценки",
+                    "Дата оценки",
+                    "Специалист",
+                    "Дата первичной оценки",
+                    "Сумма баллов"
+                ]
+            else:
+                headers = [
+                    "Фамилия",
+                    "Имя",
+                    "Отчество",
+                    "Год рождения",
+                    "ФИО и г.р.",
+                    "uid пациента",
+                    "ID оценки",
+                    "Тип оценки",
+                    "Дата оценки",
+                    "Специалист",
+                    "Дата первичной оценки",
+                    "Сумма баллов"
+                ]
+            
+            # Добавляем заголовки для 8 факторов
+            for i in range(1, 9):
+                factor_name = FACTOR_NAMES.get(i, f"Фактор {i}")
+                headers.append(f"{i}. {factor_name} - оценка")
+                headers.append(f"{i}. {factor_name} - стадия")
+                headers.append(f"{i}. {factor_name} - комментарий")
+            
+            headers.append("Заключение")
+            
+            # Применяем заголовки
+            for col, header in enumerate(headers, 1):
+                cell = ws.cell(row=1, column=col, value=header)
+                cell.font = Font(bold=True)
+                cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+                cell.fill = PatternFill(start_color="D9E1F2", end_color="D9E1F2", fill_type="solid")
+            
+            # Собираем все оценки
+            row_num = 2
+            stage_names = ["предобдумывание", "обдумывание", "подготовка", "действие", "удержание"]
+            
+            for patient in data:
+                patient_uid = patient.get("uid", "")
+                last_name = patient.get("last_name", "")
+                first_name = patient.get("first_name", "")
+                patronymic = patient.get("patronymic", "")
+                birth_year = patient.get("birth_year", "")
+                fiogr = patient.get("fiogr", f"{last_name} {first_name} {patronymic} {birth_year}".strip())
+                
+                # Сортируем оценки по дате
+                assessments = sorted(
+                    patient.get("assessments", []),
+                    key=lambda a: a.get("date", "")
+                )
+                
+                # Выводим каждую оценку в отдельную строку
+                for assessment in assessments:
+                    assessment_type = assessment.get("type", "")
+                    assessment_id = assessment.get("assessment_id", "")
+                    date = assessment.get("date", "")
+                    rater = assessment.get("rater", "")
+                    total_score = assessment.get("total_score", 0)
+                    conclusion = assessment.get("conclusion", "")
+                    
+                    # Для повторной оценки ищем дату первичной оценки
+                    primary_date = ""
+                    if assessment_type == "повторная":
+                        # Ищем первичную оценку, которая была до этой повторной
+                        for a in assessments:
+                            if a.get("type") == "первичная" and a.get("date", "") <= date:
+                                primary_date = a.get("date", "")
+                                break
+                    
+                    # Заполняем основные поля
+                    col = 1
+                    if not anonymous:
+                        ws.cell(row=row_num, column=col, value=last_name)
+                        col += 1
+                        ws.cell(row=row_num, column=col, value=first_name)
+                        col += 1
+                        ws.cell(row=row_num, column=col, value=patronymic)
+                        col += 1
+                        ws.cell(row=row_num, column=col, value=birth_year)
+                        col += 1
+                        ws.cell(row=row_num, column=col, value=fiogr)
+                        col += 1
+                    
+                    ws.cell(row=row_num, column=col, value=patient_uid)
+                    col += 1
+                    ws.cell(row=row_num, column=col, value=assessment_id)
+                    col += 1
+                    ws.cell(row=row_num, column=col, value=assessment_type)
+                    col += 1
+                    ws.cell(row=row_num, column=col, value=date)
+                    col += 1
+                    ws.cell(row=row_num, column=col, value=rater)
+                    col += 1
+                    ws.cell(row=row_num, column=col, value=primary_date)
+                    col += 1
+                    ws.cell(row=row_num, column=col, value=total_score)
+                    col += 1
+                    
+                    # Факторы
+                    factors = assessment.get("factors", {})
+                    for i in range(1, 9):
+                        f_key = f"f{i}"
+                        factor = factors.get(f_key, {})
+                        score = factor.get("score", 0)
+                        stage = factor.get("stage")
+                        comment = factor.get("comment", "")
+                        
+                        # Преобразуем стадию в текст
+                        stage_text = ""
+                        if stage is not None:
+                            if stage == 5:
+                                stage_text = "нет"
+                            elif 0 <= stage <= 4:
+                                stage_text = stage_names[stage]
+                            else:
+                                stage_text = str(stage)
+                        
+                        ws.cell(row=row_num, column=col, value=score)
+                        col += 1
+                        ws.cell(row=row_num, column=col, value=stage_text)
+                        col += 1
+                        ws.cell(row=row_num, column=col, value=comment)
+                        col += 1
+                    
+                    ws.cell(row=row_num, column=col, value=conclusion)
+                    
+                    row_num += 1
+            
+            # Настраиваем ширину столбцов
+            for col in range(1, len(headers) + 1):
+                ws.column_dimensions[get_column_letter(col)].width = 20
+            
+            # Устанавливаем фильтры
+            ws.auto_filter.ref = ws.dimensions
+            
+            # Замораживаем первую строку
+            ws.freeze_panes = "A2"
+            
+            # Сохраняем файл
+            docs_dir = self.get_documents_dir()
+            if anonymous:
+                filename = "arsenal_data_anonymous.xlsx"
+            else:
+                filename = "arsenal_data.xlsx"
+            
+            filepath = docs_dir / filename
+            
+            # Если файл существует, добавляем дату к имени
+            if filepath.exists():
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                name_parts = filename.rsplit('.', 1)
+                filepath = docs_dir / f"{name_parts[0]}_{timestamp}.{name_parts[1]}"
+            
+            wb.save(filepath)
+            
+            # Открываем файл
+            open_file_externally(filepath)
+            
+            if anonymous:
+                self.notify_success(f"Таблица с обезличенными данными создана:\n{filepath}")
+            else:
+                self.notify_success(f"Таблица с данными создана:\n{filepath}")
+            
+        except ImportError:
+            self.notify_error(
+                "Для работы с Excel необходимо установить библиотеку openpyxl.\n\n"
+                "Выполните в терминале команду:\n"
+                "pip install openpyxl"
+            )
+        except Exception as e:
+            self.notify_error(f"Ошибка создания таблицы: {e}")
+            import traceback
+            traceback.print_exc()
 
 # Экран меню
 
@@ -4522,8 +4855,8 @@ BUTTON_DESCRIPTIONS = {
     "btn_list": "Раздел для просмотра всех сохраненных заключений.\n\nДанная функция позволяет просматривать именно сохраненные файлы отображения проведенных оценок. Есть возможность открыть заключение во внешнем редакторе для печати или удалить. При редактировании заключений имейте в виду, что вы вносите изменение только в файл отображения, а исходные данные, внесенные во время оценки, остаются неизменными.\n\nНе удаляйте заключения, созданные в самых ранних выпусках прошлой версии программы, т. к. не все данные по этим оценкам могут быть сохранены в журнале.",
     "btn_look": "Функция поиска пациента для просмотра всех проведенных ему оценок.\n\nВ отличие от функции просмотра заключений эта функция отображает записи об оценках, которые сохранены в журнале (базе данных). Эти данные доступны для просмотра и открытия для печати во внешнем редакторе.\n\nЕсли вы не сохранили файл отображения заключения по выбранной оценке, то вы можете восстановить его.",
     "btn_form": "Функция создания формы для ведения заметок во время сбора информации о пациенте и его расспроса. Можно создать форму на одну или на две страницы. Форма открывается во внешнем редакторе, там ее можно изменить и распечатать.",
-    "btn_data": "Раздел с функциями для переноса данных между компьютерами.",
-    "btn_info": "Версия программы v2.1\n\nЭта программа для работы с методикой Арсенал разработана для компьютеров с операционными системами Linux, Windows и MacOS. Распространяется под лицензией CC BY-NC, то есть может свободно и бесплатно копироваться, устанавливаться, использоваться и видоизменяться со ссылкой на разработчика, но не может продаваться и быть использована в коммерческих целях.\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) Шадров Василий Валерьевич, 2024-2026",
+    "btn_data": "Раздел с функциями для переноса данных между компьютерами и вывода таблиц.",
+    "btn_info": "Версия программы v2.2\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство № 2026619934.\nПрямая ссылка https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич",
     "btn_exit": "Завершение работы с программой.",
 }
 
@@ -5831,22 +6164,6 @@ class arsenal(App):
                 self.exit()
         self.push_screen(QuitScreen(), check_quit)
 
-def main():
-    # Проверка: запущен ли скрипт в интерактивном терминале
-    # Если нет (например, клик по AppImage), пробуем открыть терминал
-    if not sys.stdin.isatty():
-        try:
-            # Для Linux: пытаемся запустить через x-terminal-emulator
-            # sys.argv[0] — это путь к самому AppImage
-            subprocess.run(['x-terminal-emulator', '-e', sys.argv[0]])
-            sys.exit(0)
-        except FileNotFoundError:
-            # Если x-terminal-emulator нет, можно попробовать xterm или gnome-terminal
-            pass
-
-    app = arsenal() 
-    app.run()
-
 if __name__ == "__main__":
-    main()
-
+    app = arsenal()
+    app.run()
