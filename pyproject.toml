@@ -5,13 +5,14 @@ bundle = "com.arsenal"
 version = "2.2.0"
 url = "https://github.com/vshadrov/arsenal"
 license.file = "COPYING"
-author = "Arsenal"
-author_email = "shadrov@pbstin.ru"
+author = "Шадров Василий Валерьевич"
+author_email = "shadrov@pbstin.ru, shadrov@hotmail.com"
 
 [tool.briefcase.app.arsenal]
-formal_name = "Arsenal"
-description = "Arsenal"
-long_description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders, primarily those undergoing compulsory treatment and involuntarily hospitalized. The main focus of the technique is to identify targets for therapeutic intervention and track the dynamics of those changes that were achieved during this intervention."
+formal_name = "Арсенал"
+description = "МОДРОП Арсенал"
+long_description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+
 sources = [
     "src/arsenal",
 ]
