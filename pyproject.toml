@@ -26,6 +26,8 @@ requires = [
     "textual",
     "rich",
     "typing-extensions",
+    "openpyxl",
+    "et-xmlfile",
 ]
 test_requires = [
     "pytest",
