@@ -23,6 +23,7 @@ import platform
 import tempfile
 import shutil
 import subprocess
+import sys
 import textwrap
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill
@@ -6164,6 +6165,21 @@ class arsenal(App):
                 self.exit()
         self.push_screen(QuitScreen(), check_quit)
 
-if __name__ == "__main__":
+def main():
+    # Проверка: запущен ли скрипт в интерактивном терминале
+    # Если нет (например, клик по AppImage), пробуем открыть терминал
+    if not sys.stdin.isatty():
+        try:
+            # Для Linux: пытаемся запустить через x-terminal-emulator
+            # sys.argv[0] — это путь к самому AppImage
+            subprocess.run(['x-terminal-emulator', '-e', sys.argv[0]])
+            sys.exit(0)
+        except FileNotFoundError:
+            # Если x-terminal-emulator нет, можно попробовать xterm или gnome-terminal
+            pass
+
     app = arsenal()
     app.run()
+
+if __name__ == "__main__":
+    main()
