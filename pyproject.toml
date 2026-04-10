@@ -2,11 +2,11 @@
 [tool.briefcase]
 project_name = "arsenal"
 bundle = "com.arsenal"
-version = "2.1.0"
+version = "2.2.0"
 url = "https://github.com/vshadrov/arsenal"
-license.file = "LICENSE"
-author = "Arsenal labs"
-author_email = "shadrovv@gmail.com"
+license.file = "COPYING"
+author = "Shadrov V. V. SPb PBSTIN"
+author_email = "shadrov@pbstin.ru"
 
 [tool.briefcase.app.arsenal]
 formal_name = "Arsenal"
