@@ -64,13 +64,13 @@ jobs:
           body: "Автоматическая сборка проекта Арсенал. Внимание: macOS версия требует снятия карантина (xattr -cr)."
           draft: false
           prerelease: true
-          make_latest: true    # Гарантирует, что этот релиз будет помечен как актуальный
-          overwrite: true      # Разрешает перезаписывать файлы с теми же именами
-          # Уточняем пути, чтобы не собирать лишние zip-архивы
+          make_latest: "true"
+          overwrite_files: true  # ИСПРАВЛЕНО: правильное название параметра
           files: |
-            linux/*.AppImage
-            macOS/*.dmg
-            macOS/*.pkg
+            **/*.AppImage
+            **/*.dmg
+            **/*.pkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
