@@ -1,12 +1,14 @@
 name: Build Arsenal
 on:
   push:
-    branches: [ main ] # Срабатывает при пуше в main
+    branches: [ main ]
 
 jobs:
   build:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -38,8 +40,6 @@ jobs:
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
             briefcase package linux appimage --no-input --no-docker
           elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-            # Собираем сразу и DMG, и PKG (Briefcase по умолчанию делает один формат, 
-            # но мы можем запустить сборку дважды или оставить стандартный)
             briefcase package macOS --no-input --adhoc-sign
           fi
         shell: bash
@@ -48,7 +48,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: arsenal-${{ matrix.os }}
-          path: dist/*
+          # Briefcase кладет файлы глубоко, используем рекурсивный поиск
+          path: |
+            **/*.AppImage
+            **/*.dmg
+            **/*.pkg
           if-no-files-found: error
 
       - name: Create GitHub Release
@@ -60,10 +64,11 @@ jobs:
           body: "Автоматическая сборка проекта Арсенал. Внимание: macOS версия требует снятия карантина (xattr -cr)."
           draft: false
           prerelease: true
+          # ИСПРАВЛЕНО: пути поиска для Briefcase
           files: |
-            dist/*.AppImage
-            dist/*.dmg
-            dist/*.pkg
-            dist/*.zip
+            **/*.AppImage
+            **/*.dmg
+            **/*.pkg
+            **/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
