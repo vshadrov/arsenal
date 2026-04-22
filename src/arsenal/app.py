@@ -50,9 +50,9 @@ class SlimScrollBarRender(ScrollBarRender):
         max_track = size - bar_size
         start_pos = int(max_track * (position / max_scroll))
 
-        # Указываем цвет линии (#000000) и ПУСТОЙ фон (None), 
+        # Указываем цвет линии (teal) и ПУСТОЙ фон (None), 
         # чтобы просвечивал фон подлежащего виджета
-        style_bar = Style(color="#000000", bgcolor=None) 
+        style_bar = Style(color="#008080", bgcolor=None) 
         # Фоновый стиль дорожки делаем прозрачным
         style_bg = Style(bgcolor=None) 
 
@@ -153,6 +153,20 @@ class CustomNotification(Static):
 class NotificationLayer(Vertical):
     """Слой для отображения уведомлений"""
     DEFAULT_LAYER = "notifications"  # Устанавливаем слой по умолчанию
+
+class HoverButton(Button):
+    """Кастомная кнопка с обработкой наведения мыши и перемещением фокуса"""
+    
+    def on_mouse_move(self, event: events.MouseMove) -> None:
+        """При наведении мыши на кнопку"""
+        # Находим родительский экран
+        screen = self.app.screen
+        # Обновляем подсказку, если у экрана есть метод _update_hint
+        if hasattr(screen, '_update_hint'):
+            screen._update_hint(self.id)
+        # Устанавливаем фокус
+        if screen.focused != self:
+            self.focus()
 
 def open_file_externally(filepath):
     """Открывает файл в офисном приложении или системном просмотрщике."""
@@ -318,9 +332,9 @@ PAGES = [
     {"part": "Повторные оценки - подход", "text": "Независимо от выбранных методов работы с пациентом, если эта работа была целенаправленной и существенно затрагивала выявленные у пациента факторы риска, достигнутые изменения должны отразиться на представлениях пациента о его проблемах и путях их преодоления и, таким образом, могут быть представлены в виде продвижения по стадиям изменения. На этом принципе основываются повторные оценки по методике Арсенал. Поскольку оценка выраженности фактора риска строится на анализе событий прошлого пациента, нет содержательного смысла повторно оценивать эту выраженность через небольшой промежуток времени по тем же критериям, которые были применены при первичной оценке. Вместо этого динамику риска предлагается оценивать определив повторно только текущую (достигнутую) стадию изменения по тем факторам, которые при первичной оценке определены как присутствующие.\n\nКак уже было сказано, стадии изменения не обязательно последовательно сменяют друг друга в одном направлении. Вполне возможно зафиксировать длительную задержку на той же стадии по одним факторам при положительной динамике по другим, так же как и регресс (срыв, откат) стадии, особенно при изменении условий, в которых находится пациент."},
     {"part": "Повторные оценки - расчет", "text": "Выражение динамики риска в точных цифрах представляется весьма условным, однако на текущем этапе разработки методики предлагается следующий алгоритм. Достижение пациентом стадии удержания по какому-либо фактору уменьшает первичную оценку выраженности этого фактора на 2. Достижение стадии действия уменьшает первичную оценку на 1. Достижение стадии подготовки не позволяет провести переоценку выраженности фактора, но свидетельствует об успешном преодолении первичного сопротивления со стороны пациента и указывает на факторы, которые должны стать первоочередными мишенями для вмешательства, т. к. пациент к такому вмешательству уже готов. Переход от стадии предобдумывания к стадии обдумывания не предполагает каких-либо реальных действий со стороны пациента, поэтому также не приводит к переоценке выраженности фактора, и, вероятно, указывает на неэффективность принятых мер.\n\nСтоит заметить, что если первично по фактору установлена оценка 3, то снижение ее возможно только до 1, в остальных случаях возможно снижение до 0. Полученные скорректированные баллы по всем факторам суммируются и эта сумма условно сравнивается с суммой баллов первичной оценки. Если проводится несколько повторных оценок, то независимо от того, произошел ли срыв стадии или отмечено улучшение, первичная оценка корректируется в зависимости от вновь установленной стадии."},
     {"part": "Условия для оценок", "text": "Как правило, первичная оценка проводится однократно. Исключением могут стать случаи, когда за время взаимодействия с пациентом была получена дополнительная информация, которая заставляет специалиста пересмотреть оценки, установленные изначально. Повторных же оценок можно провести несколько, чтобы отследить изменения после отдельных этапов лечения. Может оказаться полезным проведение оценок одного пациента несколькими специалистами. Сам характер изменений, которые должна отслеживать методика, предполагает, что даже при самых интенсивных вмешательствах повторная оценка должна проводиться по крайней мере через несколько месяцев после первичной.\n\nПри каждой повторной оценке специалисту необходимо сначала ознакомиться с заключением по первичной оценке.\n\nВ том случае, если у пациента произошло значимое ухудшение по какому-либо из факторов, например совершено новое ООД или обнаружились новые проблемы по факторам, которые первично оценены как отсутствующие, то стоит еще раз провести первичную оценку и заново определить представленность всех факторов и стадий изменения по ним (для упрощения переноса данных найдите уже проведенную оценку в разделе \"5. Все оценки\", откройте ее, сохраните как черновик, а затем откройте черновик через меню \"7. Работа с данными\" или \"2. Первичная оценка\" и внесите изменившиеся данные).\n\nВ противном случае, когда такого значимого ухудшения нет, достаточно провести повторную оценку только стадий изменения по факторам, первично определенным как присутствующие, на основании данных о текущем состоянии и поведении пациента и его прицельного расспроса. Каждая такая оценка сопровождается комментарием, в котором следует указать, на основании каких наблюдений она установлена."},
-    {"part": "Программа - структура заключения", "text": "В файле пациента автоматически формируется следующее представление оценок, данных по каждому фактору.\n\n(Если схема отображается некорректно, сделайте окно программы шире или уменьшите размер шрифта с помощью сочетания клавиш Ctrl+\"-\" так, чтобы линия ниже умещалась на одной строке.)\n├──────────────────────────────────────────────────────────────────────────────┤\n\nПри первичной оценке:\n                                              [#000000]╭дата первичной оценки[/]\n                                        [#000000]╭─────┴────╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2026.02.04───╮\nФакторы                             │ оцен  стад      │ [#000000]← заголовки[/]\n\\[1] Агрессия                        │ 2 ▓▓  ▁▂▄   под │\\[1] [#000000]← оценки по фактору[/]\n[#000000]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯ ╰┬╯[/]\n[#000000] ╰номер фактора    ╰название фактора    │       │       ╰номер фактора[/]\n[#000000]                                        │       ╰стадия изменения**[/]\n[#000000]                                        ╰оценка выраженности*[/]\n[#000000]                            ╭дата первичной оценки[/]\n\\[9] Всего из 24       [#000000]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2026.02.04   │ 14 │██████████████          │\n                                    ╰────┴────────────────────────╯\n[#000000]                                    ╰─┬─╯╰┬───────────────────────╯\n                                      │   ╰шкала представления суммы оценок\n                                      ╰сумма оценок по всем факторам[/]\n\nПри повторной оценке:\n[#000000]                    дата первичной оценки╮       дата повторной оценки╮\n                                        ╭┴─────────╮        ╭─────────┴╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2025.01.28───╮╭─────2026.03.19─────╮\nФакторы                             │ оцен  стад      ││ стад      изм оцен │\n\\[1] Агрессия                        │ 3 ███ ▁     пре ││ ▁▂▄▆  дей +++ 2 ▓▓ │\\[1]\n[#000000]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯  ╰───┬────╯╰─┬─╯╰─┬─╯ ╰┬╯\n ╰номер фактора    ╰название фактора    │       │           │       │    │    │\n  первичная оценка выраженности фактора*╯       │           │       │    │    │\n         первичная стадия изменения по фактору**╯           │       │    │    │\n                         новая стадия изменения по фактору**╯       │    │    │\n   динамика стадии изменения между первичной и повторной оценками***╯    │    │\n                       новая (пересчитанная) оценка выраженности фактора*╯    │\n                                                                 номер фактора╯\n     сумма первичных оценок выраженности и ее шкала╮\n       дата первичной оценки╮       ╭──────────────┴──────────────╮[/]\n\\[9] Всего из 24       [#000000]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2025.01.28   │ 22 │██████████████████████  │\n                                    ├────┼────────────────────────┤\n                       2026.03.19   │ 16 │████████████████        │\n                      [#000000]╰─────┬────╯[/]  ╰────┴────────────────────────╯\n[#000000]       дата повторной оценки╯       ╰─────────────────────┬───────╯\nсумма новых (пересчитанных) оценок выраженности и ее шкала╯[/]\n\n[#000000]*[/] Оценка выраженности фактора может иметь следующие обозначения:\n    0 ▏   - оценка 0,\n    1 ▒   - оценка 1,\n    2 ▓▓  - оценка 2,\n    3 ███ - оценка 3.\n\n[#000000]**[/] Стадия изменения может иметь следующие обозначения:\n    ▁     пре - предобдумывание,\n    ▁▂    обд - обдумывание,\n    ▁▂▄   под - подготовка,\n    ▁▂▄▆  дей - действие,\n    ▁▂▄▆█ уде - удержание.\n\n[#000000]***[/] Представление динамики стадии изменения между первичной и повторной оценками может иметь следующие обозначения:\n    +++ - продвижение на три или четыре стадии,\n    ++  - продвижение на две стадии,\n    +   - продвижение на одну стадию,\n        - отсутствие динамики,\n    -   - откат на одну стадию,\n    --  - откат на две стадии,\n    --- - откат на три или четыре стадии."},
+    {"part": "Программа - структура заключения", "text": "В файле пациента автоматически формируется следующее представление оценок, данных по каждому фактору.\n\n(Если схема отображается некорректно, сделайте окно программы шире или уменьшите размер шрифта с помощью сочетания клавиш Ctrl+\"-\" так, чтобы линия ниже умещалась на одной строке.)\n├──────────────────────────────────────────────────────────────────────────────┤\n\nПри первичной оценке:\n                                              [teal]╭дата первичной оценки[/]\n                                        [teal]╭─────┴────╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2026.02.04───╮\nФакторы                             │ оцен  стад      │ [teal]← заголовки[/]\n\\[1] Агрессия                        │ 2 ▓▓  ▁▂▄   под │\\[1] [teal]← оценки по фактору[/]\n[teal]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯ ╰┬╯[/]\n[teal] ╰номер фактора    ╰название фактора    │       │       ╰номер фактора[/]\n[teal]                                        │       ╰стадия изменения**[/]\n[teal]                                        ╰оценка выраженности*[/]\n[teal]                            ╭дата первичной оценки[/]\n\\[9] Всего из 24       [teal]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2026.02.04   │ 14 │██████████████          │\n                                    ╰────┴────────────────────────╯\n[teal]                                    ╰─┬─╯╰┬───────────────────────╯\n                                      │   ╰шкала представления суммы оценок\n                                      ╰сумма оценок по всем факторам[/]\n\nПри повторной оценке:\n[teal]                    дата первичной оценки╮       дата повторной оценки╮\n                                        ╭┴─────────╮        ╭─────────┴╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2025.01.28───╮╭─────2026.03.19─────╮\nФакторы                             │ оцен  стад      ││ стад      изм оцен │\n\\[1] Агрессия                        │ 3 ███ ▁     пре ││ ▁▂▄▆  дей +++ 2 ▓▓ │\\[1]\n[teal]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯  ╰───┬────╯╰─┬─╯╰─┬─╯ ╰┬╯\n ╰номер фактора    ╰название фактора    │       │           │       │    │    │\n  первичная оценка выраженности фактора*╯       │           │       │    │    │\n         первичная стадия изменения по фактору**╯           │       │    │    │\n                         новая стадия изменения по фактору**╯       │    │    │\n   динамика стадии изменения между первичной и повторной оценками***╯    │    │\n                       новая (пересчитанная) оценка выраженности фактора*╯    │\n                                                                 номер фактора╯\n     сумма первичных оценок выраженности и ее шкала╮\n       дата первичной оценки╮       ╭──────────────┴──────────────╮[/]\n\\[9] Всего из 24       [teal]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2025.01.28   │ 22 │██████████████████████  │\n                                    ├────┼────────────────────────┤\n                       2026.03.19   │ 16 │████████████████        │\n                      [teal]╰─────┬────╯[/]  ╰────┴────────────────────────╯\n[teal]       дата повторной оценки╯       ╰─────────────────────┬───────╯\nсумма новых (пересчитанных) оценок выраженности и ее шкала╯[/]\n\n[teal]*[/] Оценка выраженности фактора может иметь следующие обозначения:\n    0 ▏   - оценка 0,\n    1 ▒   - оценка 1,\n    2 ▓▓  - оценка 2,\n    3 ███ - оценка 3.\n\n[teal]**[/] Стадия изменения может иметь следующие обозначения:\n    ▁     пре - предобдумывание,\n    ▁▂    обд - обдумывание,\n    ▁▂▄   под - подготовка,\n    ▁▂▄▆  дей - действие,\n    ▁▂▄▆█ уде - удержание.\n\n[teal]***[/] Представление динамики стадии изменения между первичной и повторной оценками может иметь следующие обозначения:\n    +++ - продвижение на три или четыре стадии,\n    ++  - продвижение на две стадии,\n    +   - продвижение на одну стадию,\n        - отсутствие динамики,\n    -   - откат на одну стадию,\n    --  - откат на две стадии,\n    --- - откат на три или четыре стадии."},
     {"part": "Программа - хранение данных", "text": "Программа для работы с методикой Арсенал сохраняет данные по завершению каждой проведенной оценки. Одни и те же данные - сведения о пациенте, специалисте, вид оценки и дата ее проведения, оценки выраженности факторов, стадии изменения, комментарии и заключение - сохраняются в двух видах: в файл пациента и в базу данных.\n\nФайлы пациентов доступны для просмотра через функцию \"4. Файлы пациентов\", так же доступно открытие этих файлов через внешний редактор для вывода на печать и их удаление. Файл пациента именуется по схеме Фамилия_Имя_Отчество_год рождения пациента.txt, все оценки, проведенные одному пациенту, сохраняются последовательно в один файл.\n\nЗаписи об оценках, сохраненные в базу данных, доступны для просмотра через функцию \"5. Все оценки\", так же доступно открытие этих записей через внешний редактор для вывода на печать и восстановление файла пациента по этим данным. В случае, если выбрана повторная оценка, то заключение по ней формируется с использованием данных о последней первичной оценке.\n\nЕсли вы импортировали данные об оценках, проведенных в ранних исполнениях первой версии программы, то полный текст заключения по таким оценкам с комментариями по каждому фактору может быть доступен только в файле пациента, который именуется по схеме ФамилияИО1990.txt. При этом в базу данных из всех комментариев сохраняется только заключение по оценке в целом. На основе таких первичных оценок возможно проведение повторной оценки, но комментарии по факторам из первичной оценки будут недоступны. Полная функциональная интеграция данных из ранних версий программы в текущую возможна путем правки файла Журнал.txt старой версии. Если необходимо это сделать, обратитесь к разработчику."},
-    {"part": "Программа - работа с данными", "text": "Черновики"},
+    {"part": "Программа - работа с данными", "text": "Пользователю предоставляется возможность управления данными об оценках, внесенными в файлы пациентов, в то время как изменение данных, сохраненных в базу данных, не рекомендуется и напрямую из программы не доступно. База данных, таким образом, представляет собой неизменяемый журнал всех оценок, проведенных на данном компьютере и импортированных с других компьютеров.\n\nВсе проведенные оценки автоматически последовательно записываются в файл пациента. При необходимости в этот файл можно внести правки открыв его во внешнем редакторе. Эти правки не затронут сведения об оценке, внесенные в базу данных.\n\nВ настройках вашей операционной системы вы можете установить, какой именно редактор будет использоваться, определив программу по умолчанию для открытия файлов с расширением .txt. Учитывайте, что для нормального отображения файлов с оценками необходимо применять моноширинный шрифт.\n\nЕсли необходимо внести правки не только в файл пациента, но и в саму запись об оценке, сохраненную в базе данных, например, если пересмотрены оценки факторов или стадии изменения, то для этого в меню \"5. Все оценки\" нужно открыть оценку, подлежащую правке, и воспользоваться действием \"3. Сохранить как черновик\". Затем - открыть этот черновик через меню \"7. Работа с данными\" и, перемещаясь по шагам оценки кнопками \"назад\" и \"вперед\", внести правки, после чего перейти к последнему шагу и завершить оценку. Запись об этой оценке будет с новой датой сохранена в базу данных вместе с предыдущей и автоматически внесена в файл пациента.\n\nВ случае, если в файл пациента внесены ошибочные или избыточные сведения, одна и та же оценка продублирована несколько раз, то этот файл можно удалить, а затем в меню \"5. Все оценки\" последовательно открыть необходимые оценки и воспользоваться действием \"2. Записать в файл пациента\" для внесения верных данных в новый файл, который будет создан автоматически.\n\nВо время проведения оценки уже внесенные данные можно сохранить в виде черновика по кнопке \"F12 Сохранить черновик\", после чего продолжить или прервать проведение оценки. Сохраненные черновики доступны для продолжения работы в меню \"7. Работа с данными\" либо на первом шаге первичной или повторной оценки по кнопке \"F10 Открыть черновик\".\n\nЧерновики хранятся локально на том компьютере, на котором были созданы, и не передаются при экспорте данных."},
     {"part": "Об авторе", "text": "Методика Арсенал разработана в 2024 году в ФКУ \"Санкт-Петербургская ПБСТИН\" Минздрава России Шадровым В. В.\n\nПо всем вопросам, касающимся проведения оценок по методике Арсенал, настройки и работы с программой методики, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com."},
 ]
 
@@ -453,11 +467,11 @@ class Rate1Screen(Screen):
     
     BINDINGS = [
         Binding("escape", "go_back", "Выход", show=True, priority=True),
+        Binding("pagedown", "scroll_guide_down", "Листать вниз", show=True, priority=True),
+        Binding("pageup", "scroll_guide_up", "Листать вверх", show=True, priority=True),
         Binding("f2", "prev_step", "Назад", show=True, priority=True),
         Binding("f3", "next_step", "Вперед", show=True),
-        Binding("pageup", "scroll_guide_up", "Листать вверх", show=True, priority=True),
-        Binding("pagedown", "scroll_guide_down", "Листать вниз", show=True, priority=True),
-        Binding("f10", "open_draft", "Открыть черновик", show=True),
+        Binding("f10", "open_draft", "Открыть черновик", show=True, priority=True),
         Binding("f12", "save_draft", "Сохранить черновик", show=True, priority=True),
     ]
         
@@ -1745,11 +1759,11 @@ class Rate2Screen(Screen):
     
     BINDINGS = [
         Binding("escape", "go_back", "Выход", show=True, priority=True),
+        Binding("pagedown", "scroll_guide_down", "Листать вниз", show=True, priority=True),
+        Binding("pageup", "scroll_guide_up", "Листать вверх", show=True, priority=True),
         Binding("f2", "prev_step", "Назад", show=True, priority=True),
         Binding("f3", "next_step", "Вперед", show=True),
-        Binding("pageup", "scroll_guide_up", "Листать вверх", show=True, priority=True),
-        Binding("pagedown", "scroll_guide_down", "Листать вниз", show=True, priority=True),
-        Binding("f10", "open_draft", "Открыть черновик", show=True),
+        Binding("f10", "open_draft", "Открыть черновик", show=True, priority=True),
         Binding("f12", "save_draft", "Сохранить черновик", show=True, priority=True),
     ]
     
@@ -2068,26 +2082,18 @@ class Rate2Screen(Screen):
             self.app.pop_screen()
 
     def _get_selected_assessment(self) -> dict:
-        """Получает выбранную оценку из списка, игнорируя спейсеры"""
+        """Получает выбранную оценку из списка"""
         try:
             list_view = self.query_one("#assessment_list", ListView)
-            if list_view.index is not None:
-                # Индекс элемента в ListView
-                idx = list_view.index
-                
-                # Определяем, является ли элемент спейсером
-                # Спейсеры добавляются после каждого элемента, кроме последнего
-                # Поэтому реальный индекс = idx // 2, если idx четный
-                if idx % 2 == 0:  # Четный индекс - возможно реальный элемент
-                    actual_index = idx // 2
-                    if actual_index < len(self.primary_assessments):
-                        return self.primary_assessments[actual_index]
-                # Если индекс нечетный - это спейсер, возвращаем None
-                return None
+            if list_view.index is not None and list_view.index < len(list_view.children):
+                item = list_view.children[list_view.index]
+                # Получаем данные из item
+                if hasattr(item, 'assessment_data'):
+                    return item.assessment_data
         except NoMatches:
             pass
         return None
-    
+        
     def _select_assessment(self, assessment: dict) -> None:
         """Выбирает оценку и обновляет данные"""
         if not assessment:
@@ -2364,15 +2370,12 @@ class Rate2Screen(Screen):
         list_view = ListView(id="assessment_list")
         container.mount(list_view)
         
-        # Добавляем элементы с отступами
+        # Добавляем элементы БЕЗ спейсеров
         for i, ass in enumerate(self.primary_assessments):
-            item = ListItem(Static(ass["display"]), id=f"item_{i}")
+            item = ListItem(Static(ass["display"]))
+            # Сохраняем данные прямо в item
+            item.assessment_data = ass
             list_view.append(item)
-            # Добавляем пустой элемент для отступа (кроме последнего)
-            if i < len(self.primary_assessments) - 1:
-                spacer = ListItem(Static(""), disabled=True, classes="spacer")
-                spacer.disabled = True  # Делаем спейсер невыбираемым
-                list_view.append(spacer)
         
         # Добавляем кнопку
         container.mount(Button("Далее (Enter или F3)", variant="primary", id="btn_next"))
@@ -2611,14 +2614,13 @@ class Rate2Screen(Screen):
     def handle_list_selected(self, event: ListView.Selected) -> None:
         """Обработка выбора пациента из списка (Enter или клик)"""
         if self.step_index == 0 and event.item:
-            # Получаем выбранную оценку
-            selected = self._get_selected_assessment()
-            if selected:
+            # Получаем данные прямо из item
+            if hasattr(event.item, 'assessment_data'):
+                selected = event.item.assessment_data
                 self._select_assessment(selected)
                 # Автоматически переходим к следующему шагу
                 self.call_after_refresh(self.action_next_step)
             else:
-                # Если выбран спейсер, игнорируем
                 event.stop()
 
     def save_current_state(self) -> None:
@@ -2631,13 +2633,10 @@ class Rate2Screen(Screen):
                 except NoMatches:
                     return
                 
-                if list_view.index is not None and list_view.index < len(self.primary_assessments):
-                    # Учитываем, что в списке есть спейсеры, поэтому индекс нужно преобразовать
-                    # Спейсеры добавляются после каждого элемента, кроме последнего
-                    # Поэтому реальный индекс в данных = индекс_в_списке // 2
-                    actual_index = list_view.index // 2 if list_view.index < len(self.primary_assessments) * 2 - 1 else list_view.index // 2
-                    if actual_index < len(self.primary_assessments):
-                        selected = self.primary_assessments[actual_index]
+                if list_view.index is not None and list_view.index < len(list_view.children):
+                    item = list_view.children[list_view.index]
+                    if hasattr(item, 'assessment_data'):
+                        selected = item.assessment_data
                         self.selected_assessment = selected
                         self.form_data["patient"] = selected["patient"]
                         self.form_data["primary"] = selected["assessment"]
@@ -3226,12 +3225,20 @@ class Rate2Screen(Screen):
         # Обработка кнопки "Далее" на шаге 0
         if button_id == "btn_next" and self.step_index == 0:
             # Получаем выбранную оценку
-            selected = self._get_selected_assessment()
-            if selected:
-                self._select_assessment(selected)
-                self._is_navigating = True
-                self.call_after_refresh(self._safe_action_next_step)
-            else:
+            try:
+                list_view = self.query_one("#assessment_list", ListView)
+                if list_view.index is not None and list_view.index < len(list_view.children):
+                    item = list_view.children[list_view.index]
+                    if hasattr(item, 'assessment_data'):
+                        selected = item.assessment_data
+                        self._select_assessment(selected)
+                        self._is_navigating = True
+                        self.call_after_refresh(self._safe_action_next_step)
+                    else:
+                        self.app.custom_notify("Выберите первичную оценку из списка", severity="warning")
+                else:
+                    self.app.custom_notify("Выберите первичную оценку из списка", severity="warning")
+            except NoMatches:
                 self.app.custom_notify("Выберите первичную оценку из списка", severity="warning")
             return
         
@@ -3376,7 +3383,7 @@ class SaveDraftDialog(ModalScreen[str]):
         width: 60;
         height: auto;
         background: white;
-        border: round #000000;
+        border: round teal;
         padding: 1 2;
     }
     
@@ -3405,8 +3412,8 @@ class SaveDraftDialog(ModalScreen[str]):
     }
     
     #draft_buttons Button:focus {
-        border: round #000000;
-        color: #000000;
+        border: round teal;
+        color: teal;
         text-style: bold;
     }
     """
@@ -3462,7 +3469,7 @@ class OpenDraftDialog(ModalScreen[dict]):
         width: 70;
         height: 20;
         background: white;
-        border: round #000000;
+        border: round teal;
         padding: 1 2;
     }
     
@@ -3499,8 +3506,8 @@ class OpenDraftDialog(ModalScreen[dict]):
     }
     
     #draft_actions Button:focus {
-        border: round #000000;
-        color: #000000;
+        border: round teal;
+        color: teal;
         text-style: bold;
     }
     
@@ -3515,7 +3522,7 @@ class OpenDraftDialog(ModalScreen[dict]):
     }
     
     #draft_list_view > ListItem.--highlight > Static {
-        color: #000000;
+        color: teal;
         text-style: bold;
     }
     
@@ -3531,7 +3538,7 @@ class OpenDraftDialog(ModalScreen[dict]):
     
     BINDINGS = [
         Binding("escape", "cancel", "Отмена", show=False),
-        Binding("enter", "select_draft", "Открыть", show=False),  # Скрываем из футера
+        Binding("enter", "select_draft", "Открыть", show=False),
     ]
     
     def __init__(self, drafts: list, assessment_type: str = None):
@@ -4853,14 +4860,15 @@ class DataScreen(Screen):
             with Vertical(id="data_buttons_panel") as btn_col:
                 btn_col.border_title = "Действия"
                 with Vertical(id="data_buttons_container"):
-                    yield Button("1. Импорт данных на этот компьютер     ", id="btn_import")
-                    yield Button("2. Экспорт данных с этого компьютера   ", id="btn_export")
-                    yield Button("3. Импорт данных из старой версии      ", id="btn_import_old")
-                    yield Button("4. Вывод таблицы оценок                ", id="btn_export_table")
-                    yield Button("5. Вывод обезличенных данных           ", id="btn_export_anonymous")
-                    yield Button("6. Продолжить оценку из черновика      ", id="btn_open_draft")
+                    # Используем HoverButton
+                    yield HoverButton("1. Импорт данных на этот компьютер     ", id="btn_import")
+                    yield HoverButton("2. Экспорт данных с этого компьютера   ", id="btn_export")
+                    yield HoverButton("3. Импорт данных из старой версии      ", id="btn_import_old")
+                    yield HoverButton("4. Вывод таблицы оценок                ", id="btn_export_table")
+                    yield HoverButton("5. Вывод обезличенных данных           ", id="btn_export_anonymous")
+                    yield HoverButton("6. Продолжить оценку из черновика      ", id="btn_open_draft")
                     yield Button("", id="btn_spacer2", disabled=True, classes="spacer")
-                    yield Button("В. Назад                               ", id="btn_back")
+                    yield HoverButton("В. Назад                               ", id="btn_back")
         yield Footer(show_command_palette=False)
             
     # Словарь описаний для кнопок
@@ -4923,6 +4931,30 @@ class DataScreen(Screen):
         self.query_one("#btn_import").focus()
         self._update_hint("btn_import")
     
+    def on_mouse_move(self, event: events.MouseMove) -> None:
+        """При движении мыши проверяем, не наведена ли она на кнопку"""
+        result = self.get_widget_at(event.x, event.y)
+        
+        if result is None:
+            return
+        
+        widget, region = result
+        
+        button = self._find_button_parent(widget)
+        
+        if button and button.id:
+            if button.id.startswith("btn_") and self.focused != button:
+                button.focus()
+    
+    def _find_button_parent(self, widget):
+        """Рекурсивно ищем родителя-кнопку"""
+        current = widget
+        while current:
+            if isinstance(current, Button):
+                return current
+            current = current.parent
+        return None
+
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Обработка нажатия кнопок"""
         btn_id = event.button.id
@@ -5690,16 +5722,60 @@ class MenuScreen(Screen):
             with Vertical(id="menu_buttons_panel") as btn_col:
                 btn_col.border_title = "Действия"
                 with Vertical(id="menu_buttons_container"):
-                    yield Button("1. Читать руководство              ", id="btn_manual")
-                    yield Button("2. Первичная оценка                ", id="btn_rate1")
-                    yield Button("3. Повторная оценка                ", id="btn_rate2")
-                    yield Button("4. Файлы пациентов                 ", id="btn_list")
-                    yield Button("5. Все оценки                      ", id="btn_look")
-                    yield Button("6. Форма для заметок               ", id="btn_form")
-                    yield Button("7. Работа с данными                ", id="btn_data")
-                    yield Button("8. О программе                     ", id="btn_info")
-                    yield Button("В. Выход                           ", id="btn_exit")
+                    # Используем HoverButton
+                    yield HoverButton("1. Читать руководство           ", id="btn_manual")
+                    yield HoverButton("2. Первичная оценка             ", id="btn_rate1")
+                    yield HoverButton("3. Повторная оценка             ", id="btn_rate2")
+                    yield HoverButton("4. Файлы пациентов              ", id="btn_list")
+                    yield HoverButton("5. Все оценки                   ", id="btn_look")
+                    yield HoverButton("6. Форма для заметок            ", id="btn_form")
+                    yield HoverButton("7. Работа с данными             ", id="btn_data")
+                    yield HoverButton("8. О программе                  ", id="btn_info")
+                    yield HoverButton("В. Выход                        ", id="btn_exit")
         yield Footer(show_command_palette=False)
+
+    def on_mouse_move(self, event: events.MouseMove) -> None:
+        """При движении мыши обновляем подсказку"""
+        try:
+            # Получаем виджет под курсором
+            result = self.get_widget_at(event.x, event.y)
+            print(f"Result: {result}")  # Отладка
+            
+            if result is None:
+                return
+            
+            # result может быть кортежем (widget, region) или просто виджетом
+            if isinstance(result, tuple):
+                widget = result[0]
+            else:
+                widget = result
+            
+            print(f"Widget: {widget}")  # Отладка
+            
+            # Ищем кнопку
+            current = widget
+            while current:
+                print(f"Current: {current}")  # Отладка
+                if isinstance(current, Button):
+                    print(f"Found button: {current.id}")  # Отладка
+                    if current.id and current.id.startswith("btn_"):
+                        self._update_hint(current.id)
+                        # Перемещаем фокус на кнопку
+                        if self.focused != current:
+                            current.focus()
+                    return
+                current = current.parent
+        except Exception as e:
+            print(f"Error: {e}")
+            import traceback
+            traceback.print_exc()
+
+    @on(events.MouseMove)
+    def handle_mouse_move(self, event: events.MouseMove) -> None:
+        """Обработчик движения мыши"""
+        print(f"Mouse move at: {event.x}, {event.y}")
+        result = self.get_widget_at(event.x, event.y)
+        print(f"Result: {result}")
 
     def on_descendant_focus(self, event: events.Focus) -> None:
         """Срабатывает, когда любая кнопка внутри экрана получает фокус"""
@@ -5767,7 +5843,7 @@ class MenuScreen(Screen):
                 width: 76;
                 height: 11;
                 background: white;
-                border: round #000000;
+                border: round teal;
                 padding: 1 2;
             }
             
@@ -5796,14 +5872,14 @@ class MenuScreen(Screen):
             }
             
             #buttons Button:focus {
-                border: round #000000;
-                color: #000000;
+                border: round teal;
+                color: teal;
                 text-style: bold;
             }
             
             #buttons Button.variant-primary {
-                border: round #000000;
-                color: #000000;
+                border: round teal;
+                color: teal;
             }
             
             #buttons Button.variant-error {
@@ -6091,7 +6167,7 @@ class arsenal(App):
             width: 50;
             height: auto;
             background: white;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
         }
 
@@ -6119,14 +6195,14 @@ class arsenal(App):
         }
 
         #confirm_buttons Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
         #menu_hint_panel {
             width: 60%;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
             background: white;
             border-title-style: bold;
@@ -6147,8 +6223,8 @@ class arsenal(App):
 
         /* Подсветка панелей при фокусе внутри них */
         #menu_hint_panel:focus-within, #menu_buttons_panel:focus-within {
-            border: round #000000;
-            border-title-color: #000000;
+            border: round teal;
+            border-title-color: teal;
             border-title-style: bold;
         }
 
@@ -6178,17 +6254,24 @@ class arsenal(App):
 
         #menu_buttons_container Button:focus {
             background: white;
-            color: #000000;
+            color: teal;
             text-style: bold;
-            border: round #000000;
+            border: round teal;
             content-align: left middle;
+        }
+
+        #menu_buttons_container Button:hover {
+            background: white;
+            color: teal;
+            text-style: bold;
+            border: round teal;
         }
 
         VerticalScroll, ListView {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: #000000 30%;
-            scrollbar-color-hover: #000000 30%;
+            scrollbar-color: teal 30%;
+            scrollbar-color-hover: teal 30%;
             scrollbar-background: transparent;
             background: white;
             padding: 0;
@@ -6215,8 +6298,8 @@ class arsenal(App):
 
         /* Фокусы панелей */
         #list_panel:focus-within, #detail_panel:focus-within {
-            border: round #000000;
-            border-title-color: #000000;
+            border: round teal;
+            border-title-color: teal;
             border-title-style: bold;
         }
 
@@ -6269,7 +6352,7 @@ class arsenal(App):
         }
 
         ListView > ListItem.--highlight > Static {
-            color: #000000;
+            color: teal;
             text-style: bold;
         }
 
@@ -6282,7 +6365,7 @@ class arsenal(App):
             width: 50;
             height: 10;
             background: white;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
         }
 
@@ -6310,8 +6393,8 @@ class arsenal(App):
         }
 
         QuitScreen Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
@@ -6331,8 +6414,8 @@ class arsenal(App):
         }
 
         #btn_open_office:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
         }
 
         #details {
@@ -6350,7 +6433,7 @@ class arsenal(App):
             width: 50;
             height: auto;
             background: white;
-            border: round #000000;
+            border: round teal;
             align: center middle;
             padding: 1 2;
         }
@@ -6389,8 +6472,8 @@ class arsenal(App):
 
         /* Фокусы панелей */
         #guide_panel:focus-within, #input_panel:focus-within {
-            border: round #000000;
-            border-title-color: #000000;
+            border: round teal;
+            border-title-color: teal;
             border-title-style: bold;
         }
 
@@ -6404,8 +6487,8 @@ class arsenal(App):
         #guide_scroll {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: #000000 30%;
-            scrollbar-color-hover: #000000 30%;
+            scrollbar-color: teal 30%;
+            scrollbar-color-hover: teal 30%;
             scrollbar-background: transparent;
             background: white;
         }
@@ -6419,8 +6502,8 @@ class arsenal(App):
         #input_scroll {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: #000000 30%;
-            scrollbar-color-hover: #000000;
+            scrollbar-color: teal 30%;
+            scrollbar-color-hover: teal;
             scrollbar-background: transparent;
             background: white;
             margin: 0;
@@ -6450,7 +6533,7 @@ class arsenal(App):
         }
 
         #input_container Input:focus {
-            border: round #000000;  /* тонкая округлая рамка при фокусе */
+            border: round teal;  /* тонкая округлая рамка при фокусе */
         }
 
         #input_container Input.placeholder {
@@ -6468,7 +6551,7 @@ class arsenal(App):
         }
 
         #input_container RadioSet:focus {
-            border: round #000000;
+            border: round teal;
         }
 
         #input_container RadioButton {
@@ -6488,11 +6571,11 @@ class arsenal(App):
             border: transparent; 
         }
 
-        /* Фокус: меняем синий фон на рамку #000000 */
+        /* Фокус: меняем синий фон на рамку teal */
         #input_container RadioButton:focus > .radio-button--container {
             background: white;
-            border: round #000000;
-            color: #000000
+            border: round teal;
+            color: teal
         }
 
         /* Исправление обрезания индикатора справа */
@@ -6507,7 +6590,7 @@ class arsenal(App):
 
         #input_container RadioButton.--on > .radio-button--container {
             text-style: bold;
-            color: #000000;
+            color: teal;
         }
 
         /* Стили для TextArea (комментарий) */
@@ -6521,14 +6604,14 @@ class arsenal(App):
             min-height: 20;
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: #000000 30%;
-            scrollbar-color-hover: #000000;
+            scrollbar-color: teal 30%;
+            scrollbar-color-hover: teal;
             scrollbar-background: transparent;
             padding: 0;
         }
 
         #input_container TextArea:focus {
-            border: round #000000;
+            border: round teal;
         }
 
         /* Стили для кнопок */
@@ -6541,14 +6624,14 @@ class arsenal(App):
         }
 
         #input_container Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
         #input_container Button.variant-primary {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
         }
 
         #input_container Button.variant-success {
@@ -6570,7 +6653,7 @@ class arsenal(App):
             width: 50;
             height: 10;
             background: white;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
         }
 
@@ -6598,8 +6681,8 @@ class arsenal(App):
         }
 
         ConfirmDialog Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
         
@@ -6609,7 +6692,7 @@ class arsenal(App):
             height: 10;
             background: white;
             align: center middle;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
         }
 
@@ -6637,8 +6720,8 @@ class arsenal(App):
         }
 
         #dialog Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
@@ -6652,7 +6735,7 @@ class arsenal(App):
             width: 50;
             height: 10;
             background: white;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
         }
 
@@ -6680,8 +6763,8 @@ class arsenal(App):
         }
 
         ConfirmSaveDialog Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
@@ -6697,7 +6780,7 @@ class arsenal(App):
         .notification {
             background: white;
             color: black;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
             margin: 1;
             width: auto;  /* Автоширина по содержимому */
@@ -6721,12 +6804,12 @@ class arsenal(App):
         }
         
         .notification.info {
-            border: round #000000;
+            border: round teal;
         }
 
         #data_hint_panel {
             width: 60%;
-            border: round #000000;
+            border: round teal;
             padding: 1 2;
             background: white;
             border-title-style: bold;
@@ -6747,8 +6830,8 @@ class arsenal(App):
 
         /* Подсветка панелей при фокусе внутри них */
         #data_hint_panel:focus-within, #data_buttons_panel:focus-within {
-            border: round #000000;
-            border-title-color: #000000;
+            border: round teal;
+            border-title-color: teal;
             border-title-style: bold;
         }
 
@@ -6774,10 +6857,17 @@ class arsenal(App):
 
         #data_buttons_container Button:focus {
             background: white;
-            color: #000000;
+            color: teal;
             text-style: bold;
-            border: round #000000;  /* При фокусе рамка становится видимой */
+            border: round teal;  /* При фокусе рамка становится видимой */
             content-align: left middle;
+        }
+
+        #data_buttons_container Button:hover {
+            background: white;
+            color: teal;
+            text-style: bold;
+            border: round teal;
         }
 
         #data_buttons_container Button.spacer {
@@ -6793,9 +6883,9 @@ class arsenal(App):
 
         #data_buttons_container Button:focus {
             background: white;
-            color: #000000;
+            color: teal;
             text-style: bold;
-            border: round #000000;
+            border: round teal;
             content-align: left middle;
         }
         
@@ -6819,8 +6909,8 @@ class arsenal(App):
         }
 
         #look_list_panel:focus-within, #look_content_panel:focus-within {
-            border: round #000000;
-            border-title-color: #000000;
+            border: round teal;
+            border-title-color: teal;
             border-title-style: bold;
         }
 
@@ -6853,7 +6943,7 @@ class arsenal(App):
         }
 
         #assessments_list > ListItem.--highlight > Static {
-            color: #000000;
+            color: teal;
             text-style: bold;
         }
 
@@ -6871,7 +6961,7 @@ class arsenal(App):
         }
 
         #content_container Input:focus {
-            border: round #000000;
+            border: round teal;
         }
 
         #content_container Input.placeholder {
@@ -6895,14 +6985,14 @@ class arsenal(App):
         }
 
         #content_container Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
         #content_container Button.variant-primary {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
         }
 
         #content_container Button.variant-success {
@@ -6930,8 +7020,8 @@ class arsenal(App):
         }
 
         #buttons_container Button:focus {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
             text-style: bold;
         }
 
@@ -6955,12 +7045,19 @@ class arsenal(App):
         }
         
         #buttons_container Button.variant-primary {
-            border: round #000000;
-            color: #000000;
+            border: round teal;
+            color: teal;
+        }
+
+        .menu-btn.hover {
+            background: white;
+            color: teal;
+            text-style: bold;
+            border: round teal;
         }
 
         Footer {
-            background: #000000;
+            background: darkcyan;
             color: white;
             text-style: bold;
         }
