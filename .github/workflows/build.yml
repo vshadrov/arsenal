@@ -1,76 +1,47 @@
 name: Build Arsenal
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 jobs:
   build:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: write
     strategy:
-      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
+      
       - name: Install System Dependencies (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
-          sudo apt install -y python3-dev build-essential libffi-dev git 
-          sudo apt install -y libgirepository1.0-dev libcairo2-dev gir1.2-gtk-3.0
-
+          sudo apt install -y python3-dev python3-pip build-essential libffi-dev git
+      
       - name: Install Briefcase
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install briefcase
+          # Используем флаг для обхода ограничений системы
+          python3 -m pip install briefcase --break-system-packages
 
-      - name: Build and Package App
+      - name: Build App
         run: |
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            briefcase package linux appimage --no-input --no-docker
-          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-            briefcase package macOS --no-input --adhoc-sign
+            # Собираем Linux
+            python3 -m briefcase package linux appimage --no-input --no-docker
+            python3 -m briefcase package linux system --no-input
+          elif [ "${{ matrix.os }}" = "windows-latest" ]; then
+            # Windows (здесь флаг не нужен, но briefcase вызывается так же)
+            briefcase package windows app --no-input
+          else
+            # macOS (тоже добавляем --break-system-packages если нужно, 
+            # но briefcase обычно справляется сам)
+            python3 -m briefcase package macOS app --no-input --adhoc-sign
           fi
         shell: bash
 
-      - name: Upload Artifacts (Internal)
+
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: arsenal-${{ matrix.os }}
-          # Briefcase кладет файлы глубоко, используем рекурсивный поиск
-          path: |
-            **/*.AppImage
-            **/*.dmg
-            **/*.pkg
-          if-no-files-found: error
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        if: success()
-        with:
-          tag_name: latest
-          name: Latest Continuous Build
-          body: "Автоматическая сборка проекта Арсенал. Внимание: macOS версия требует снятия карантина (xattr -cr)."
-          draft: false
-          prerelease: true
-          make_latest: "true"
-          overwrite_files: true  # ИСПРАВЛЕНО: правильное название параметра
-          files: |
-            **/*.AppImage
-            **/*.dmg
-            **/*.pkg
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
+          name: arsenal-dist-${{ matrix.os }}
+          path: dist/*
