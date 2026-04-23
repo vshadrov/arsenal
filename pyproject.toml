@@ -4,7 +4,7 @@ project_name = "arsenal"
 bundle = "com.arsenal"
 version = "2.3.1"
 url = "https://github.com/vshadrov/arsenal"
-license.file = "COPYING"
+license.file = "LICENSE"
 author = "Arsenal"
 author_email = "shadrov@pbstin.ru"
 
