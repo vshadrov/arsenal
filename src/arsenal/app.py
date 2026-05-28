@@ -4,14 +4,16 @@
 # Лицензия GPL-3.0-or-later
 
 from textual import on, events
-from textual.app import App, ComposeResult
-from textual.widgets import Footer, Static, ListItem, ListView, Button, Label, Input, RadioSet, RadioButton, TextArea
-from textual.containers import Horizontal, Vertical, VerticalScroll
+from textual.app import App, ComposeResult, active_app
 from textual.binding import Binding
+from textual.containers import Horizontal, Vertical, VerticalScroll
+from textual.css.query import NoMatches
 from textual.message import Message
+from textual.reactive import reactive
 from textual.screen import Screen, ModalScreen
 from textual.scrollbar import ScrollBar, ScrollBarRender
-from textual.css.query import NoMatches
+from textual.theme import Theme
+from textual.widgets import Footer, Static, ListItem, ListView, Button, Label, Input, RadioSet, RadioButton, TextArea
 from rich.style import Style
 from rich.text import Text
 from pathlib import Path
@@ -30,46 +32,22 @@ from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.utils import get_column_letter
 
 
-class SlimScrollBarRender(ScrollBarRender):
-    def render_bar(
-        self,
-        size: int,
-        virtual_size: int,
-        window_size: int,
-        position: float,
-        vertical: bool,
-        **kwargs
-    ) -> Text:
-        # Если контент влезает - рисуем пустоту
-        if virtual_size <= window_size:
-            return Text(" " * size)
+# Виджет для добавления маркера в списки
+class ListLabel(Static):
+    # always_update=True гарантирует вызов watch метода в любой ситуации
+    is_highlighted = reactive(False, always_update=True)
 
-        # 1. ГЕОМЕТРИЯ
-        bar_size = max(1, int(size * window_size / virtual_size))
-        max_scroll = max(1, virtual_size - window_size)
-        max_track = size - bar_size
-        start_pos = int(max_track * (position / max_scroll))
+    def __init__(self, clean_text: str, **kwargs):
+        super().__init__(**kwargs)
+        self.clean_text = clean_text
+        # Устанавливаем базовое состояние текста сразу при создании
+        self.renderable = f"  {self.clean_text}"
 
-        # Указываем цвет линии (teal) и ПУСТОЙ фон (None), 
-        # чтобы просвечивал фон подлежащего виджета
-        style_bar = Style(color="#008080", bgcolor=None) 
-        # Фоновый стиль дорожки делаем прозрачным
-        style_bg = Style(bgcolor=None) 
-
-        char = "│" if vertical else "─"
-        
-        # Собираем строку, принудительно обрезая до ширины size
-        res = Text("", style=style_bg)
-        res.append(" " * start_pos)
-        res.append(char * bar_size, style=style_bar)
-        res.append(" " * (size - start_pos - bar_size))
-        
-        # Обрезаем и убираем лишние стили с пустых мест
-        return res[:size]
-
-
-# Применяем КЛАСС
-ScrollBar.renderer = SlimScrollBarRender
+    def watch_is_highlighted(self, value: bool) -> None:
+        if value:
+            self.update(f"█ {self.clean_text}")
+        else:
+            self.update(f"{self.clean_text}") # Можно добавить два пробела, чтобы текст не прыгал
 
 # Задаем хранение и обработку данных
 class DataManager:
@@ -78,6 +56,7 @@ class DataManager:
         self.base_dir = Path.home() / ".arsenal_data"
         self.db_path = self.base_dir / "arsenal_database.json"
         self.reports_dir = self.base_dir / "arsenal_reports"
+        self.config_path = self.base_dir / "config.json"
         
         # Создаем структуру папок сразу при запуске
         self.base_dir.mkdir(exist_ok=True)
@@ -132,6 +111,154 @@ class DataManager:
             json.dump(self.data, f, ensure_ascii=False, indent=4)
         
         return patient
+
+    def load_saved_theme(self, default_theme: str, available_themes: dict) -> str:
+        """Безопасно читает сохраненную тему из ~/.arsenal_data/config.json"""
+        if self.config_path.exists():
+            try:
+                with open(self.config_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    saved_theme = data.get("theme", default_theme)
+                    # Валидация: проверяем, что тема есть в списке доступных
+                    return saved_theme if saved_theme in available_themes else default_theme
+            except (json.JSONDecodeError, IOError):
+                return default_theme
+        return default_theme
+
+    def save_theme(self, theme_name: str) -> None:
+        """Записывает выбранную тему в ~/.arsenal_data/config.json"""
+        try:
+            with open(self.config_path, "w", encoding="utf-8") as f:
+                json.dump({"theme": theme_name}, f, indent=4)
+        except IOError:
+            pass
+
+# Темы
+
+DEFAULT_THEME = "themeLT"
+
+THEMES = {
+    "themeLT": Theme(
+        name="themeLT", # Стяжкин
+        dark=False,
+        primary="#008080",
+        secondary="#666666", # для рамок и кнопок вне фокуса
+        accent="#008080", # teal
+        background="#FFFFFF",
+        surface="#FFFFFF",
+        panel="#DCDCDC",
+    ),
+    "themeLB": Theme(
+        name="themeLB", # Голубев
+        dark=False,
+        primary="#0000FF",
+        secondary="#666666",
+        accent="#0000FF", # blue
+        background="#FFFFFF",
+        surface="#FFFFFF",
+        panel="#b5b5b5",
+    ),
+    "themeLS": Theme(
+        name="themeLS", # Тарасевич
+        dark=False,
+        primary="#4682B4",
+        secondary="#666666",
+        accent="#4682B4", # steelblue
+        background="#FFFFFF",
+        surface="#FFFFFF",
+        panel="#DCDCDC",
+    ),
+    "themeLM": Theme(
+        name="themeLM", # Чекунова
+        dark=False,
+        primary="#000000",
+        secondary="#404040",
+        accent="#000000",
+        background="#DCDCDC",
+        surface="#DCDCDC",
+        panel="#b5b5b5",
+    ),
+    "themeDQ": Theme(
+        name="themeDQ", # Макушев
+        dark=True,
+        primary="#D2B48C",
+        secondary="#DCDCDC",
+        accent="#D2B48C", # tan
+        background="#2F4F4F",
+        surface="#2F4F4F",
+        panel="#2c2c2c",
+    ),
+    "themeDM": Theme(
+        name="themeDM", # Шалек
+        dark=True,
+        primary="#DAA520",
+        secondary="#DCDCDC",
+        accent="#DAA520",
+        background="#3b3b3b",
+        surface="#3b3b3b",
+        panel="#2c2c2c",
+    ),
+    "themeDC": Theme(
+        name="themeDC", # Львов
+        dark=True,
+        primary="#FFFFFF",
+        secondary="#FFFFFF",
+        accent="#FFFFFF", # white
+        background="#111111",
+        surface="#111111",
+        panel="#111111",
+    )
+}
+
+class SlimScrollBarRender(ScrollBarRender):
+    def render_bar(
+        self,
+        size: int,
+        virtual_size: int,
+        window_size: int,
+        position: float,
+        vertical: bool,
+        **kwargs
+    ) -> Text:
+        # Если контент влезает - рисуем пустоту
+        if virtual_size <= window_size:
+            return Text(" " * size)
+
+        # 1. ГЕОМЕТРИЯ
+        bar_size = max(1, int(size * window_size / virtual_size))
+        max_scroll = max(1, virtual_size - window_size)
+        max_track = size - bar_size
+        start_pos = int(max_track * (position / max_scroll))
+
+        # 2. БЕЗОПАСНОЕ ПОЛУЧЕНИЕ ЦВЕТА ИЗ ТЕМЫ
+        theme_accent = "#D3D3D3"  # Дефолтный цвет (фолбек)
+        
+        try:
+            # Получаем доступ к приложению через контекст потока
+            app = active_app.get()
+            # Проверяем, что у приложения уже инициализированы переменные темы
+            if app and hasattr(app, "theme_variables") and app.theme_variables:
+                theme_accent = app.theme_variables.get("accent", "#D3D3D3")
+        except LookupError:
+            # Сработает, если Textual считает полосу прокрутки до полной инициализации контекста
+            pass
+
+        # 3. ОТРИСОВКА
+        style_bar = Style(color=theme_accent, bgcolor=None) 
+        style_bg = Style(bgcolor=None) 
+
+        char = "│" if vertical else "─"
+        
+        res = Text("", style=style_bg)
+        res.append(" " * start_pos)
+        res.append(char * bar_size, style=style_bar)
+        res.append(" " * (size - start_pos - bar_size))
+        
+        return res[:size]
+
+# Применяем КЛАСС
+ScrollBar.renderer = SlimScrollBarRender
+
 
 class CustomNotification(Static):
     """Свое уведомление"""
@@ -263,7 +390,7 @@ class ConfirmSaveDialog(ModalScreen[bool]):
         self.dismiss(event.button.id == "yes")
 
 class MyRadioButton(RadioButton):
-    """Радиокнопки"""
+    """Радиокнопки с рамкой при фокусе"""
     
     def __init__(self, label: str, value: bool = False) -> None:
         super().__init__(label, value)
@@ -332,7 +459,7 @@ PAGES = [
     {"part": "Повторные оценки - подход", "text": "Независимо от выбранных методов работы с пациентом, если эта работа была целенаправленной и существенно затрагивала выявленные у пациента факторы риска, достигнутые изменения должны отразиться на представлениях пациента о его проблемах и путях их преодоления и, таким образом, могут быть представлены в виде продвижения по стадиям изменения. На этом принципе основываются повторные оценки по методике Арсенал. Поскольку оценка выраженности фактора риска строится на анализе событий прошлого пациента, нет содержательного смысла повторно оценивать эту выраженность через небольшой промежуток времени по тем же критериям, которые были применены при первичной оценке. Вместо этого динамику риска предлагается оценивать определив повторно только текущую (достигнутую) стадию изменения по тем факторам, которые при первичной оценке определены как присутствующие.\n\nКак уже было сказано, стадии изменения не обязательно последовательно сменяют друг друга в одном направлении. Вполне возможно зафиксировать длительную задержку на той же стадии по одним факторам при положительной динамике по другим, так же как и регресс (срыв, откат) стадии, особенно при изменении условий, в которых находится пациент."},
     {"part": "Повторные оценки - расчет", "text": "Выражение динамики риска в точных цифрах представляется весьма условным, однако на текущем этапе разработки методики предлагается следующий алгоритм. Достижение пациентом стадии удержания по какому-либо фактору уменьшает первичную оценку выраженности этого фактора на 2. Достижение стадии действия уменьшает первичную оценку на 1. Достижение стадии подготовки не позволяет провести переоценку выраженности фактора, но свидетельствует об успешном преодолении первичного сопротивления со стороны пациента и указывает на факторы, которые должны стать первоочередными мишенями для вмешательства, т. к. пациент к такому вмешательству уже готов. Переход от стадии предобдумывания к стадии обдумывания не предполагает каких-либо реальных действий со стороны пациента, поэтому также не приводит к переоценке выраженности фактора, и, вероятно, указывает на неэффективность принятых мер.\n\nСтоит заметить, что если первично по фактору установлена оценка 3, то снижение ее возможно только до 1, в остальных случаях возможно снижение до 0. Полученные скорректированные баллы по всем факторам суммируются и эта сумма условно сравнивается с суммой баллов первичной оценки. Если проводится несколько повторных оценок, то независимо от того, произошел ли срыв стадии или отмечено улучшение, первичная оценка корректируется в зависимости от вновь установленной стадии."},
     {"part": "Условия для оценок", "text": "Как правило, первичная оценка проводится однократно. Исключением могут стать случаи, когда за время взаимодействия с пациентом была получена дополнительная информация, которая заставляет специалиста пересмотреть оценки, установленные изначально. Повторных же оценок можно провести несколько, чтобы отследить изменения после отдельных этапов лечения. Может оказаться полезным проведение оценок одного пациента несколькими специалистами. Сам характер изменений, которые должна отслеживать методика, предполагает, что даже при самых интенсивных вмешательствах повторная оценка должна проводиться по крайней мере через несколько месяцев после первичной.\n\nПри каждой повторной оценке специалисту необходимо сначала ознакомиться с заключением по первичной оценке.\n\nВ том случае, если у пациента произошло значимое ухудшение по какому-либо из факторов, например совершено новое ООД или обнаружились новые проблемы по факторам, которые первично оценены как отсутствующие, то стоит еще раз провести первичную оценку и заново определить представленность всех факторов и стадий изменения по ним (для упрощения переноса данных найдите уже проведенную оценку в разделе \"5. Все оценки\", откройте ее, сохраните как черновик, а затем откройте черновик через меню \"7. Работа с данными\" или \"2. Первичная оценка\" и внесите изменившиеся данные).\n\nВ противном случае, когда такого значимого ухудшения нет, достаточно провести повторную оценку только стадий изменения по факторам, первично определенным как присутствующие, на основании данных о текущем состоянии и поведении пациента и его прицельного расспроса. Каждая такая оценка сопровождается комментарием, в котором следует указать, на основании каких наблюдений она установлена."},
-    {"part": "Программа - структура заключения", "text": "В файле пациента автоматически формируется следующее представление оценок, данных по каждому фактору.\n\n(Если схема отображается некорректно, сделайте окно программы шире или уменьшите размер шрифта с помощью сочетания клавиш Ctrl+\"-\" так, чтобы линия ниже умещалась на одной строке.)\n├──────────────────────────────────────────────────────────────────────────────┤\n\nПри первичной оценке:\n                                              [teal]╭дата первичной оценки[/]\n                                        [teal]╭─────┴────╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2026.02.04───╮\nФакторы                             │ оцен  стад      │ [teal]← заголовки[/]\n\\[1] Агрессия                        │ 2 ▓▓  ▁▂▄   под │\\[1] [teal]← оценки по фактору[/]\n[teal]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯ ╰┬╯[/]\n[teal] ╰номер фактора    ╰название фактора    │       │       ╰номер фактора[/]\n[teal]                                        │       ╰стадия изменения**[/]\n[teal]                                        ╰оценка выраженности*[/]\n[teal]                            ╭дата первичной оценки[/]\n\\[9] Всего из 24       [teal]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2026.02.04   │ 14 │██████████████          │\n                                    ╰────┴────────────────────────╯\n[teal]                                    ╰─┬─╯╰┬───────────────────────╯\n                                      │   ╰шкала представления суммы оценок\n                                      ╰сумма оценок по всем факторам[/]\n\nПри повторной оценке:\n[teal]                    дата первичной оценки╮       дата повторной оценки╮\n                                        ╭┴─────────╮        ╭─────────┴╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2025.01.28───╮╭─────2026.03.19─────╮\nФакторы                             │ оцен  стад      ││ стад      изм оцен │\n\\[1] Агрессия                        │ 3 ███ ▁     пре ││ ▁▂▄▆  дей +++ 2 ▓▓ │\\[1]\n[teal]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯  ╰───┬────╯╰─┬─╯╰─┬─╯ ╰┬╯\n ╰номер фактора    ╰название фактора    │       │           │       │    │    │\n  первичная оценка выраженности фактора*╯       │           │       │    │    │\n         первичная стадия изменения по фактору**╯           │       │    │    │\n                         новая стадия изменения по фактору**╯       │    │    │\n   динамика стадии изменения между первичной и повторной оценками***╯    │    │\n                       новая (пересчитанная) оценка выраженности фактора*╯    │\n                                                                 номер фактора╯\n     сумма первичных оценок выраженности и ее шкала╮\n       дата первичной оценки╮       ╭──────────────┴──────────────╮[/]\n\\[9] Всего из 24       [teal]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2025.01.28   │ 22 │██████████████████████  │\n                                    ├────┼────────────────────────┤\n                       2026.03.19   │ 16 │████████████████        │\n                      [teal]╰─────┬────╯[/]  ╰────┴────────────────────────╯\n[teal]       дата повторной оценки╯       ╰─────────────────────┬───────╯\nсумма новых (пересчитанных) оценок выраженности и ее шкала╯[/]\n\n[teal]*[/] Оценка выраженности фактора может иметь следующие обозначения:\n    0 ▏   - оценка 0,\n    1 ▒   - оценка 1,\n    2 ▓▓  - оценка 2,\n    3 ███ - оценка 3.\n\n[teal]**[/] Стадия изменения может иметь следующие обозначения:\n    ▁     пре - предобдумывание,\n    ▁▂    обд - обдумывание,\n    ▁▂▄   под - подготовка,\n    ▁▂▄▆  дей - действие,\n    ▁▂▄▆█ уде - удержание.\n\n[teal]***[/] Представление динамики стадии изменения между первичной и повторной оценками может иметь следующие обозначения:\n    +++ - продвижение на три или четыре стадии,\n    ++  - продвижение на две стадии,\n    +   - продвижение на одну стадию,\n        - отсутствие динамики,\n    -   - откат на одну стадию,\n    --  - откат на две стадии,\n    --- - откат на три или четыре стадии."},
+    {"part": "Программа - структура заключения", "text": "В файле пациента автоматически формируется следующее представление оценок, данных по каждому фактору.\n\n(Если схема отображается некорректно, сделайте окно программы шире или уменьшите размер шрифта с помощью сочетания клавиш Ctrl+\"-\" так, чтобы линия ниже умещалась на одной строке.)\n├──────────────────────────────────────────────────────────────────────────────┤\n\nПри первичной оценке:\n                                              [$accent]╭дата первичной оценки[/]\n                                        [$accent]╭─────┴────╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2026.02.04───╮\nФакторы                             │ оцен  стад      │ [$accent]← заголовки[/]\n\\[1] Агрессия                        │ 2 ▓▓  ▁▂▄   под │\\[1] [$accent]← оценки по фактору[/]\n[$accent]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯ ╰┬╯[/]\n[$accent] ╰номер фактора    ╰название фактора    │       │       ╰номер фактора[/]\n[$accent]                                        │       ╰стадия изменения**[/]\n[$accent]                                        ╰оценка выраженности*[/]\n[$accent]                            ╭дата первичной оценки[/]\n\\[9] Всего из 24       [$accent]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2026.02.04   │ 14 │██████████████          │\n                                    ╰────┴────────────────────────╯\n[$accent]                                    ╰─┬─╯╰┬───────────────────────╯\n                                      │   ╰шкала представления суммы оценок\n                                      ╰сумма оценок по всем факторам[/]\n\nПри повторной оценке:\n[$accent]                    дата первичной оценки╮       дата повторной оценки╮\n                                        ╭┴─────────╮        ╭─────────┴╮[/]\n     М О Д Р О П   А р с е н а л    ╭────2025.01.28───╮╭─────2026.03.19─────╮\nФакторы                             │ оцен  стад      ││ стад      изм оцен │\n\\[1] Агрессия                        │ 3 ███ ▁     пре ││ ▁▂▄▆  дей +++ 2 ▓▓ │\\[1]\n[$accent]╰┬╯╰───────────────┬───────────────╯ ╰──┬──╯╰───┬────╯  ╰───┬────╯╰─┬─╯╰─┬─╯ ╰┬╯\n ╰номер фактора    ╰название фактора    │       │           │       │    │    │\n  первичная оценка выраженности фактора*╯       │           │       │    │    │\n         первичная стадия изменения по фактору**╯           │       │    │    │\n                         новая стадия изменения по фактору**╯       │    │    │\n   динамика стадии изменения между первичной и повторной оценками***╯    │    │\n                       новая (пересчитанная) оценка выраженности фактора*╯    │\n                                                                 номер фактора╯\n     сумма первичных оценок выраженности и ее шкала╮\n       дата первичной оценки╮       ╭──────────────┴──────────────╮[/]\n\\[9] Всего из 24       [$accent]╭─────┴────╮[/]  ╭────┬────────────────────────╮\n                       2025.01.28   │ 22 │██████████████████████  │\n                                    ├────┼────────────────────────┤\n                       2026.03.19   │ 16 │████████████████        │\n                      [$accent]╰─────┬────╯[/]  ╰────┴────────────────────────╯\n[$accent]       дата повторной оценки╯       ╰─────────────────────┬───────╯\nсумма новых (пересчитанных) оценок выраженности и ее шкала╯[/]\n\n[$accent]*[/] Оценка выраженности фактора может иметь следующие обозначения:\n    0 ▏   - оценка 0,\n    1 ▒   - оценка 1,\n    2 ▓▓  - оценка 2,\n    3 ███ - оценка 3.\n\n[$accent]**[/] Стадия изменения может иметь следующие обозначения:\n    ▁     пре - предобдумывание,\n    ▁▂    обд - обдумывание,\n    ▁▂▄   под - подготовка,\n    ▁▂▄▆  дей - действие,\n    ▁▂▄▆█ уде - удержание.\n\n[$accent]***[/] Представление динамики стадии изменения между первичной и повторной оценками может иметь следующие обозначения:\n    +++ - продвижение на три или четыре стадии,\n    ++  - продвижение на две стадии,\n    +   - продвижение на одну стадию,\n        - отсутствие динамики,\n    -   - откат на одну стадию,\n    --  - откат на две стадии,\n    --- - откат на три или четыре стадии."},
     {"part": "Программа - хранение данных", "text": "Программа для работы с методикой Арсенал сохраняет данные по завершению каждой проведенной оценки. Одни и те же данные - сведения о пациенте, специалисте, вид оценки и дата ее проведения, оценки выраженности факторов, стадии изменения, комментарии и заключение - сохраняются в двух видах: в файл пациента и в базу данных.\n\nФайлы пациентов доступны для просмотра через функцию \"4. Файлы пациентов\", так же доступно открытие этих файлов через внешний редактор для вывода на печать и их удаление. Файл пациента именуется по схеме Фамилия_Имя_Отчество_год рождения пациента.txt, все оценки, проведенные одному пациенту, сохраняются последовательно в один файл.\n\nЗаписи об оценках, сохраненные в базу данных, доступны для просмотра через функцию \"5. Все оценки\", так же доступно открытие этих записей через внешний редактор для вывода на печать и восстановление файла пациента по этим данным. В случае, если выбрана повторная оценка, то заключение по ней формируется с использованием данных о последней первичной оценке.\n\nЕсли вы импортировали данные об оценках, проведенных в ранних исполнениях первой версии программы, то полный текст заключения по таким оценкам с комментариями по каждому фактору может быть доступен только в файле пациента, который именуется по схеме ФамилияИО1990.txt. При этом в базу данных из всех комментариев сохраняется только заключение по оценке в целом. На основе таких первичных оценок возможно проведение повторной оценки, но комментарии по факторам из первичной оценки будут недоступны. Полная функциональная интеграция данных из ранних версий программы в текущую возможна путем правки файла Журнал.txt старой версии. Если необходимо это сделать, обратитесь к разработчику."},
     {"part": "Программа - работа с данными", "text": "Пользователю предоставляется возможность управления данными об оценках, внесенными в файлы пациентов, в то время как изменение данных, сохраненных в базу данных, не рекомендуется и напрямую из программы не доступно. База данных, таким образом, представляет собой неизменяемый журнал всех оценок, проведенных на данном компьютере и импортированных с других компьютеров.\n\nВсе проведенные оценки автоматически последовательно записываются в файл пациента. При необходимости в этот файл можно внести правки открыв его во внешнем редакторе. Эти правки не затронут сведения об оценке, внесенные в базу данных.\n\nВ настройках вашей операционной системы вы можете установить, какой именно редактор будет использоваться, определив программу по умолчанию для открытия файлов с расширением .txt. Учитывайте, что для нормального отображения файлов с оценками необходимо применять моноширинный шрифт.\n\nЕсли необходимо внести правки не только в файл пациента, но и в саму запись об оценке, сохраненную в базе данных, например, если пересмотрены оценки факторов или стадии изменения, то для этого в меню \"5. Все оценки\" нужно открыть оценку, подлежащую правке, и воспользоваться действием \"3. Сохранить как черновик\". Затем - открыть этот черновик через меню \"7. Работа с данными\" и, перемещаясь по шагам оценки кнопками \"назад\" и \"вперед\", внести правки, после чего перейти к последнему шагу и завершить оценку. Запись об этой оценке будет с новой датой сохранена в базу данных вместе с предыдущей и автоматически внесена в файл пациента.\n\nВ случае, если в файл пациента внесены ошибочные или избыточные сведения, одна и та же оценка продублирована несколько раз, то этот файл можно удалить, а затем в меню \"5. Все оценки\" последовательно открыть необходимые оценки и воспользоваться действием \"2. Записать в файл пациента\" для внесения верных данных в новый файл, который будет создан автоматически.\n\nВо время проведения оценки уже внесенные данные можно сохранить в виде черновика по кнопке \"F12 Сохранить черновик\", после чего продолжить или прервать проведение оценки. Сохраненные черновики доступны для продолжения работы в меню \"7. Работа с данными\" либо на первом шаге первичной или повторной оценки по кнопке \"F10 Открыть черновик\".\n\nЧерновики хранятся локально на том компьютере, на котором были созданы, и не передаются при экспорте данных."},
     {"part": "Об авторе", "text": "Методика Арсенал разработана в 2024 году в ФКУ \"Санкт-Петербургская ПБСТИН\" Минздрава России Шадровым В. В.\n\nПо всем вопросам, касающимся проведения оценок по методике Арсенал, настройки и работы с программой методики, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com."},
@@ -438,26 +565,39 @@ class ManualScreen(Screen):
                 list_col.border_title = "Руководство по МОДРОП Арсенал"
                 yield ListView(
                     ListItem(Static(""), classes="spacer", disabled=True),
-                    *[ListItem(Static(f"{c['part']}"), id=f"c_{i}") for i, c in enumerate(PAGES)],
+                    # ВМЕСТО Static используем наш ListLabel
+                    *[ListItem(ListLabel(f"{c['part']}"), id=f"c_{i}") for i, c in enumerate(PAGES)],
                     ListItem(Static(""), classes="spacer", disabled=True),
                     id="page_list"
                 )
             with VerticalScroll(id="detail_panel") as detail_col:
-                detail_col.border_title = "Руководство по МОДРОП Арсенал"  # Заголовок по умолчанию
+                detail_col.border_title = "Руководство по МОДРОП Арсенал"
                 yield Static("Выберите раздел", id="details")
         yield Footer(show_command_palette=False)
 
+    @on(ListView.Highlighted)
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         if event.item and event.item.id:
             try:
+                # 1. Обновляем текст в правой панели
                 idx = int(event.item.id.split("_")[1])
-                # Обновляем текст
                 self.query_one("#details", Static).update(PAGES[idx]['text'])
-                # Обновляем заголовок панели
+                
                 detail_panel = self.query_one("#detail_panel")
                 detail_panel.border_title = PAGES[idx]['part']
-            except (ValueError, IndexError): 
+                
+                for label in self.query("ListLabel"):
+                    label.is_highlighted = False
+                
+                # Включаем маркер только у текущего выделенного пункта
+                if hasattr(event.item, "children") and event.item.children:
+                    current_label = event.item.children[0]
+                    if isinstance(current_label, ListLabel):
+                        current_label.is_highlighted = True
+                        
+            except (ValueError, IndexError):
                 pass
+
 
     def on_mount(self) -> None:
         self.query_one("#page_list").focus()
@@ -580,7 +720,7 @@ class Rate1Screen(Screen):
                     elif isinstance(focused, Button):
                         event.prevent_default()
                         self.call_after_refresh(self.action_next_step)
-            
+                        
             # Шаг 25: Заключение
             elif self.step_index == 25:
                 if isinstance(focused, TextArea):
@@ -1057,28 +1197,21 @@ class Rate1Screen(Screen):
         if current_score is None:
             current_score = 0
         
-        # container.mount(Label(f"{factor_name}"))
-        # container.mount(Label("Оценка выраженности:"))
-            
-        # Создаем RadioSet
+        # Создаем RadioSet с кастомной отрисовкой
         radio_buttons = [
             MyRadioButton("Все хорошо.    Оценка 0", value=(current_score == 0)),
             MyRadioButton("Есть проблемы. Оценка 1", value=(current_score == 1)),
             MyRadioButton("Плохо.         Оценка 2", value=(current_score == 2)),
             MyRadioButton("Совсем плохо.  Оценка 3", value=(current_score == 3)),
         ]
-            
+        
         rs = RadioSet(*radio_buttons, id=f"rs_score_{self.current_factor}_{self.step_index}")
         container.mount(rs)
         
-        # Кнопка далее
         container.mount(Button("Далее (Enter или F3)", variant="primary", 
                             id=f"btn_next_{self.step_index}"))
         
-        # Сбрасываем запомненный индекс
         self.reset_radio_index()
-        
-        # Устанавливаем фокус на RadioSet
         self.call_after_refresh(lambda: rs.focus())
 
     def show_factor_stage(self, f_key: str, factor_name: str):
@@ -2203,11 +2336,26 @@ class Rate2Screen(Screen):
                             },
                             "assessment": assessment,
                             "display": display,
-                            "total_score": total_score  # Можно использовать для сортировки
+                            "total_score": total_score,
+                            # Добавляем сортировочные ключи
+                            "_sort_key": (
+                                last_name.lower(),
+                                first_name.lower(),
+                                patronymic.lower(),
+                                date  # новые даты будут сверху при reverse=True
+                            )
                         })
         
-        # Сортируем по дате (новые сверху) или по убыванию total_score
-        self.primary_assessments.sort(key=lambda x: x["assessment"].get("date", ""), reverse=True)
+        # Сортируем: сначала по ФИО (алфавит), затем по дате (новые сверху)
+        self.primary_assessments.sort(
+            key=lambda x: (
+                x["patient"]["last_name"].lower(),
+                x["patient"]["first_name"].lower(),
+                x["patient"]["patronymic"].lower(),
+                x["assessment"].get("date", "")
+            ),
+            reverse=False  # Сначала по ФИО в алфавитном порядке
+        )
 
     @property
     def max_steps(self) -> int:
@@ -2363,25 +2511,53 @@ class Rate2Screen(Screen):
         if not self.primary_assessments:
             container.mount(Label("Нет доступных первичных оценок"))
             container.mount(Button("Назад", variant="primary", id="btn_back"))
-            self.call_after_refresh(lambda: self.query_one("#btn_back").focus() if self.query_one("#btn_back") else None)
             return
         
-        # Создаем ListView
         list_view = ListView(id="assessment_list")
         container.mount(list_view)
         
-        # Добавляем элементы БЕЗ спейсеров
+        # Сохраняем индекс выделенного элемента
+        selected_idx = self.draft_data.get("selected_idx", 0) if self.draft_data else 0
+        
         for i, ass in enumerate(self.primary_assessments):
-            item = ListItem(Static(ass["display"]))
-            # Сохраняем данные прямо в item
+            # ВМЕСТО Static используем ваш новый класс ListLabel
+            label = ListLabel(ass['display'])
+            
+            # Если этот элемент должен быть выбран изначально — сразу активируем маркер
+            if i == selected_idx:
+                label.is_highlighted = True
+                
+            item = ListItem(label)
             item.assessment_data = ass
             list_view.append(item)
         
-        # Добавляем кнопку
-        container.mount(Button("Далее (Enter или F3)", variant="primary", id="btn_next"))
+        if selected_idx < len(self.primary_assessments):
+            list_view.index = selected_idx
         
-        # Устанавливаем фокус
+        container.mount(Button("Далее (Enter или F3)", variant="primary", id="btn_next"))
         self.call_after_refresh(lambda: list_view.focus())
+
+    @on(ListView.Highlighted, "#assessment_list")
+    def handle_assessment_list_highlighted(self, event: ListView.Highlighted) -> None:
+        """Обновляет отображение элементов списка при навигации"""
+        if self.step_index != 0:
+            return
+            
+        if event.item:
+            try:
+                # Находим текущий список
+                list_view = self.query_one("#assessment_list", ListView)
+                
+                # Сбрасываем выделение ТОЛЬКО у элементов этого списка
+                for child in list_view.children:
+                    if hasattr(child, "children") and child.children:
+                        label = child.children[0]
+                        if isinstance(label, ListLabel):
+                            # Если это текущий выделенный пункт, ставим True, иначе False
+                            label.is_highlighted = (child == event.item)
+                            
+            except Exception:
+                pass
 
     def show_rater_input_step(self):
         """Показывает поле для ввода специалиста"""
@@ -3382,8 +3558,8 @@ class SaveDraftDialog(ModalScreen[str]):
     #draft_dialog {
         width: 60;
         height: auto;
-        background: white;
-        border: round teal;
+        background: transparent;
+        border: round $accent;
         padding: 1 2;
     }
     
@@ -3391,7 +3567,8 @@ class SaveDraftDialog(ModalScreen[str]):
         width: 100%;
         height: auto;
         content-align: center middle;
-        color: black;
+        color: $text;
+        background: transparent;
         text-style: bold;
         margin-bottom: 1;
     }
@@ -3399,6 +3576,7 @@ class SaveDraftDialog(ModalScreen[str]):
     #draft_buttons {
         width: 100%;
         height: 3;
+        background: transparent;
         align: center middle;
     }
     
@@ -3406,14 +3584,15 @@ class SaveDraftDialog(ModalScreen[str]):
         width: 18;
         height: 3;
         margin: 0 2;
-        background: white;
-        color: #666666;
+        background: transparent;
+        color: $secondary;
         border: none;
     }
     
     #draft_buttons Button:focus {
-        border: round teal;
-        color: teal;
+        border: round $accent;
+        background: transparent;
+        color: $accent;
         text-style: bold;
     }
     """
@@ -3468,8 +3647,8 @@ class OpenDraftDialog(ModalScreen[dict]):
     #draft_list_dialog {
         width: 70;
         height: 20;
-        background: white;
-        border: round teal;
+        background: transparent;
+        border: round $accent;
         padding: 1 2;
     }
     
@@ -3477,7 +3656,7 @@ class OpenDraftDialog(ModalScreen[dict]):
         width: 100%;
         height: 1;
         content-align: center middle;
-        color: black;
+        color: $text;
         text-style: bold;
         margin-bottom: 1;
     }
@@ -3485,8 +3664,8 @@ class OpenDraftDialog(ModalScreen[dict]):
     #draft_list_view {
         width: 100%;
         height: 13;
-        border: round grey;
-        background: white;
+        border: none;
+        background: transparent;
     }
     
     #draft_actions {
@@ -3500,29 +3679,30 @@ class OpenDraftDialog(ModalScreen[dict]):
         width: 20;
         height: 3;
         margin: 0 2;
-        background: white;
-        color: #666666;
+        background: transparent;
+        color: $secondary;
         border: none;
     }
     
     #draft_actions Button:focus {
-        border: round teal;
-        color: teal;
+        border: round $accent;
+        color: $accent;
+        background: transparent;
         text-style: bold;
     }
     
     #draft_list_view ListItem {
         padding-left: 1;
-        background: white;
-        color: black;
+        background: transparent;
+        color: $text;
     }
     
     #draft_list_view > ListItem.--highlight {
-        background: white;
+        background: transparent;
     }
     
     #draft_list_view > ListItem.--highlight > Static {
-        color: teal;
+        color: $accent;
         text-style: bold;
     }
     
@@ -3530,9 +3710,9 @@ class OpenDraftDialog(ModalScreen[dict]):
         width: 100%;
         height: 13;
         content-align: center middle;
-        color: #666666;
-        border: round grey;
-        background: white;
+        color: $text;
+        border: round $secondary;
+        background: transparent;
     }
     """
     
@@ -3564,12 +3744,10 @@ class OpenDraftDialog(ModalScreen[dict]):
     def on_mount(self) -> None:
         """Заполняем список после монтирования"""
         if not self.drafts:
-            # Отключаем кнопку "Открыть"
             try:
                 self.query_one("#btn_open").disabled = True
             except NoMatches:
                 pass
-            # Фокус на кнопку "Отмена"
             try:
                 self.query_one("#btn_cancel").focus()
             except NoMatches:
@@ -3578,23 +3756,46 @@ class OpenDraftDialog(ModalScreen[dict]):
         
         list_view = self.query_one("#draft_list_view", ListView)
         
-        # Добавляем черновики в список - БЕЗ цветовой разметки в тексте
-        for draft in self.drafts:
+        for i, draft in enumerate(self.drafts):
             patient_info = draft.get("patient_info", {})
             display = (f"{patient_info.get('last_name', '')} "
-                      f"{patient_info.get('first_name', '')} "
-                      f"{patient_info.get('patronymic', '')} "
-                      f"{patient_info.get('birth_year', '')} г.р. - "
-                      f"{draft.get('created_at', '')[:10]}")
-            item = ListItem(Static(display))
+                    f"{patient_info.get('first_name', '')} "
+                    f"{patient_info.get('patronymic', '')} "
+                    f"{patient_info.get('birth_year', '')} г.р. - "
+                    f"{draft.get('created_at', '')[:10]}")
+            
+            label = ListLabel(display)
+            
+            # Если это самый первый элемент — сразу активируем маркер █
+            if i == 0:
+                label.is_highlighted = True
+                
+            item = ListItem(label)
             item.draft_data = draft
             list_view.append(item)
         
-        # Фокус на первом элементе
+        # Фокус первого элемента
         if list_view.children:
             list_view.focus()
             list_view.index = 0
-    
+            
+    @on(ListView.Highlighted, "#draft_list_view")
+    def handle_draft_list_highlighted(self, event: ListView.Highlighted) -> None:
+        """Обновляет отображение элементов списка черновиков при навигации"""
+        if event.item:
+            try:
+                list_view = self.query_one("#draft_list_view", ListView)
+                
+                for child in list_view.children:
+                    if hasattr(child, "children") and child.children:
+                        label = child.children[0]
+                        if isinstance(label, ListLabel):
+                            # Если элемент является текущим выделенным — True, иначе — False
+                            label.is_highlighted = (child == event.item)
+                            
+            except NoMatches:
+                pass
+        
     def on_key(self, event: events.Key) -> None:
         """Обработка клавиш для навигации"""
         if event.key == "left":
@@ -3708,7 +3909,7 @@ class ListScreen(Screen):
     def compose(self) -> ComposeResult:
         with Horizontal():
             with Vertical(id="list_panel") as list_col:
-                list_col.border_title = "Заключения"
+                list_col.border_title = "Пациенты"
                 yield ListView(id="reports_list")
             
             with VerticalScroll(id="detail_panel") as detail_col:
@@ -3743,9 +3944,41 @@ class ListScreen(Screen):
         files = sorted([f.name for f in path.glob("*.txt")])
         list_view = self.query_one("#reports_list", ListView)
         list_view.clear()
-        for f_name in files:
-            # Используем аргумент name для хранения имени файла
-            list_view.append(ListItem(Static(f_name), name=f_name))
+        
+        # Определяем, какой индекс файла должен быть выделен
+        target_index = 0
+        if self.highlight_file and self.highlight_file in files:
+            target_index = files.index(self.highlight_file)
+            
+        for i, f_name in enumerate(files):
+            label = ListLabel(f_name)
+            
+            # Если этот файл должен быть выделен — сразу активируем маркер
+            if i == target_index:
+                label.is_highlighted = True
+                
+            list_view.append(ListItem(label, name=f_name))
+        
+        # Устанавливаем индекс в самом ListView (если файлы вообще есть)
+        if files:
+            list_view.index = target_index
+            
+    @on(ListView.Highlighted, "#reports_list")
+    def handle_list_highlighted(self, event: ListView.Highlighted) -> None:
+        """Обновляет отображение элементов списка при навигации"""
+        try:
+            list_view = self.query_one("#reports_list", ListView)
+            
+            # Переключаем маркеры, используя индекс элемента в цикле
+            for i, child in enumerate(list_view.children):
+                if hasattr(child, "children") and child.children:
+                    label = child.children[0]
+                    if isinstance(label, ListLabel):
+                        # Включаем маркер, если индекс элемента совпадает с текущим выбранным индексом списка
+                        label.is_highlighted = (i == list_view.index)
+                        
+        except NoMatches:
+            pass
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         """Обновление превью и заголовка (первая строка файла) при навигации"""
@@ -3854,6 +4087,34 @@ class LookScreen(Screen):
         # Счетчик для уникальных ID
         self._form_counter = 0
 
+    def on_mouse_move(self, event: events.MouseMove) -> None:
+        """При движении мыши подсвечиваем кнопку под курсором в режиме просмотра"""
+        if self.mode != "view":
+            return
+        
+        # Получаем виджет под курсором
+        result = self.get_widget_at(event.screen_x, event.screen_y)
+        
+        if result is None:
+            return
+        
+        if isinstance(result, tuple):
+            widget = result[0]
+        else:
+            widget = result
+        
+        # Ищем родителя-кнопку
+        current = widget
+        button = None
+        while current:
+            if isinstance(current, Button) and current.id and current.id in self.view_buttons:
+                button = current
+                break
+            current = current.parent
+        
+        if button and self.focused != button:
+            button.focus()
+
     def compose(self) -> ComposeResult:
         with Horizontal():
             # Левая панель - список оценок
@@ -3935,10 +4196,11 @@ class LookScreen(Screen):
                     "search_text": f"{display} {assessment.get('rater', '')}".lower()
                 })
         
-        # Сортируем по алфавиту (по фамилии, имени)
+        # Сортируем по алфавиту (по фамилии, имени, отчеству)
         self.all_assessments.sort(key=lambda x: (
             x["patient"]["last_name"].lower(),
             x["patient"]["first_name"].lower(),
+            x["patient"]["patronymic"].lower(),
             x["assessment"].get("date", "")
         ))
 
@@ -3946,24 +4208,27 @@ class LookScreen(Screen):
         """Обновляет список в левой панели"""
         try:
             list_view = self.query_one("#assessments_list", ListView)
-            
-            # Полностью очищаем список
             list_view.clear()
             
-            # Добавляем новые элементы
             for i, ass in enumerate(self.filtered_assessments):
-                item = ListItem(Static(ass["display"]))
-                # Сохраняем индекс в атрибуте для доступа
-                item.index = i
+                label = ListLabel(ass['display'])
+                
+                # Устанавливаем маркер только для изначально выбранного элемента
+                # (маркеры при навигации будут обновляться через обработчик Highlighted)
+                if i == self.selected_index:
+                    label.is_highlighted = True
+                    
+                item = ListItem(label)
+                item.db_index = i 
+                item.assessment_data = ass
                 list_view.append(item)
             
-            # Если есть элементы, выделяем первый
             if self.filtered_assessments:
-                self.selected_index = min(self.selected_index, len(self.filtered_assessments) - 1)
                 list_view.index = self.selected_index
                 
         except NoMatches:
             pass
+
 
     def show_search_form(self):
         """Показывает форму поиска в правой панели"""
@@ -4272,6 +4537,7 @@ class LookScreen(Screen):
                 if list_view.index > 0:
                     list_view.index -= 1
                     self.selected_index = list_view.index
+                    self._update_list_display()
 
     def action_move_down(self):
         """Перемещение вниз по списку"""
@@ -4282,6 +4548,20 @@ class LookScreen(Screen):
                 if list_view.index < len(self.filtered_assessments) - 1:
                     list_view.index += 1
                     self.selected_index = list_view.index
+                    self._update_list_display()
+
+    def _update_list_display(self):
+        """Обновляет отображение элементов списка"""
+        try:
+            list_view = self.query_one("#assessments_list", ListView)
+            for i, child in enumerate(list_view.children):
+                if hasattr(child, 'children') and child.children:
+                    label = child.children
+                    if isinstance(label, ListLabel):
+                        label.is_highlighted = (i == list_view.index)
+        except NoMatches:
+            pass
+
 
     def action_select_item(self):
         """Выбор текущего элемента в списке"""
@@ -4314,9 +4594,81 @@ class LookScreen(Screen):
 
     @on(ListView.Selected)
     def handle_list_selected(self, event: ListView.Selected):
-        """Обработка выбора из списка мышью или Enter"""
         self.action_select_item()
 
+#    @on(ListView.Highlighted, "#assessments_list")
+#    def handle_list_highlighted(self, event: ListView.Highlighted) -> None:
+#        """Обновляет отображение элементов списка при навигации"""
+#        # Если в приложении есть логика фильтрации режимов, сохраняем проверку поиска:
+#        # if self.mode != "search": return
+#        
+#        try:
+#            list_view = self.query_one("#assessments_list", ListView)
+#            
+#            # Переключаем маркеры строго на основе реального, теперь уже исправного индекса Textual
+#            for i, child in enumerate(list_view.children):
+#                if hasattr(child, 'children') and child.children:
+#                    label = child.children
+#                    if isinstance(label, ListLabel):
+#                        # Синхронизируем маркер с текущим положением курсора
+#                        label.is_highlighted = (i == list_view.index)
+#                        
+#            # Если вам нужно обновлять переменную selected_index класса при перемещении:
+#            if list_view.index is not None:
+#                self.selected_index = list_view.index
+#                        
+#        except NoMatches:
+#            pass
+
+    @on(ListView.Highlighted, "#assessments_list")
+    def handle_single_assessments_list_highlighted(self, event: ListView.Highlighted) -> None:
+        """Единый и единственный обработчик перемещения фокуса для списка оценок"""
+        # Если у вас есть логика фильтрации режимов (например, поиск), 
+        # вы можете добавить её сюда, но обновление маркера должно происходить ВСЕГДА
+        
+        if event.item:
+            try:
+                list_view = self.query_one("#assessments_list", ListView)
+                
+                # ВСЕГДА перемещаем маркер за курсором, независимо от режима (search или обычный)
+                for i, child in enumerate(list_view.children):
+                    if hasattr(child, 'children') and child.children:
+                        label = child.children
+                        if isinstance(label, ListLabel):
+                            label.is_highlighted = (i == list_view.index)
+                
+                # Синхронизируем внутренний индекс класса с реальным выбором на экране
+                if list_view.index is not None:
+                    self.selected_index = list_view.index
+                    
+            except NoMatches:
+                pass
+
+    @on(ListView.Highlighted, "#assessments_list")
+    def handle_assessments_list_highlighted(self, event: ListView.Highlighted) -> None:
+        """Обновляет отображение элементов списка при навигации"""
+        if self.mode != "search":
+            return
+        
+        if event.item:
+            try:
+                list_view = self.query_one("#assessments_list", ListView)
+                
+                # Обновляем маркеры у всех элементов
+                for i, child in enumerate(list_view.children):
+                    if hasattr(child, 'children') and child.children:
+                        label = child.children[0]
+                        if isinstance(label, ListLabel):
+                            # Включаем маркер только для текущего выделенного элемента
+                            label.is_highlighted = (i == list_view.index)
+                
+                # Синхронизируем внутренний индекс
+                if list_view.index is not None:
+                    self.selected_index = list_view.index
+                    
+            except NoMatches:
+                pass
+            
     def show_selected_assessment(self):
         """Отображает выбранную оценку - файл слева, кнопки справа"""
         if self.selected_index >= len(self.filtered_assessments):
@@ -4933,7 +5285,7 @@ class DataScreen(Screen):
     
     def on_mouse_move(self, event: events.MouseMove) -> None:
         """При движении мыши проверяем, не наведена ли она на кнопку"""
-        result = self.get_widget_at(event.x, event.y)
+        result = self.get_widget_at(event.screen_x, event.screen_y)
         
         if result is None:
             return
@@ -5695,50 +6047,55 @@ class DataScreen(Screen):
             import traceback
             traceback.print_exc()
 
-# Экран меню
+# Экран настроек
 
 # Словарь описаний для левой панели
-BUTTON_DESCRIPTIONS = {
-    "btn_manual": "Методика Арсенал разработана для оценки динамики риска опасного поведения у пациентов с психическими расстройствами.\n\nВ меню справа собраны основные разделы программы для работы с методикой.\n\nПри работе с программой используйте сочетания клавиш Ctrl+\"-\" и Ctrl+\"+\" для изменения масштаба отображения, стрелки - для навигации и пролистывания, кнопки PgUp и PgDn - для пролистывания.\n\nПрименимые на конкретном экране клавиши и их сочетания указаны на нижней панели, они также срабатывают по нажатию кнопкой мыши.",
-    "btn_rate1": "Раздел для проведения первичной оценки. Она включает в себя оценку представленности у пациента восьми факторов риска, стадии изменения по каждому из них, составление комментариев и заключения.\n\nЧтобы провести оценку вам нужно собрать информацию о пациенте и провести его расспрос. Для удобства можете сформировать и распечатать форму для заметок.\n\nПри проведении оценки вам будут даны инструкции к каждому шагу, но, возможно, сначала стоит ознакомиться с полным руководством к методике.",
-    "btn_rate2": "Раздел для проведения повторной оценки.\n\nПри каждой повторной оценке специалисту необходимо сначала ознакомиться с заключением по первичной оценке. В том случае, если у пациента произошло значимое ухудшение по какому-либо из факторов, например совершено новое ООД или обнаружились новые проблемы по факторам, которые первично оценены как отсутствующие, то стоит еще раз провести первичную оценку и заново определить представленность всех факторов и стадий изменения по ним. Если такого значимого ухудшения нет, достаточно провести повторную оценку только стадий изменения по факторам, первично определенным как присутствующие, на основании данных о текущем состоянии и поведении пациента и его прицельного расспроса. Каждая такая оценка сопровождается комментарием, в котором следует указать, на основании каких наблюдений она установлена.\n\nЧтобы провести повторную оценку вам потребуются сохраненные данные о первичной оценке и расспрос пациента. Для удобства можете сформировать и распечатать форму для заметок.\n\nПри проведении оценки вам будут даны инструкции к каждому шагу, но, возможно, сначала стоит ознакомиться с полным руководством к методике.",
-    "btn_list": "Раздел для просмотра сохраненных оценок по каждому пациенту.\n\nДанная функция позволяет просматривать именно сохраненные файлы пациентов с внесенными в него оценками. Есть возможность открыть файл во внешнем редакторе для печати или удалить. При редактировании заключений имейте в виду, что вы вносите изменение только в файл пациента, а исходные данные оценки, остаются неизменными.\n\nНе удаляйте заключения, созданные в самых ранних выпусках программы версии v0.x, т. к. не все данные по этим оценкам могут быть сохранены в журнале.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
-    "btn_look": "Функция просмотра и поиска всех проведенных оценок.\n\nВ отличие от функции просмотра файлов пациентов эта функция отображает все записи об оценках, которые сохранены в журнале (базе данных). Эти данные доступны для просмотра и открытия для печати во внешнем редакторе.\n\nЕсли выбранная оценка не внесена в файл пациента, ее можно сохранить в него.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
-    "btn_form": "Функция создания формы для ведения заметок во время сбора информации о пациенте и его расспроса. Можно создать форму на одну или на две страницы. Форма открывается во внешнем редакторе, там ее можно изменить и распечатать.",
-    "btn_data": "Раздел с функциями обработки данных.\n\nДоступны перенос данных между компьютерами, вывод таблиц с данными об оценках, продолжение проведения оценок, сохраненных как черновики.",
-    "btn_info": "Версия программы v2.3\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство No 2026619934.\nПрямая ссылка https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич",
-    "btn_exit": "Завершение работы с программой.",
+SETBUTTON_DESCRIPTIONS = {
+    "btn_info": "Версия программы v2.4\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство No 2026619934.\nПрямая ссылка https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич",
+    "btn_themeLT": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[teal on #ffffff]╭─ [/][bold teal on #ffffff]Просмотр темы[/][teal on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][teal on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][teal on #ffffff]│ [/][bold teal on #ffffff]1. Кнопка в фокусе[/][teal on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][teal on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][teal on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][teal on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][teal on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][teal on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][teal on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][teal on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][teal on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][teal on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][teal on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #008080 on #DCDCDC] esc [/][bold black on #DCDCDC]Выход  [/][bold #008080 on #DCDCDC]f2 [/][bold black on #DCDCDC]Назад  [/][bold #008080 on #DCDCDC]f3 [/][bold black on #DCDCDC]Вперед                                                     [/]",
+    "btn_themeLB": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[blue on #ffffff]╭─ [/][bold blue on #ffffff]Просмотр темы[/][blue on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][blue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][blue on #ffffff]│ [/][bold blue on #ffffff]1. Кнопка в фокусе[/][blue on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][blue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][blue on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][blue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][blue on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][blue on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][blue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][blue on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][blue on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][blue on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][blue on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #0000FF on #b5b5b5] esc [/][bold black on #b5b5b5]Выход  [/][bold #0000FF on #b5b5b5]f2 [/][bold black on #b5b5b5]Назад  [/][bold #0000FF on #b5b5b5]f3 [/][bold black on #b5b5b5]Вперед                                                     [/]",
+    "btn_themeLS": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[steelblue on #ffffff]╭─ [/][bold steelblue on #ffffff]Просмотр темы[/][steelblue on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][steelblue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][steelblue on #ffffff]│ [/][bold steelblue on #ffffff]1. Кнопка в фокусе[/][steelblue on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][steelblue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][steelblue on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][steelblue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][steelblue on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][steelblue on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][steelblue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][steelblue on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][steelblue on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][steelblue on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][steelblue on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #4682B4 on #DCDCDC] esc [/][bold black on #DCDCDC]Выход  [/][bold #4682B4 on #DCDCDC]f2 [/][bold black on #DCDCDC]Назад  [/][bold #4682B4 on #DCDCDC]f3 [/][bold black on #DCDCDC]Вперед                                                     [/]",
+    "btn_themeLM": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[black on #DCDCDC]╭─ [/][bold black on #DCDCDC]Просмотр темы[/][black on #DCDCDC] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #DCDCDC]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][black on #DCDCDC]╭──────────────────────╮ │\n│ [/][black on #DCDCDC]Факторы                             │ оцен  стад      │ [/][black on #DCDCDC]│ [/][bold black on #DCDCDC]1. Кнопка в фокусе[/][black on #DCDCDC]   │ │\n│ [/][black on #DCDCDC]\\[1] Агрессия                        │ 0 ▏             │ [/][black on #DCDCDC]╰──────────────────────╯ │\n│ [/][black on #DCDCDC]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][black on #DCDCDC]                          │\n│ [/][black on #DCDCDC]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #DCDCDC]2. Кнопка вне фокуса[/][black on #DCDCDC]   │\n│ [/][black on #DCDCDC]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][black on #DCDCDC]                          │\n│ [/][black on #DCDCDC]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][black on #DCDCDC]╭──────────────────────╮ │\n│ [/][black on #DCDCDC]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][black on #DCDCDC] │ [/][black on #DCDCDC]Поле ввода текста[/][black on #DCDCDC]    │ │\n│ [/][black on #DCDCDC]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][black on #DCDCDC]╰──────────────────────╯ │\n│ [/][black on #DCDCDC]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][black on #DCDCDC]                          │\n│ [/][black on #DCDCDC]                                    ╰─────────────────╯                          [/][black on #DCDCDC]│\n│   [/][bold black on #DCDCDC] █ Выделенный пункт списка[/][black on #DCDCDC]        ╭────┬────────────────────────╮[/][black on #DCDCDC]              │\n│    [/][black on #DCDCDC]Не выделенный пункт списка       │ 12 │████████████            │ [/][black on #DCDCDC]             │\n│                                     [/][black on #DCDCDC]╰────┴────────────────────────╯[/][black on #DCDCDC]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold black on #b5b5b5] esc [/][bold black on #b5b5b5]Выход  [/][bold black on #b5b5b5]f2 [/][bold black on #b5b5b5]Назад  [/][bold black on #b5b5b5]f3 [/][bold black on #b5b5b5]Вперед                                                     [/]",
+    "btn_themeDQ": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[tan on #2F4F4F]╭─ [/][bold tan on #2F4F4F]Просмотр темы[/][tan on #2F4F4F] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][#DCDCDC on #2F4F4F]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][tan on #2F4F4F]╭──────────────────────╮ │\n│ [/][#DCDCDC on #2F4F4F]Факторы                             │ оцен  стад      │ [/][tan on #2F4F4F]│ [/][bold tan on #2F4F4F]1. Кнопка в фокусе[/][tan on #2F4F4F]   │ │\n│ [/][#DCDCDC on #2F4F4F]\\[1] Агрессия                        │ 0 ▏             │ [/][tan on #2F4F4F]╰──────────────────────╯ │\n│ [/][#DCDCDC on #2F4F4F]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][tan on #2F4F4F]                          │\n│ [/][#DCDCDC on #2F4F4F]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #DCDCDC on #2F4F4F]2. Кнопка вне фокуса[/][tan on #2F4F4F]   │\n│ [/][#DCDCDC on #2F4F4F]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][tan on #2F4F4F]                          │\n│ [/][#DCDCDC on #2F4F4F]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][tan on #2F4F4F]╭──────────────────────╮ │\n│ [/][#DCDCDC on #2F4F4F]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][tan on #2F4F4F] │ [/][#DCDCDC on #2F4F4F]Поле ввода текста[/][tan on #2F4F4F]    │ │\n│ [/][#DCDCDC on #2F4F4F]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][tan on #2F4F4F]╰──────────────────────╯ │\n│ [/][#DCDCDC on #2F4F4F]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][tan on #2F4F4F]                          │\n│ [/][#DCDCDC on #2F4F4F]                                    ╰─────────────────╯                          [/][tan on #2F4F4F]│\n│   [/][bold #DCDCDC on #2F4F4F] █ Выделенный пункт списка[/][#DCDCDC on #2F4F4F]        ╭────┬────────────────────────╮[/][tan on #2F4F4F]              │\n│    [/][#DCDCDC on #2F4F4F]Не выделенный пункт списка       │ 12 │████████████            │ [/][tan on #2F4F4F]             │\n│                                     [/][#DCDCDC on #2F4F4F]╰────┴────────────────────────╯[/][tan on #2F4F4F]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold tan on #2c2c2c] esc [/][bold white on #2c2c2c]Выход  [/][bold tan on #2c2c2c]f2 [/][bold white on #2c2c2c]Назад  [/][bold tan on #2c2c2c]f3 [/][bold white on #2c2c2c]Вперед                                                     [/]",
+    "btn_themeDM": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[goldenrod on #3b3b3b]╭─ [/][bold goldenrod on #3b3b3b]Просмотр темы[/][goldenrod on #3b3b3b] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][white on #3b3b3b]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][goldenrod on #3b3b3b]╭──────────────────────╮ │\n│ [/][white on #3b3b3b]Факторы                             │ оцен  стад      │ [/][goldenrod on #3b3b3b]│ [/][bold goldenrod on #3b3b3b]1. Кнопка в фокусе[/][goldenrod on #3b3b3b]   │ │\n│ [/][white on #3b3b3b]\\[1] Агрессия                        │ 0 ▏             │ [/][goldenrod on #3b3b3b]╰──────────────────────╯ │\n│ [/][white on #3b3b3b]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][goldenrod on #3b3b3b]                          │\n│ [/][white on #3b3b3b]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #DCDCDC on #3b3b3b]2. Кнопка вне фокуса[/][goldenrod on #3b3b3b]   │\n│ [/][white on #3b3b3b]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][goldenrod on #3b3b3b]                          │\n│ [/][white on #3b3b3b]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][goldenrod on #3b3b3b]╭──────────────────────╮ │\n│ [/][white on #3b3b3b]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][goldenrod on #3b3b3b] │ [/][white on #3b3b3b]Поле ввода текста[/][goldenrod on #3b3b3b]    │ │\n│ [/][white on #3b3b3b]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][goldenrod on #3b3b3b]╰──────────────────────╯ │\n│ [/][white on #3b3b3b]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][goldenrod on #3b3b3b]                          │\n│ [/][white on #3b3b3b]                                    ╰─────────────────╯                          [/][goldenrod on #3b3b3b]│\n│   [/][bold white on #3b3b3b] █ Выделенный пункт списка[/][white on #3b3b3b]        ╭────┬────────────────────────╮[/][goldenrod on #3b3b3b]              │\n│    [/][white on #3b3b3b]Не выделенный пункт списка       │ 12 │████████████            │ [/][goldenrod on #3b3b3b]             │\n│                                     [/][white on #3b3b3b]╰────┴────────────────────────╯[/][goldenrod on #3b3b3b]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #DAA520 on #2c2c2c] esc [/][bold white on #2c2c2c]Выход  [/][bold #DAA520 on #2c2c2c]f2 [/][bold white on #2c2c2c]Назад  [/][bold #DAA520 on #2c2c2c]f3 [/][bold white on #2c2c2c]Вперед                                                     [/]",
+    "btn_themeDC": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[white on #111111]╭─ [/][bold white on #111111]Просмотр темы[/][white on #111111] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][white on #111111]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][white on #111111]╭──────────────────────╮ │\n│ [/][white on #111111]Факторы                             │ оцен  стад      │ [/][white on #111111]│ [/][bold white on #111111]1. Кнопка в фокусе[/][white on #111111]   │ │\n│ [/][white on #111111]\\[1] Агрессия                        │ 0 ▏             │ [/][white on #111111]╰──────────────────────╯ │\n│ [/][white on #111111]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][white on #111111]                          │\n│ [/][white on #111111]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #DCDCDC on #111111]2. Кнопка вне фокуса[/][white on #111111]   │\n│ [/][white on #111111]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][white on #111111]                          │\n│ [/][white on #111111]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][white on #111111]╭──────────────────────╮ │\n│ [/][white on #111111]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][white on #111111] │ [/][white on #111111]Поле ввода текста[/][white on #111111]    │ │\n│ [/][white on #111111]\\[7] Образ жизни и установки         │ 1 ▒   ▁     пре │ [/][white on #111111]╰──────────────────────╯ │\n│ [/][white on #111111]\\[8] Близкие отношения, быт и планы  │ 0 ▏             │[/][white on #111111]                          │\n│ [/][white on #111111]                                    ╰─────────────────╯                          [/][white on #111111]│\n│   [/][bold white on #111111] █ Выделенный пункт списка[/][white on #111111]        ╭────┬────────────────────────╮[/][white on #111111]              │\n│    [/][white on #111111]Не выделенный пункт списка       │ 12 │████████████            │ [/][white on #111111]             │\n│                                     [/][white on #111111]╰────┴────────────────────────╯[/][white on #111111]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold white on #111111] esc [/][bold #DCDCDC on #111111]Выход  [/][bold white on #111111]f2 [/][bold #DCDCDC on #111111]Назад  [/][bold white on #111111]f3 [/][bold #DCDCDC on #111111]Вперед                                                     [/]",
+    "btn_exit": "Возврат в основное меню.",
 }
 
-class MenuScreen(Screen):
+class SetScreen(Screen):
+
+    BINDINGS = [
+        Binding("escape", "app.pop_screen", "Назад"),
+    ]
+
     def compose(self) -> ComposeResult:
         with Horizontal():
             # Левая панель для подсказок
-            with Vertical(id="menu_hint_panel") as hint_col:
+            with Vertical(id="set_hint_panel") as hint_col:
                 hint_col.border_title = "МОДРОП Арсенал"
-                yield Static("", id="menu_hint_text")
+                yield Static("", id="set_hint_text")
             
             # Правая панель для кнопок
-            with Vertical(id="menu_buttons_panel") as btn_col:
-                btn_col.border_title = "Действия"
-                with Vertical(id="menu_buttons_container"):
+            with Vertical(id="set_buttons_panel") as btn_col:
+                btn_col.border_title = "Настройки"
+                with Vertical(id="set_buttons_container"):
                     # Используем HoverButton
-                    yield HoverButton("1. Читать руководство           ", id="btn_manual")
-                    yield HoverButton("2. Первичная оценка             ", id="btn_rate1")
-                    yield HoverButton("3. Повторная оценка             ", id="btn_rate2")
-                    yield HoverButton("4. Файлы пациентов              ", id="btn_list")
-                    yield HoverButton("5. Все оценки                   ", id="btn_look")
-                    yield HoverButton("6. Форма для заметок            ", id="btn_form")
-                    yield HoverButton("7. Работа с данными             ", id="btn_data")
-                    yield HoverButton("8. О программе                  ", id="btn_info")
-                    yield HoverButton("В. Выход                        ", id="btn_exit")
+                    yield HoverButton("1. О программе      ", id="btn_info")
+                    yield HoverButton("2. Тема Стяжкин     ", id="btn_themeLT")
+                    yield HoverButton("3. Тема Голубев     ", id="btn_themeLB")
+                    yield HoverButton("4. Тема Тарасевич   ", id="btn_themeLS")
+                    yield HoverButton("5. Тема Чекунова    ", id="btn_themeLM")
+                    yield HoverButton("6. Тема Макушев     ", id="btn_themeDQ")
+                    yield HoverButton("7. Тема Шалек       ", id="btn_themeDM")
+                    yield HoverButton("8. Тема Львов       ", id="btn_themeDC")
+                    yield HoverButton("В. Назад            ", id="btn_exit")
         yield Footer(show_command_palette=False)
 
     def on_mouse_move(self, event: events.MouseMove) -> None:
         """При движении мыши обновляем подсказку"""
         try:
             # Получаем виджет под курсором
-            result = self.get_widget_at(event.x, event.y)
+            result = self.get_widget_at(event.screen_x, event.screen_y)
             print(f"Result: {result}")  # Отладка
             
             if result is None:
@@ -5774,7 +6131,140 @@ class MenuScreen(Screen):
     def handle_mouse_move(self, event: events.MouseMove) -> None:
         """Обработчик движения мыши"""
         print(f"Mouse move at: {event.x}, {event.y}")
-        result = self.get_widget_at(event.x, event.y)
+        result = self.get_widget_at(event.screen_x, event.screen_y)
+        print(f"Result: {result}")
+
+    def on_descendant_focus(self, event: events.Focus) -> None:
+        """Срабатывает, когда любая кнопка внутри экрана получает фокус"""
+        target = getattr(event, "control", None) or getattr(event, "node", None)
+        
+        if isinstance(target, Button) and target.id:
+            self._update_hint(target.id)
+
+    def _update_hint(self, btn_id: str) -> None:
+        """Обновление текста в левой панели"""
+        description = SETBUTTON_DESCRIPTIONS.get(btn_id, "Выберите настройку")
+        # Убеждаемся, что виджет существует, прежде чем обновлять
+        try:
+            self.query_one("#set_hint_text", Static).update(description)
+        except NoMatches:
+            pass
+
+    def on_mount(self) -> None:
+        # Фокусируем первую кнопку при старте
+        self.query_one("#btn_info").focus()
+        # И сразу принудительно ставим для неё текст
+        self._update_hint("btn_info")
+
+    # --- ЛОГИКА НАЖАТИЯ КНОПОК ---
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        # ID кнопки: Имя темы в словаре THEMES
+        theme_mapping = {
+            "btn_themeLT": "themeLT",
+            "btn_themeLB": "themeLB",
+            "btn_themeLS": "themeLS",
+            "btn_themeLM": "themeLM",
+            "btn_themeDQ": "themeDQ",
+            "btn_themeDM": "themeDM",
+            "btn_themeDC": "themeDC",
+        }
+        
+        btn_id = event.button.id
+        
+        if btn_id in theme_mapping:
+            target_theme = theme_mapping[btn_id]
+            
+            if target_theme in THEMES:
+                self.app.theme = target_theme
+                
+                # Сохраняем тему через централизованный менеджер данных приложения
+                self.app.data_manager.save_theme(target_theme)
+                
+        elif btn_id == "btn_exit":
+            self.app.pop_screen()
+        elif btn_id == "btn_info":
+            pass
+
+# Экран меню
+
+# Словарь описаний для левой панели
+BUTTON_DESCRIPTIONS = {
+    "btn_manual": "Методика Арсенал разработана для оценки динамики риска опасного поведения у пациентов с психическими расстройствами.\n\nВ меню справа собраны основные разделы программы для работы с методикой.\n\nПри работе с программой используйте сочетания клавиш Ctrl+\"-\" и Ctrl+\"+\" для изменения масштаба отображения, стрелки - для навигации и пролистывания, кнопки PgUp и PgDn - для пролистывания.\n\nПрименимые на конкретном экране клавиши и их сочетания указаны на нижней панели, они также срабатывают по нажатию кнопкой мыши.",
+    "btn_rate1": "Раздел для проведения первичной оценки. Она включает в себя оценку представленности у пациента восьми факторов риска, стадии изменения по каждому из них, составление комментариев и заключения.\n\nЧтобы провести оценку вам нужно собрать информацию о пациенте и провести его расспрос. Для удобства можете сформировать и распечатать форму для заметок.\n\nПри проведении оценки вам будут даны инструкции к каждому шагу, но, возможно, сначала стоит ознакомиться с полным руководством к методике.",
+    "btn_rate2": "Раздел для проведения повторной оценки.\n\nПри каждой повторной оценке специалисту необходимо сначала ознакомиться с заключением по первичной оценке. В том случае, если у пациента произошло значимое ухудшение по какому-либо из факторов, например совершено новое ООД или обнаружились новые проблемы по факторам, которые первично оценены как отсутствующие, то стоит еще раз провести первичную оценку и заново определить представленность всех факторов и стадий изменения по ним. Если такого значимого ухудшения нет, достаточно провести повторную оценку только стадий изменения по факторам, первично определенным как присутствующие, на основании данных о текущем состоянии и поведении пациента и его прицельного расспроса. Каждая такая оценка сопровождается комментарием, в котором следует указать, на основании каких наблюдений она установлена.\n\nЧтобы провести повторную оценку вам потребуются сохраненные данные о первичной оценке и расспрос пациента. Для удобства можете сформировать и распечатать форму для заметок.\n\nПри проведении оценки вам будут даны инструкции к каждому шагу, но, возможно, сначала стоит ознакомиться с полным руководством к методике.",
+    "btn_list": "Раздел для просмотра сохраненных оценок по каждому пациенту.\n\nДанная функция позволяет просматривать именно сохраненные файлы пациентов с внесенными в него оценками. Есть возможность открыть файл во внешнем редакторе для печати или удалить. При редактировании заключений имейте в виду, что вы вносите изменение только в файл пациента, а исходные данные оценки, остаются неизменными.\n\nНе удаляйте заключения, созданные в самых ранних выпусках программы версии v0.x, т. к. не все данные по этим оценкам могут быть сохранены в журнале.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
+    "btn_look": "Функция просмотра и поиска всех проведенных оценок.\n\nВ отличие от функции просмотра файлов пациентов эта функция отображает все записи об оценках, которые сохранены в журнале (базе данных). Эти данные доступны для просмотра и открытия для печати во внешнем редакторе.\n\nЕсли выбранная оценка не внесена в файл пациента, ее можно сохранить в него.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
+    "btn_form": "Функция создания формы для ведения заметок во время сбора информации о пациенте и его расспроса. Можно создать форму на одну или на две страницы. Форма открывается во внешнем редакторе, там ее можно изменить и распечатать.",
+    "btn_data": "Раздел с функциями обработки данных.\n\nДоступны перенос данных между компьютерами, вывод таблиц с данными об оценках, продолжение проведения оценок, сохраненных как черновики.",
+    "btn_set": "Раздел с информацией и настройками внешнего вида программы.",
+    "btn_exit": "Завершение работы с программой.",
+}
+
+class MenuScreen(Screen):
+    def compose(self) -> ComposeResult:
+        with Horizontal():
+            # Левая панель для подсказок
+            with Vertical(id="menu_hint_panel") as hint_col:
+                hint_col.border_title = "МОДРОП Арсенал"
+                yield Static("", id="menu_hint_text")
+            
+            # Правая панель для кнопок
+            with Vertical(id="menu_buttons_panel") as btn_col:
+                btn_col.border_title = "Действия"
+                with Vertical(id="menu_buttons_container"):
+                    # Используем HoverButton
+                    yield HoverButton("1. Читать руководство           ", id="btn_manual")
+                    yield HoverButton("2. Первичная оценка             ", id="btn_rate1")
+                    yield HoverButton("3. Повторная оценка             ", id="btn_rate2")
+                    yield HoverButton("4. Файлы пациентов              ", id="btn_list")
+                    yield HoverButton("5. Все оценки                   ", id="btn_look")
+                    yield HoverButton("6. Форма для заметок            ", id="btn_form")
+                    yield HoverButton("7. Работа с данными             ", id="btn_data")
+                    yield HoverButton("8. Настройки                    ", id="btn_set")
+                    yield HoverButton("В. Выход                        ", id="btn_exit")
+        yield Footer(show_command_palette=False)
+
+    def on_mouse_move(self, event: events.MouseMove) -> None:
+        """При движении мыши обновляем подсказку"""
+        try:
+            # Получаем виджет под курсором
+            result = self.get_widget_at(event.screen_x, event.screen_y)
+            print(f"Result: {result}")  # Отладка
+            
+            if result is None:
+                return
+            
+            # result может быть кортежем (widget, region) или просто виджетом
+            if isinstance(result, tuple):
+                widget = result[0]
+            else:
+                widget = result
+            
+            print(f"Widget: {widget}")  # Отладка
+            
+            # Ищем кнопку
+            current = widget
+            while current:
+                print(f"Current: {current}")  # Отладка
+                if isinstance(current, Button):
+                    print(f"Found button: {current.id}")  # Отладка
+                    if current.id and current.id.startswith("btn_"):
+                        self._update_hint(current.id)
+                        # Перемещаем фокус на кнопку
+                        if self.focused != current:
+                            current.focus()
+                    return
+                current = current.parent
+        except Exception as e:
+            print(f"Error: {e}")
+            import traceback
+            traceback.print_exc()
+
+    @on(events.MouseMove)
+    def handle_mouse_move(self, event: events.MouseMove) -> None:
+        """Обработчик движения мыши"""
+        print(f"Mouse move at: {event.x}, {event.y}")
+        result = self.get_widget_at(event.screen_x, event.screen_y)
         print(f"Result: {result}")
 
     def on_descendant_focus(self, event: events.Focus) -> None:
@@ -5808,6 +6298,7 @@ class MenuScreen(Screen):
             "btn_list": ListScreen,
             "btn_look": LookScreen,
             "btn_data": DataScreen,
+            "btn_set": SetScreen,
         }
         
         btn_id = event.button.id
@@ -5816,10 +6307,7 @@ class MenuScreen(Screen):
         elif btn_id == "btn_exit":
             self.app.action_request_quit()
         elif btn_id == "btn_form":
-            # Вместо создания FormScreen показываем диалог прямо здесь
             self.show_form_dialog()
-        elif btn_id == "btn_info":
-            pass
 
     def show_form_dialog(self):
         """Показывает диалог создания формы для заметок"""
@@ -5842,8 +6330,8 @@ class MenuScreen(Screen):
             #dialog {
                 width: 76;
                 height: 11;
-                background: white;
-                border: round teal;
+                background: $background;
+                border: round $accent;
                 padding: 1 2;
             }
             
@@ -5851,7 +6339,7 @@ class MenuScreen(Screen):
                 width: 100%;
                 height: 3;
                 content-align: center middle;
-                color: black;
+                color: $text;
                 text-style: bold;
             }
             
@@ -5865,21 +6353,22 @@ class MenuScreen(Screen):
                 width: 22;
                 height: 3;
                 margin: 0 1;
-                background: white;
-                color: #666666;
+                background: $background;
+                color: $secondary;
                 border: none;
                 content-align: center middle;
             }
             
             #buttons Button:focus {
-                border: round teal;
-                color: teal;
+                border: round $accent;
+                color: $accent;
+                background: transparent;
                 text-style: bold;
             }
             
             #buttons Button.variant-primary {
-                border: round teal;
-                color: teal;
+                border: round $accent;
+                color: $accent;
             }
             
             #buttons Button.variant-error {
@@ -6154,8 +6643,8 @@ class arsenal(App):
 
     CSS = """
         Screen {
-            background: white;
-            color: black;
+            background: $background;
+            color: $text;
         }
 
         ConfirmDeleteDialog {
@@ -6166,8 +6655,8 @@ class arsenal(App):
         #dialog_confirm {
             width: 50;
             height: auto;
-            background: white;
-            border: round teal;
+            background: $background;
+            border: round $accent;
             padding: 1 2;
         }
 
@@ -6175,7 +6664,7 @@ class arsenal(App):
             text-align: center;
             width: 100%;
             height: 4;
-            color: black;
+            color: $text;
             text-style: bold;
         }
 
@@ -6189,43 +6678,112 @@ class arsenal(App):
             width: 14;
             height: 3;
             margin: 0 2;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: none;
         }
 
         #confirm_buttons Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
+        }
+
+        #set_hint_panel {
+            width: 70%;
+            border: round $accent;
+            padding: 2 2 1 4;
+            background: $background;
+            border-title-style: bold;
+        }
+
+        #set_buttons_panel {
+            width: 30%;
+            border: round $secondary;
+            background: $background;
+        }
+
+        #set_hint_text {
+            height: auto;
+            width: 100%;
+            color: $text;
+        }
+
+        /* Подсветка панелей при фокусе внутри них */
+        #set_hint_panel:focus-within, #set_buttons_panel:focus-within {
+            border: round $accent;
+            border-title-color: $accent;
+            border-title-style: bold;
+            background: transparent;
+        }
+
+        /* Контейнер для кнопок внутри правой панели */
+        #set_buttons_container {
+            width: 100%;
+            height: auto;
+            align: left top;
+            padding: 1 0 0 1;
+        }
+
+        #set_buttons_container Button {
+            width: 35;
+            height: 3;
+            background: $background;
+            color: $secondary;
+            border: none;
+            content-align: left middle;
+            padding: 0 2;
+            margin: 0;
+        }
+
+        #set_buttons_container Button > Static {
+            width: 100%;
+            content-align: left middle;
+        }
+
+        #set_buttons_container Button:focus {
+            background: transparent;
+            color: $accent;
+            text-style: bold;
+            border: round $accent;
+            content-align: left middle;
+        }
+
+        #set_buttons_container Button:hover {
+            background: transparent;
+            color: $accent;
+            text-style: bold;
+            border: round $accent;
         }
 
         #menu_hint_panel {
             width: 60%;
-            border: round teal;
+            border: round $accent;
             padding: 1 2;
-            background: white;
+            background: $background;
             border-title-style: bold;
         }
 
         #menu_buttons_panel {
             width: 40%;
-            border: round grey;
-            background: white;
+            border: round $secondary;
+            background: $background;
         }
 
         #menu_hint_text {
             height: auto;
             width: 100%;
-            color: black;
+            color: $text;
             padding: 1 2;
         }
 
         /* Подсветка панелей при фокусе внутри них */
         #menu_hint_panel:focus-within, #menu_buttons_panel:focus-within {
-            border: round teal;
-            border-title-color: teal;
+            border: round $accent;
+            border-title-color: $accent;
             border-title-style: bold;
+            background: transparent;
         }
 
         /* Контейнер для кнопок внутри правой панели */
@@ -6239,8 +6797,8 @@ class arsenal(App):
         #menu_buttons_container Button {
             width: 47;
             height: 3;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: none;
             content-align: left middle;
             padding: 0 2;
@@ -6253,67 +6811,69 @@ class arsenal(App):
         }
 
         #menu_buttons_container Button:focus {
-            background: white;
-            color: teal;
+            background: transparent;
+            color: $accent;
             text-style: bold;
-            border: round teal;
+            border: round $accent;
             content-align: left middle;
         }
 
         #menu_buttons_container Button:hover {
-            background: white;
-            color: teal;
+            background: transparent;
+            color: $accent;
             text-style: bold;
-            border: round teal;
+            border: round $accent;
         }
 
         VerticalScroll, ListView {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: teal 30%;
-            scrollbar-color-hover: teal 30%;
+            scrollbar-color: $accent 30%;
+            scrollbar-color-hover: $accent 30%;
             scrollbar-background: transparent;
-            background: white;
+            background: $background;
             padding: 0;
             margin: 0;
         }
 
         /* Хорошие панели                               - как образец */
         #list_panel {
-            width: 30%;
-            border: round grey;
+            width: 36%;
+            border: round $secondary;
             padding: 0;
             margin: 0;
             border-title-align: left;
-            border-title-color: grey;
+            border-title-color: $secondary;
+            background: transparent;
         }
 
         #detail_panel {
-            width: 70%;
-            border: round grey;
+            width: 64%;
+            border: round $secondary;
             padding: 0;
             border-title-align: left;
-            border-title-color: grey;
+            border-title-color: $secondary;
         }
 
         /* Фокусы панелей */
         #list_panel:focus-within, #detail_panel:focus-within {
-            border: round teal;
-            border-title-color: teal;
+            border: round $accent;
+            border-title-color: $accent;
             border-title-style: bold;
+            background: transparent;
         }
 
         /* Настройка контента */
         #details {
             padding: 1 2; 
             width: 100%;
-            color: black;
+            color: $text;
         }
 
         ListView {
             scrollbar-gutter: stable;
-            background: white;
-            color: black;
+            background: transparent;
+            color: $text;
             padding: 0;
             margin: 0;
             border: none;
@@ -6328,31 +6888,36 @@ class arsenal(App):
         ListItem {
             padding-left: 1;
             padding-right: 1;
-            background: white;
-            color: black;
+            background: transparent;
+            color: $text;
         }
 
         ListItem > Static {
-            color: black;
+            color: $text;
             text-style: none;
+            background: transparent;
         }
         
         ListItem.spacer {
             height: 1;
-            background: white;
+            background: transparent;
             border: none;
         }
 
         ListItem.spacer:hover {
-            background: white;
+            background: transparent;
         }
 
-        ListView > ListItem.--highlight {
-            background: white;
+        /* Отменяем стандартный сине-серый фокус Textual для списка */
+        ListView:focus > ListItem.--highlight {
+            background: transparent;
         }
 
-        ListView > ListItem.--highlight > Static {
-            color: teal;
+        ListView > ListItem.--highlight,
+        ListView:focus > ListItem.--highlight {
+            background: transparent;
+        }
+        ListView > ListItem.--highlight ListLabel {
             text-style: bold;
         }
 
@@ -6364,8 +6929,8 @@ class arsenal(App):
         #dialog {
             width: 50;
             height: 10;
-            background: white;
-            border: round teal;
+            background: $background;
+            border: round $accent;
             padding: 1 2;
         }
 
@@ -6373,7 +6938,7 @@ class arsenal(App):
             width: 100%;
             height: 3;
             content-align: center middle;
-            color: black;
+            color: $text;
             text-style: bold;
         }
 
@@ -6387,40 +6952,42 @@ class arsenal(App):
             width: 14;
             height: 3;
             margin: 0 2;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: none;
         }
 
         QuitScreen Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
 
         #report_actions {
             height: 5;
             align: center middle;
-            border-top: round grey;
+            border-top: round $secondary;
             dock: bottom;
             padding: 1;
         }
 
         #btn_open_office {
             width: 40;
-            background: white;
-            color: #666666;
-            border: round grey;
+            background: $background;
+            color: $secondary;
+            border: round $secondary;
         }
 
         #btn_open_office:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
         }
 
         #details {
             padding: 1 2;
-            color: black;
+            color: $text;
             text-wrap: wrap; 
         }
 
@@ -6432,8 +6999,8 @@ class arsenal(App):
         #dialog_box {
             width: 50;
             height: auto;
-            background: white;
-            border: round teal;
+            background: $background;
+            border: round $accent;
             align: center middle;
             padding: 1 2;
         }
@@ -6443,7 +7010,7 @@ class arsenal(App):
             width: 100%;
             margin-bottom: 1;
             text-style: bold;
-            color: black;
+            color: $text;
         }
 
         #dialog_box Button {
@@ -6454,47 +7021,48 @@ class arsenal(App):
         /* Панели для первичной оценки */
         #guide_panel {
             width: 60%;
-            border: round grey;
-            background: white;
+            border: round $secondary;
+            background: $background;
             padding: 1 0 0 1;
             border-title-align: left;
-            border-title-color: black;
+            border-title-color: $text;
             border-title-style: bold;
         }
 
         #input_panel {
             width: 40%;
-            border: round grey;
-            background: white;
+            border: round $secondary;
+            background: $background;
             padding: 1 0 0 1;
             border-title-align: left;
         }
 
         /* Фокусы панелей */
         #guide_panel:focus-within, #input_panel:focus-within {
-            border: round teal;
-            border-title-color: teal;
+            border: round $accent;
+            border-title-color: $accent;
             border-title-style: bold;
+            background: transparent;
         }
 
         #guide_title, #input_title {
             padding: 0 1;
-            background: #e0e0e0;
-            color: black;
+            background: $background;
+            color: $text;
             height: 1;
         }
 
         #guide_scroll {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: teal 30%;
-            scrollbar-color-hover: teal 30%;
+            scrollbar-color: $accent 30%;
+            scrollbar-color-hover: $accent 30%;
             scrollbar-background: transparent;
-            background: white;
+            background: transparent;
         }
 
         #guide_text {
-            color: black;
+            color: $text;
             text-wrap: wrap;
             padding-right: 1;  /* отступ от полосы прокрутки */
         }
@@ -6502,10 +7070,10 @@ class arsenal(App):
         #input_scroll {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: teal 30%;
-            scrollbar-color-hover: teal;
+            scrollbar-color: $accent;
+            scrollbar-color-hover: $accent;
             scrollbar-background: transparent;
-            background: white;
+            background: transparent;
             margin: 0;
         }
 
@@ -6519,7 +7087,7 @@ class arsenal(App):
             margin-top: 0;
             margin-bottom: 0;  /* убираем отступ снизу */
             text-style: bold;
-            color: black;
+            color: $text;
             padding: 0;
         }
 
@@ -6527,111 +7095,114 @@ class arsenal(App):
         #input_container Input {
             margin: 0 0 0 0;
             width: 100%;
-            background: white;
+            background: $background;
             border: transparent;
-            color: black;  /* введенный текст черный */
+            color: $text;
         }
 
         #input_container Input:focus {
-            border: round teal;  /* тонкая округлая рамка при фокусе */
+            border: round $accent;
+            background: transparent;
         }
 
         #input_container Input.placeholder {
-            color: #cccccc;  /* бледно-серый для placeholder */
+            color: $text-muted;  /* бледно-серый для placeholder */
         }
 
         #input_container RadioSet {
             margin: 0;
             width: 100%;
-            border: round grey;
+            border: round $secondary;
             padding: 1 1 0 3;
-            background: white;
+            background: $background;
             height: 20;
             min-height: 20;
         }
 
         #input_container RadioSet:focus {
-            border: round teal;
+            border: round $accent;
+            background: transparent;
         }
 
-        #input_container RadioButton {
+        MyRadioButton {
             width: 100%;
-            height: 3;        /* Фиксируем высоту, чтобы рамка не двигала соседей */
+            height: 3;
             padding: 0;
             margin: 0;
-            background: white;
+            background: $background;
             border: none;
         }
 
         /* Внутренний контейнер с заранее зарезервированной прозрачной рамкой */
-        #input_container RadioButton > .radio-button--container {
+        MyRadioButton > .radio-button--container {
             padding: 0 2;
             width: 100%;
             height: 100%;
             border: transparent; 
         }
 
-        /* Фокус: меняем синий фон на рамку teal */
-        #input_container RadioButton:focus > .radio-button--container {
-            background: white;
-            border: round teal;
-            color: teal
+        /* Фокус: меняем на рамку $accent */
+        MyRadioButton:focus > .radio-button--container {
+            background: $background;
+            border: round $accent;
+            color: $accent;
         }
 
-        /* Исправление обрезания индикатора справа */
-        #input_container RadioButton .radio-button--label {
-            margin-left: 0;
-            padding-right: 0; /* Доп. отступ справа для индикатора */
+        MyRadioButton:focus-within .toggle--button {
+            color: $accent;
+            background: transparent;
         }
 
-        #input_container RadioButton:hover > .radio-button--container {
-            background: #f0f0f0;
+        MyRadioButton:hover > .radio-button--container {
+            background: transparent;
         }
 
-        #input_container RadioButton.--on > .radio-button--container {
+        MyRadioButton.--on > .radio-button--container {
             text-style: bold;
-            color: teal;
+            color: $accent;
         }
 
         /* Стили для TextArea (комментарий) */
         #input_container TextArea {
             margin: 0 0 0 0;
             width: 100%;
-            border: round grey;
-            background: white;
-            color: black;  /* черный текст */
-            height: 20;  /* Та же высота, что и у RadioSet */
+            border: round $secondary;
+            background: $background;
+            color: $text;
+            height: 20;
             min-height: 20;
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            scrollbar-color: teal 30%;
-            scrollbar-color-hover: teal;
+            scrollbar-color: $accent 30%;
+            scrollbar-color-hover: $accent;
             scrollbar-background: transparent;
             padding: 0;
         }
 
         #input_container TextArea:focus {
-            border: round teal;
+            border: round $accent;
+            background: transparent;
         }
 
         /* Стили для кнопок */
         #input_container Button {
             width: 100%;
             margin: 1 0;
-            background: white;
-            color: #666666;
-            border: round grey;
+            background: $background;
+            color: $secondary;
+            border: round $secondary;
         }
 
         #input_container Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
 
         #input_container Button.variant-primary {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
         }
 
         #input_container Button.variant-success {
@@ -6652,8 +7223,8 @@ class arsenal(App):
         ConfirmDialog #dialog {
             width: 50;
             height: 10;
-            background: white;
-            border: round teal;
+            background: $background;
+            border: round $accent;
             padding: 1 2;
         }
 
@@ -6661,7 +7232,7 @@ class arsenal(App):
             width: 100%;
             height: 3;
             content-align: center middle;
-            color: black;
+            color: $text;
             text-style: bold;
         }
 
@@ -6675,14 +7246,15 @@ class arsenal(App):
             width: 14;
             height: 3;
             margin: 0 2;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: none;
         }
 
         ConfirmDialog Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
         
@@ -6690,9 +7262,9 @@ class arsenal(App):
         #dialog {
             width: 50;
             height: 10;
-            background: white;
+            background: $background;
             align: center middle;
-            border: round teal;
+            border: round $accent;
             padding: 1 2;
         }
 
@@ -6700,7 +7272,7 @@ class arsenal(App):
             width: 100%;
             height: 3;
             content-align: center middle;
-            color: black;
+            color: $text;
             text-style: bold;
         }
 
@@ -6714,14 +7286,15 @@ class arsenal(App):
             width: 14;
             height: 3;
             margin: 0 2;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: none;
         }
 
         #dialog Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
 
@@ -6734,8 +7307,8 @@ class arsenal(App):
         ConfirmSaveDialog #dialog {
             width: 50;
             height: 10;
-            background: white;
-            border: round teal;
+            background: $background;
+            border: round $accent;
             padding: 1 2;
         }
 
@@ -6743,7 +7316,7 @@ class arsenal(App):
             width: 100%;
             height: 3;
             content-align: center middle;
-            color: black;
+            color: $text;
             text-style: bold;
         }
 
@@ -6757,14 +7330,15 @@ class arsenal(App):
             width: 14;
             height: 3;
             margin: 0 2;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: none;
         }
 
         ConfirmSaveDialog Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
 
@@ -6778,9 +7352,9 @@ class arsenal(App):
         }
         
         .notification {
-            background: white;
-            color: black;
-            border: round teal;
+            background: $background;
+            color: $text;
+            border: round $accent;
             padding: 1 2;
             margin: 1;
             width: auto;  /* Автоширина по содержимому */
@@ -6804,35 +7378,36 @@ class arsenal(App):
         }
         
         .notification.info {
-            border: round teal;
+            border: round $accent;
         }
 
         #data_hint_panel {
             width: 60%;
-            border: round teal;
+            border: round $accent;
             padding: 1 2;
-            background: white;
+            background: $background;
             border-title-style: bold;
         }
 
         #data_buttons_panel {
             width: 40%;
-            border: round grey;
-            background: white;
+            border: round $secondary;
+            background: $background;
         }
 
         #data_hint_text {
             height: auto;
             width: 100%;
-            color: black;
+            color: $text;
             padding: 1 2;
         }
 
         /* Подсветка панелей при фокусе внутри них */
         #data_hint_panel:focus-within, #data_buttons_panel:focus-within {
-            border: round teal;
-            border-title-color: teal;
+            border: round $accent;
+            border-title-color: $accent;
             border-title-style: bold;
+            background: transparent;
         }
 
         /* Контейнер для кнопок внутри правой панели */
@@ -6846,8 +7421,8 @@ class arsenal(App):
         #data_buttons_container Button {
             width: 47;
             height: 3;
-            background: white;
-            color: #666666;
+            background: $background;
+            color: $secondary;
             border: transparent;  /* Прозрачная рамка вместо none */
             border: round transparent;  /* Прозрачная круглая рамка */
             content-align: left middle;
@@ -6856,18 +7431,18 @@ class arsenal(App):
         }
 
         #data_buttons_container Button:focus {
-            background: white;
-            color: teal;
+            background: transparent;
+            color: $accent;
             text-style: bold;
-            border: round teal;  /* При фокусе рамка становится видимой */
+            border: round $accent;  /* При фокусе рамка становится видимой */
             content-align: left middle;
         }
 
         #data_buttons_container Button:hover {
-            background: white;
-            color: teal;
+            background: transparent;
+            color: $accent;
             text-style: bold;
-            border: round teal;
+            border: round $accent;
         }
 
         #data_buttons_container Button.spacer {
@@ -6882,68 +7457,69 @@ class arsenal(App):
         }
 
         #data_buttons_container Button:focus {
-            background: white;
-            color: teal;
+            background: transparent;
+            color: $accent;
             text-style: bold;
-            border: round teal;
+            border: round $accent;
             content-align: left middle;
         }
         
         /* Стили для LookScreen */
         #look_list_panel {
             width: 70%;
-            border: round grey;
-            background: white;
-            padding: 0;
+            border: round $secondary;
+            background: transparent;
+            padding: 1 0 1 0;
             margin: 0;
             border-title-align: left;
         }
 
         #look_content_panel {
             width: 30%;
-            border: round grey;
-            background: white;
+            border: round $secondary;            
+            background: transparent;
             padding: 0;
             margin: 0;
             border-title-align: left;
         }
 
         #look_list_panel:focus-within, #look_content_panel:focus-within {
-            border: round teal;
-            border-title-color: teal;
+            border: round $accent;
+            border-title-color: $accent;
             border-title-style: bold;
+            background: transparent;
         }
 
         #list_scroll {
             scrollbar-gutter: stable;
             scrollbar-size: 1 1;
-            background: white;
+            background: transparent;
             padding: 0;
             margin: 0;
         }
 
         #assessments_list {
             scrollbar-gutter: stable;
-            background: white;
-            color: black;
+            background: transparent;
+            color: $text;
             padding: 0;
             margin: 0;
         }
 
         #assessments_list ListItem {
-            padding-left: 0;
-            background: white;
-            color: black;
+            padding: 0 1 0 1;
+            background: $background;
+            color: $text;
         }
 
         #assessments_list ListItem > Static {
-            color: black;
+            color: $text;
             text-style: none;
-            padding-left: 1;
+            padding: 0 1 0 1;
         }
 
         #assessments_list > ListItem.--highlight > Static {
-            color: teal;
+            color: $accent;
             text-style: bold;
         }
 
@@ -6955,44 +7531,46 @@ class arsenal(App):
         #content_container Input {
             margin: 0 0 0 0;
             width: 100%;
-            background: white;
+            background: $background;
             border: transparent;
-            color: black;
+            color: $text;
         }
 
         #content_container Input:focus {
-            border: round teal;
+            border: round $accent;
+            background: transparent;
         }
 
         #content_container Input.placeholder {
-            color: #cccccc;
+            color: $text-muted;
         }
 
         #content_container Label {
             margin-top: 0;
             margin-bottom: 0;
             text-style: bold;
-            color: black;
+            color: $secondary;
             padding: 0;
         }
 
         #content_container Button {
             width: 100%;
             margin: 1 0;
-            background: white;
-            color: #666666;
-            border: round grey;
+            background: $background;
+            color: $secondary;
+            border: round $secondary;
         }
 
         #content_container Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
 
         #content_container Button.variant-primary {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
         }
 
         #content_container Button.variant-success {
@@ -7001,8 +7579,8 @@ class arsenal(App):
         }
 
         #content_container Button.variant-default {
-            border: round grey;
-            color: #666666;
+            border: round $secondary;
+            color: $secondary;
         }
 
         /* Стили для контейнера кнопок в режиме просмотра */
@@ -7014,14 +7592,22 @@ class arsenal(App):
         #buttons_container Button {
             width: 100%;
             margin: 1 0;
-            background: white;
-            color: #666666;
-            border: round grey;
+            background: $background;
+            color: $secondary;
+            border: transparent;
         }
 
         #buttons_container Button:focus {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
+            background: transparent;
+            text-style: bold;
+        }
+
+        #buttons_container Button:hover {
+            border: round $accent;
+            color: $accent;
+            background: transparent;
             text-style: bold;
         }
 
@@ -7039,33 +7625,33 @@ class arsenal(App):
 
         #view_text {
             padding: 1 2;
-            color: black;
+            color: $text;
             text-wrap: wrap;
             width: 100%;
         }
         
         #buttons_container Button.variant-primary {
-            border: round teal;
-            color: teal;
+            border: round $accent;
+            color: $accent;
         }
 
         .menu-btn.hover {
-            background: white;
-            color: teal;
+            background: transparent;
+            color: $accent;
             text-style: bold;
-            border: round teal;
-        }
-
-        Footer {
-            background: darkcyan;
-            color: white;
-            text-style: bold;
+            border: round $accent;
         }
 
         /* Класс для placeholder */
         .placeholder-text {
-            color: #cccccc;
+            color: $text-muted;
         }
+
+        Footer {
+            background: $panel;
+            text-style: bold;
+        }
+        
     """
 
     BINDINGS = [
@@ -7085,6 +7671,21 @@ class arsenal(App):
         yield MenuScreen()
 
     def on_mount(self) -> None:
+        # 1. Инициализируем менеджер данных (он сам создаст папки, если их нет)
+        self.data_manager = DataManager()
+        
+        # 2. Регистрируем ваши кастомные темы
+        for theme_obj in THEMES.values():
+            self.register_theme(theme_obj)
+        
+        # 3. Загружаем тему, используя путь из data_manager
+        # Передаем дефолтную тему и словарь THEMES для проверки валидности
+        self.theme = self.data_manager.load_saved_theme(
+            default_theme="themeLT", 
+            available_themes=THEMES
+        )
+        
+        # Отображаем главный экран
         self.push_screen(MenuScreen())
 
     def custom_notify(self, message: str, severity: str = "info"):
