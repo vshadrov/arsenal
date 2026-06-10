@@ -2,7 +2,7 @@
 [tool.briefcase]
 project_name = "arsenal"
 bundle = "com.arsenal"
-version = "2.4.0"
+version = "2.4.1"
 url = "https://github.com/vshadrov/arsenal"
 license.file = "LICENSE"
 author = "Arsenal"
@@ -97,8 +97,9 @@ categories = ["Office"]
 [tool.briefcase.app.arsenal.linux.flatpak]
 icon = "resources/images/arsenal"
 flatpak_runtime = "org.freedesktop.Platform"
-flatpak_runtime_version = "25.08"
+flatpak_runtime_version = "24.08"
 flatpak_sdk = "org.freedesktop.Sdk"
+
 categories = ["Office"]
 
 [tool.briefcase.app.arsenal.windows]

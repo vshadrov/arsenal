@@ -27,6 +27,7 @@ import shutil
 import subprocess
 import sys
 import textwrap
+import unicodedata
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.utils import get_column_letter
@@ -63,6 +64,51 @@ class DataManager:
         self.reports_dir.mkdir(exist_ok=True)
         self.data = self.load_data()
 
+    def normalize_filename(self, filename: str) -> str:
+        """
+        Нормализует имя файла для кроссплатформенной совместимости.
+        Использует форму NFC (Canonical Composition) как универсальный стандарт.
+        """
+        # Приводим к NFC форме (более универсальная для обмена)
+        normalized = unicodedata.normalize('NFC', filename)
+        return normalized
+
+    def normalize_patient_name(self, text: str) -> str:
+        """
+        Нормализует ФИО пациента: первая буква заглавная, остальные строчные,
+        плюс нормализация Unicode.
+        """
+        if not text:
+            return text
+        
+        # Нормализуем Unicode
+        text = unicodedata.normalize('NFC', text.strip())
+        
+        # Разбиваем на слова, каждое слово с заглавной буквы
+        words = text.split()
+        normalized_words = []
+        for word in words:
+            if word:
+                normalized_words.append(word[0].upper() + word[1:].lower())
+        
+        return ' '.join(normalized_words)
+
+    def get_normalized_filename(self, last_name: str, first_name: str, patronymic: str, birth_year: str) -> str:
+        """
+        Формирует нормализованное имя файла из данных пациента.
+        """
+        # Собираем части имени
+        parts = [last_name, first_name, patronymic, birth_year]
+        # Фильтруем пустые
+        non_empty = [p for p in parts if p]
+        # Объединяем с пробелами
+        base = " ".join(non_empty)
+        # Заменяем пробелы на подчеркивания
+        safe = base.replace(" ", "_")
+        # Нормализуем Unicode
+        normalized = self.normalize_filename(safe)
+        return f"{normalized}.txt"
+
     def load_data(self):
         if self.db_path.exists():
             try:
@@ -73,22 +119,25 @@ class DataManager:
         return []
 
     def save_assessment(self, patient_info, assessment_details):
-        # Извлекаем отдельные компоненты из patient_info
-        # Ожидаем, что patient_info содержит отдельные поля
         last_name = patient_info.get('last_name', '')
         first_name = patient_info.get('first_name', '')
         patronymic = patient_info.get('patronymic', '')
         birth_year = patient_info.get('birth_year', '')
         
-        # Формируем fio и fiogr для совместимости
+        # Нормализуем ФИО
+        last_name = self.normalize_patient_name(last_name)
+        first_name = self.normalize_patient_name(first_name)
+        patronymic = self.normalize_patient_name(patronymic)
+        
         fio = f"{last_name} {first_name} {patronymic}".strip()
         fiogr = f"{fio} {birth_year}".strip()
         
-        # 1. Поиск или создание пациента по отдельным полям
+        # Поиск пациента по ВСЕМ полям (включая отчество)
         patient = next((p for p in self.data if 
-                       p.get('last_name') == last_name and 
-                       p.get('first_name') == first_name and 
-                       p.get('birth_year') == birth_year), None)
+                    p.get('last_name', '') == last_name and 
+                    p.get('first_name', '') == first_name and 
+                    p.get('patronymic', '') == patronymic and
+                    p.get('birth_year', '') == birth_year), None)
         
         if not patient:
             patient = {
@@ -97,16 +146,14 @@ class DataManager:
                 "first_name": first_name,
                 "patronymic": patronymic,
                 "birth_year": birth_year,
-                "fiogr": fiogr,  # Для быстрого поиска и отображения
+                "fiogr": fiogr,
                 "assessments": []
             }
             self.data.append(patient)
         
-        # 2. Добавление оценки
         assessment_details["timestamp"] = uuid.uuid4().hex[:6]
         patient["assessments"].append(assessment_details)
         
-        # 3. Сохранение JSON
         with open(self.db_path, "w", encoding="utf-8") as f:
             json.dump(self.data, f, ensure_ascii=False, indent=4)
         
@@ -1516,21 +1563,17 @@ class Rate1Screen(Screen):
         return "?    "
 
     def save_report(self) -> None:
-        """Сохраняет заключение в файл и в базу данных"""
         try:
-            # Подготовка данных - используем уже обработанные данные из form_data
-            # НЕ применяем capitalize() повторно!
-            last_name = self.form_data["last_name"]  # уже обработано в save_current_state
-            first_name = self.form_data["first_name"]  # уже обработано в save_current_state
-            patronymic = self.form_data["patronymic"]  # уже обработано в save_current_state
+            last_name = self.form_data["last_name"]
+            first_name = self.form_data["first_name"]
+            patronymic = self.form_data["patronymic"]
             birth_year = self.form_data["birth_year"]
-            rater = self.form_data["rater"]  # уже обработано в save_current_state (только strip)
+            rater = self.form_data["rater"]
             
-            # Формируем имя файла в формате "Фамилия_Имя_Отчество_1999.txt"
-            filename_parts = [last_name, first_name, patronymic, birth_year]
-            filename_base = " ".join(filter(None, filename_parts))
-            filename_safe = filename_base.replace(" ", "_")
-            filename = f"{filename_safe}.txt"
+            # Получаем нормализованное имя файла через DataManager
+            filename = self.app.results.get_normalized_filename(
+                last_name, first_name, patronymic, birth_year
+            )
             filepath = self.app.results.reports_dir / filename
                 
             # Собираем оценки
@@ -5359,6 +5402,20 @@ class DataScreen(Screen):
             traceback.print_exc()
                         
     # --- Вспомогательные функции ---
+
+    def find_existing_file(self, target_name: str) -> Path:
+        """
+        Ищет существующий файл в reports_dir, нормализуя имена для сравнения.
+        """
+        reports_dir = self.app.results.reports_dir
+        target_normalized = self.app.results.normalize_filename(target_name)
+        
+        for existing_file in reports_dir.glob("*.txt"):
+            existing_normalized = self.app.results.normalize_filename(existing_file.name)
+            if existing_normalized == target_normalized:
+                return existing_file
+        
+        return None
     
     def get_documents_dir(self) -> Path:
         """Определяет путь к папке Документы в зависимости от ОС"""
@@ -5406,20 +5463,21 @@ class DataScreen(Screen):
     # --- Функция экспорта ---
     
     def export_data(self) -> None:
-        """Экспорт данных в папку Документы"""
+        """Экспорт данных с нормализацией имен файлов"""
         try:
-            # Определяем целевую папку
             docs_dir = self.get_documents_dir()
             export_dir = docs_dir / "Арсенал - данные"
             
             # Создаем папку для экспорта
             export_dir.mkdir(exist_ok=True)
             
-            # 1. Копируем файлы заключений (.txt)
+            # 1. Копируем файлы заключений с нормализацией имен
             reports_dir = self.app.results.reports_dir
             if reports_dir.exists():
                 for txt_file in reports_dir.glob("*.txt"):
-                    dest_file = export_dir / txt_file.name
+                    # Нормализуем имя для экспорта
+                    normalized_name = self.app.results.normalize_filename(txt_file.name)
+                    dest_file = export_dir / normalized_name
                     shutil.copy2(txt_file, dest_file)
             
             # 2. Копируем базу данных
@@ -5428,7 +5486,6 @@ class DataScreen(Screen):
                 dest_db = export_dir / "arsenal_database.json"
                 shutil.copy2(db_path, dest_db)
             
-            # Успех
             self.notify_success(f"Данные экспортированы в:\n{export_dir}")
             
         except Exception as e:
@@ -5462,28 +5519,30 @@ class DataScreen(Screen):
             traceback.print_exc()
     
     def import_report_files(self, import_dir: Path) -> None:
-        """Импортирует и объединяет текстовые файлы заключений"""
+        """Импортирует текстовые файлы с нормализацией имен"""
         reports_dir = self.app.results.reports_dir
-        
-        # Создаем папку назначения, если её нет
         reports_dir.mkdir(exist_ok=True)
         
-        # Собираем все txt файлы из импортируемой папки
         imported_files = list(import_dir.glob("*.txt"))
         
         for src_file in imported_files:
-            # Пропускаем файл базы данных
             if src_file.name == "arsenal_database.json":
                 continue
             
-            dst_file = reports_dir / src_file.name
+            # Нормализуем имя исходного файла
+            normalized_name = self.app.results.normalize_filename(src_file.name)
             
-            if not dst_file.exists():
-                # Файла нет - просто копируем
+            # Ищем существующий файл по нормализованному имени
+            existing_file = self.find_existing_file(normalized_name)
+            
+            if existing_file is None:
+                # Копируем с нормализованным именем
+                dst_file = reports_dir / normalized_name
                 shutil.copy2(src_file, dst_file)
+                self.notify_info(f"Скопирован новый файл: {normalized_name}")
             else:
-                # Файл есть - объединяем содержимое
-                self.merge_text_files(src_file, dst_file)
+                # Объединяем содержимое
+                self.merge_text_files(src_file, existing_file)
     
     def merge_text_files(self, src_file: Path, dst_file: Path) -> None:
         """Объединяет два текстовых файла, избегая дублирования"""
@@ -5536,28 +5595,30 @@ class DataScreen(Screen):
     def merge_json_databases(self, current: list, imported: list) -> list:
         """
         Объединяет две базы данных JSON.
-        Ключ уникальности: комбинация last_name, first_name, birth_year + assessment_id
+        Ключ уникальности: комбинация last_name, first_name, patronymic, birth_year
         """
-        # Создаем словарь для быстрого доступа к существующим пациентам
         patients_dict = {}
         for patient in current:
-            key = (patient.get("last_name", ""), 
-                   patient.get("first_name", ""), 
-                   patient.get("birth_year", ""))
+            key = (
+                patient.get("last_name", ""),
+                patient.get("first_name", ""),
+                patient.get("patronymic", ""),
+                patient.get("birth_year", "")
+            )
             patients_dict[key] = patient
         
-        # Обрабатываем импортируемых пациентов
         for imported_patient in imported:
-            key = (imported_patient.get("last_name", ""), 
-                   imported_patient.get("first_name", ""), 
-                   imported_patient.get("birth_year", ""))
+            key = (
+                imported_patient.get("last_name", ""),
+                imported_patient.get("first_name", ""),
+                imported_patient.get("patronymic", ""),
+                imported_patient.get("birth_year", "")
+            )
             
             if key in patients_dict:
-                # Пациент существует - объединяем оценки
                 existing = patients_dict[key]
                 self.merge_assessments(existing, imported_patient)
             else:
-                # Новый пациент - добавляем целиком
                 current.append(imported_patient)
         
         return current
@@ -5571,7 +5632,43 @@ class DataScreen(Screen):
         for assessment in imported.get("assessments", []):
             if assessment.get("assessment_id", "") not in existing_ids:
                 existing.setdefault("assessments", []).append(assessment)
-    
+
+    def cleanup_duplicate_files(self):
+        """Очищает дубликаты файлов, возникшие из-за проблем с нормализацией"""
+        reports_dir = self.app.results.reports_dir
+        
+        # Группируем файлы по нормализованному имени
+        files_by_name = {}
+        for filepath in reports_dir.glob("*.txt"):
+            normalized = self.app.results.normalize_filename(filepath.name)
+            if normalized not in files_by_name:
+                files_by_name[normalized] = []
+            files_by_name[normalized].append(filepath)
+        
+        # Обрабатываем дубликаты
+        for norm_name, file_list in files_by_name.items():
+            if len(file_list) > 1:
+                # Выбираем основной файл (тот, у которого имя в NFC форме)
+                primary = None
+                for f in file_list:
+                    if f.name == norm_name:
+                        primary = f
+                        break
+                if not primary:
+                    primary = file_list[0]
+                    # Переименовываем в нормализованное имя
+                    new_path = reports_dir / norm_name
+                    primary.rename(new_path)
+                    primary = new_path
+                
+                # Объединяем остальные
+                for dup in file_list:
+                    if dup != primary:
+                        self.merge_text_files(dup, primary)
+                        dup.unlink()
+                
+                self.notify_info(f"Объединены дубликаты для {norm_name}")
+
     # --- Функция импорта из старой версии ---
     
     def import_old_data(self) -> None:
@@ -6442,7 +6539,7 @@ class MenuScreen(Screen):
         
     def generate_one_page_form(self) -> str:
         """Генерирует пустую форму на одной странице"""
-        return """Пациент (ф.)_____________ (и.)_____________ (о.)_____________ (г.р.)______
+        return """Пациент (ф.)_____________ (и.)_____________ (о.)__________________ (г.р.)______
 
 Оценка:   первичная / повторная
 
@@ -6509,7 +6606,7 @@ class MenuScreen(Screen):
 
     def generate_two_page_form(self) -> str:
         """Генерирует пустую форму на двух страницах"""
-        return """Пациент (ф.)_____________ (и.)_____________ (о.)_____________ (г.р.)______
+        return """Пациент (ф.)_____________ (и.)_____________ (о.)__________________ (г.р.)______
 
 Оценка:   первичная / повторная
 

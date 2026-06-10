@@ -1,0 +1,384 @@
+Date/Time:       2026-06-10 14:50:10 
+Command line:    /usr/bin/briefcase package linux flatpak
+
+OS Release:      Linux 7.0.0-22-generic
+OS Version:      #22-Ubuntu SMP PREEMPT_DYNAMIC Mon May 25 15:54:34 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-22-generic-x86_64-with-glibc2.43
+
+Python exe:      /usr/bin/python3
+Python version:  3.14.4 (main, Apr  8 2026, 04:02:31) [GCC 15.2.0]
+Virtual env:     False
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   flatpak
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=ru_RU.utf8
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	LANG=ru_RU.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	PATH=/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PWD=/home/shadrov/arsenal_project_eng рабочий v2.4
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/3188,unix/T480:/tmp/.ICE-unix/3188
+	SHELL=/bin/bash
+	SHLVL=1
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VTE_VERSION=8400
+	WINDOWID=111149059
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xubuntu:/usr/share/xfce4:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/usr/bin/briefcase
+
+pyproject.toml:
+# This project was generated with 0.4.1 using template: https://github.com/beeware/briefcase-template @ v0.4.1
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.4.1"
+url = "https://github.com/vshadrov/arsenal"
+license.file = "LICENSE"
+author = "Arsenal"
+author_email = "shadrov@pbstin.ru"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Arsenal"
+description = "Arsenal"
+long_description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders, primarily those undergoing compulsory treatment and involuntarily hospitalized. The main focus of the technique is to identify targets for therapeutic intervention and track the changes that were achieved during this intervention."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+console_app = true
+main_module = "arsenal.app"
+main_function = "main"
+
+requires = [
+    "textual",
+    "rich",
+    "typing-extensions",
+    "openpyxl",
+    "et-xmlfile",
+]
+test_requires = [
+    "pytest",
+]
+icon = "resources/arsenal"
+
+[tool.briefcase.app.arsenal.macOS]
+icon = "resources/arsenal"
+universal_build = true
+requires = [
+    # Add your macOS-specific app requirements here
+]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux]
+icon = "resources/images/arsenal"
+categories = ["Office"]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.appimage]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.system.debian]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.rhel]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.suse]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.arch]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.flatpak]
+icon = "resources/images/arsenal"
+flatpak_runtime = "org.freedesktop.Platform"
+flatpak_runtime_version = "24.08"
+flatpak_sdk = "org.freedesktop.Sdk"
+finish_arg = [
+    "--share=network",
+    "--share=ipc",
+    "--socket=x11",
+    "--device=dri"
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+icon = "resources/arsenal"
+requires = [
+    # Add your Windows-specific app requirements here
+]
+console = true
+categories = ["Office"]
+
+# Mobile deployments
+[tool.briefcase.app.arsenal.iOS]
+supported = false
+
+[tool.briefcase.app.arsenal.android]
+supported = false
+
+# Web deployments
+[tool.briefcase.app.arsenal.web]
+supported = false
+
+Briefcase Log:
+[14:50:10]                                                                                                                                                         subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     flatpak --version                                                                                                                               subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_eng рабочий v2.4                                                                                                  subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Flatpak 1.16.6                                                                                                                                  subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     flatpak-builder --version                                                                                                                       subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_eng рабочий v2.4                                                                                                  subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     flatpak-builder-1.4.8                                                                                                                           subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                       create.py:937
+           [arsenal] Generating application template...                                                                                                                create.py:937
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/__main__.py:27 in main                                                                                                                  │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────── locals ─────────────────────────────────────────────────╮                                                                      │
+│ │       command = <briefcase.platforms.linux.flatpak.LinuxFlatpakPackageCommand object at 0x7b52970af770> │                                                                      │
+│ │       console = <briefcase.console.Console object at 0x7b52970ae660>                                    │                                                                      │
+│ │ extra_cmdline = []                                                                                      │                                                                      │
+│ │       options = {'update': False, 'packaging_format': 'flatpak', 'adhoc_sign': False, 'identity': None} │                                                                      │
+│ │     overrides = {}                                                                                      │                                                                      │
+│ │        result = 0                                                                                       │                                                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                      │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:204 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   201 │   │                                                                                                                                                                      │
+│   202 │   │   state = None                                                                                                                                                       │
+│   203 │   │   for _, app_obj in sorted(apps_to_package.items()):                                                                                                                 │
+│ ❱ 204 │   │   │   state = self._package_app(                                                                                                                                     │
+│   205 │   │   │   │   app_obj,                                                                                                                                                   │
+│   206 │   │   │   │   update=update,                                                                                                                                             │
+│   207 │   │   │   │   **full_options(state, options),                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │               _ = 'arsenal'                                                                               │                                                                    │
+│ │             app = None                                                                                    │                                                                    │
+│ │        app_name = None                                                                                    │                                                                    │
+│ │         app_obj = <com.arsenal.arsenal v2.4.1 AppConfig>                                                  │                                                                    │
+│ │ apps_to_package = {'arsenal': <com.arsenal.arsenal v2.4.1 AppConfig>}                                     │                                                                    │
+│ │         options = {'packaging_format': 'flatpak', 'adhoc_sign': False, 'identity': None}                  │                                                                    │
+│ │            self = <briefcase.platforms.linux.flatpak.LinuxFlatpakPackageCommand object at 0x7b52970af770> │                                                                    │
+│ │           state = None                                                                                    │                                                                    │
+│ │          update = False                                                                                   │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:103 in _package_app                                                                                                 │
+│                                                                                                                                                                                  │
+│   100 │   │   │   # it will be necessary to confirm deletion of the old folder.                                                                                                  │
+│   101 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   102 │   │   elif not template_file.exists():                                                                                                                                   │
+│ ❱ 103 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   104 │   │   │   state = self.build_command(app, **full_options(state, options))                                                                                                │
+│   105 │   │   elif update:                                                                                                                                                       │
+│   106 │   │   │   # If we're updating for packaging, update everything.                                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────╮                                               │
+│ │              app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                                      │                                               │
+│ │      binary_file = PosixPath('/home/shadrov/arsenal_project_eng рабочий v2.4/build/arsenal/linux/flatpak/com.arsenal.arsenal') │                                               │
+│ │          options = {'adhoc_sign': False, 'identity': None}                                                                     │                                               │
+│ │ packaging_format = 'flatpak'                                                                                                   │                                               │
+│ │             self = <briefcase.platforms.linux.flatpak.LinuxFlatpakPackageCommand object at 0x7b52970af770>                     │                                               │
+│ │    template_file = PosixPath('/home/shadrov/arsenal_project_eng рабочий v2.4/build/arsenal/linux/flatpak')                     │                                               │
+│ │           update = False                                                                                                       │                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                               │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:1026 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   1023 │   │                                                                                                                                                                     │
+│   1024 │   │   state = None                                                                                                                                                      │
+│   1025 │   │   for _, app_obj in sorted(apps_to_create.items()):                                                                                                                 │
+│ ❱ 1026 │   │   │   state = self.create_app(                                                                                                                                      │
+│   1027 │   │   │   │   app_obj,                                                                                                                                                  │
+│   1028 │   │   │   │   **full_options(state, options),                                                                                                                           │
+│   1029 │   │   │   )                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────── locals ─────────────────────────────────────────────────╮                                                                      │
+│ │              _ = 'arsenal'                                                                              │                                                                      │
+│ │            app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                 │                                                                      │
+│ │       app_name = None                                                                                   │                                                                      │
+│ │        app_obj = <com.arsenal.arsenal v2.4.1 AppConfig>                                                 │                                                                      │
+│ │ apps_to_create = {'arsenal': <com.arsenal.arsenal v2.4.1 AppConfig>}                                    │                                                                      │
+│ │        options = {'adhoc_sign': False, 'identity': None}                                                │                                                                      │
+│ │           self = <briefcase.platforms.linux.flatpak.LinuxFlatpakCreateCommand object at 0x7b5296e1f770> │                                                                      │
+│ │          state = None                                                                                   │                                                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                      │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:938 in create_app                                                                                                    │
+│                                                                                                                                                                                  │
+│    935 │   │   │   self.tools.shutil.rmtree(bundle_path)                                                                                                                         │
+│    936 │   │                                                                                                                                                                     │
+│    937 │   │   self.console.info("Generating application template...", prefix=app.app_name)                                                                                      │
+│ ❱  938 │   │   self.generate_app_template(app=app)                                                                                                                               │
+│    939 │   │                                                                                                                                                                     │
+│    940 │   │   # External apps (apps that define 'external_package_path') need the packaging me                                                                                  │
+│    941 │   │   # from the template, but not the app content, dependencies, support package etc.                                                                                  │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                        │
+│ │         app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                  │                                                                        │
+│ │ bundle_path = PosixPath('/home/shadrov/arsenal_project_eng рабочий v2.4/build/arsenal/linux/flatpak') │                                                                        │
+│ │     options = {'adhoc_sign': False, 'identity': None}                                                 │                                                                        │
+│ │        self = <briefcase.platforms.linux.flatpak.LinuxFlatpakCreateCommand object at 0x7b5296e1f770>  │                                                                        │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                        │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:258 in generate_app_template                                                                                         │
+│                                                                                                                                                                                  │
+│    255 │   │   )                                                                                                                                                                 │
+│    256 │   │                                                                                                                                                                     │
+│    257 │   │   # Add in any extra template context to support permissions                                                                                                        │
+│ ❱  258 │   │   extra_context.update(self.permissions_context(app, self._x_permissions(app)))                                                                                     │
+│    259 │   │                                                                                                                                                                     │
+│    260 │   │   # Add in any extra template context required by the output format.                                                                                                │
+│    261 │   │   extra_context.update(self.output_format_template_context(app))                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                       │
+│ │           app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                 │                                                                       │
+│ │ extra_context = {                                                                                      │                                                                       │
+│ │                 │   'project_name': 'arsenal',                                                         │                                                                       │
+│ │                 │   'main_module': 'arsenal.app',                                                      │                                                                       │
+│ │                 │   'main_function': 'main',                                                           │                                                                       │
+│ │                 │   'categories': ['Office'],                                                          │                                                                       │
+│ │                 │   'terminal': True,                                                                  │                                                                       │
+│ │                 │   'flatpak_runtime': 'org.freedesktop.Platform',                                     │                                                                       │
+│ │                 │   'flatpak_runtime_version': '24.08',                                                │                                                                       │
+│ │                 │   'flatpak_sdk': 'org.freedesktop.Sdk',                                              │                                                                       │
+│ │                 │   'app_name': 'arsenal',                                                             │                                                                       │
+│ │                 │   'version': '2.4.1',                                                                │                                                                       │
+│ │                 │   ... +29                                                                            │                                                                       │
+│ │                 }                                                                                      │                                                                       │
+│ │          self = <briefcase.platforms.linux.flatpak.LinuxFlatpakCreateCommand object at 0x7b5296e1f770> │                                                                       │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                       │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/platforms/linux/flatpak.py:145 in permissions_context                                                                                   │
+│                                                                                                                                                                                  │
+│   142 │   │   │   "filesystem=xdg-documents": True,                                                                                                                              │
+│   143 │   │   }                                                                                                                                                                  │
+│   144 │   │                                                                                                                                                                      │
+│ ❱ 145 │   │   finish_args.update(getattr(app, "finish_arg", {}))                                                                                                                 │
+│   146 │   │                                                                                                                                                                      │
+│   147 │   │   return {                                                                                                                                                           │
+│   148 │   │   │   "finish_args": finish_args,                                                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────────╮                     │
+│ │           app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                                                                   │                     │
+│ │   finish_args = {                                                                                                                                        │                     │
+│ │                 │   'share=ipc': True,                                                                                                                   │                     │
+│ │                 │   'socket=x11': True,                                                                                                                  │                     │
+│ │                 │   'nosocket=wayland': True,                                                                                                            │                     │
+│ │                 │   'share=network': True,                                                                                                               │                     │
+│ │                 │   'device=dri': True,                                                                                                                  │                     │
+│ │                 │   'socket=pulseaudio': True,                                                                                                           │                     │
+│ │                 │   'filesystem=xdg-cache': True,                                                                                                        │                     │
+│ │                 │   'filesystem=xdg-config': True,                                                                                                       │                     │
+│ │                 │   'filesystem=xdg-data': True,                                                                                                         │                     │
+│ │                 │   'filesystem=xdg-documents': True                                                                                                     │                     │
+│ │                 }                                                                                                                                        │                     │
+│ │          self = <briefcase.platforms.linux.flatpak.LinuxFlatpakCreateCommand object at 0x7b5296e1f770>                                                   │                     │
+│ │ x_permissions = {'camera': None, 'microphone': None, 'coarse_location': None, 'fine_location': None, 'background_location': None, 'photo_library': None} │                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ValueError: dictionary update sequence element #0 has length 15; 2 is required

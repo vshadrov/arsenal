@@ -1,0 +1,506 @@
+Date/Time:       2026-06-10 14:58:16 
+Command line:    /usr/bin/briefcase package linux flatpak
+
+OS Release:      Linux 7.0.0-22-generic
+OS Version:      #22-Ubuntu SMP PREEMPT_DYNAMIC Mon May 25 15:54:34 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-22-generic-x86_64-with-glibc2.43
+
+Python exe:      /usr/bin/python3
+Python version:  3.14.4 (main, Apr  8 2026, 04:02:31) [GCC 15.2.0]
+Virtual env:     False
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   flatpak
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=ru_RU.utf8
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	LANG=ru_RU.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	PATH=/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PWD=/home/shadrov/arsenal_project_eng рабочий v2.4
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/3188,unix/T480:/tmp/.ICE-unix/3188
+	SHELL=/bin/bash
+	SHLVL=1
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VTE_VERSION=8400
+	WINDOWID=111149059
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xubuntu:/usr/share/xfce4:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/usr/bin/briefcase
+
+pyproject.toml:
+# This project was generated with 0.4.1 using template: https://github.com/beeware/briefcase-template @ v0.4.1
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.4.1"
+url = "https://github.com/vshadrov/arsenal"
+license.file = "LICENSE"
+author = "Arsenal"
+author_email = "shadrov@pbstin.ru"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Arsenal"
+description = "Arsenal"
+long_description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders, primarily those undergoing compulsory treatment and involuntarily hospitalized. The main focus of the technique is to identify targets for therapeutic intervention and track the changes that were achieved during this intervention."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+console_app = true
+main_module = "arsenal.app"
+main_function = "main"
+
+requires = [
+    "textual",
+    "rich",
+    "typing-extensions",
+    "openpyxl",
+    "et-xmlfile",
+]
+test_requires = [
+    "pytest",
+]
+icon = "resources/arsenal"
+
+[tool.briefcase.app.arsenal.macOS]
+icon = "resources/arsenal"
+universal_build = true
+requires = [
+    # Add your macOS-specific app requirements here
+]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux]
+icon = "resources/images/arsenal"
+categories = ["Office"]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.appimage]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.system.debian]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.rhel]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.suse]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.arch]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.flatpak]
+icon = "resources/images/arsenal"
+flatpak_runtime = "org.freedesktop.Platform"
+flatpak_runtime_version = "24.08"
+flatpak_sdk = "org.freedesktop.Sdk"
+
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+icon = "resources/arsenal"
+requires = [
+    # Add your Windows-specific app requirements here
+]
+console = true
+categories = ["Office"]
+
+# Mobile deployments
+[tool.briefcase.app.arsenal.iOS]
+supported = false
+
+[tool.briefcase.app.arsenal.android]
+supported = false
+
+# Web deployments
+[tool.briefcase.app.arsenal.web]
+supported = false
+
+Briefcase Log:
+[14:52:07]                                                                                                                                                         subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     flatpak --version                                                                                                                               subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_eng рабочий v2.4                                                                                                  subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Flatpak 1.16.6                                                                                                                                  subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     flatpak-builder --version                                                                                                                       subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_eng рабочий v2.4                                                                                                  subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     flatpak-builder-1.4.8                                                                                                                           subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                       create.py:937
+           [arsenal] Generating application template...                                                                                                                create.py:937
+           Using app template: https://github.com/beeware/briefcase-linux-flatpak-template.git, branch v0.3.25                                                          base.py:1241
+           Cloning template 'https://github.com/beeware/briefcase-linux-flatpak-template.git'...                                                                        base.py:1073
+[14:52:09] Using existing template (sha f1c26284143d81c459952bf8a175e01f56b8444b, updated Mon Aug 11 13:23:39 2025)                                                     base.py:1146
+[14:52:10]                                                                                                                                                             create.py:952
+           [arsenal] Installing support package...                                                                                                                     create.py:952
+           Using support package                                                                                                                                       create.py:366
+           https://github.com/astral-sh/python-build-standalone/releases/download/20250808/cpython-3.14.0rc1+20250808-x86_64-unknown-linux-gnu-install_only_stripped.t              
+           ar.gz                                                                                                                                                                    
+           Downloading cpython-3.14.0rc1+20250808-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz...                                                               file.py:227
+[14:52:13] Unpacking support package... started                                                                                                                        create.py:281
+[14:52:15] Unpacking support package... done                                                                                                                           create.py:281
+                                                                                                                                                                       create.py:970
+[14:52:16] [arsenal] Installing application code...                                                                                                                    create.py:970
+           Installing src/arsenal... started                                                                                                                           create.py:734
+           Installing src/arsenal... done                                                                                                                              create.py:734
+                                                                                                                                                                       create.py:973
+           [arsenal] Installing requirements...                                                                                                                        create.py:973
+           Writing requirements file... started                                                                                                                        create.py:532
+           Writing requirements file... done                                                                                                                           create.py:532
+                                                                                                                                                                       create.py:976
+           [arsenal] Installing application resources...                                                                                                               create.py:976
+           Installing resources/images/arsenal-16.png as 16px application icon... started                                                                              create.py:815
+           Installing resources/images/arsenal-16.png as 16px application icon... done                                                                                 create.py:815
+           Installing resources/images/arsenal-32.png as 32px application icon... started                                                                              create.py:815
+           Installing resources/images/arsenal-32.png as 32px application icon... done                                                                                 create.py:815
+           Installing resources/images/arsenal-64.png as 64px application icon... started                                                                              create.py:815
+           Installing resources/images/arsenal-64.png as 64px application icon... done                                                                                 create.py:815
+           Installing resources/images/arsenal-128.png as 128px application icon... started                                                                            create.py:815
+           Installing resources/images/arsenal-128.png as 128px application icon... done                                                                               create.py:815
+           Installing resources/images/arsenal-256.png as 256px application icon... started                                                                            create.py:815
+           Installing resources/images/arsenal-256.png as 256px application icon... done                                                                               create.py:815
+           Installing resources/images/arsenal-512.png as 512px application icon... started                                                                            create.py:815
+           Installing resources/images/arsenal-512.png as 512px application icon... done                                                                               create.py:815
+                                                                                                                                                                       create.py:981
+           [arsenal] Removing unneeded app content...                                                                                                                  create.py:981
+           Removing unneeded app bundle content... started                                                                                                             create.py:897
+           Removing directory support/python/lib/python3.14/encodings/__pycache__                                                                                      create.py:904
+           Removing unneeded app bundle content... done                                                                                                                create.py:897
+                                                                                                                                                                       create.py:984
+           [arsenal] Created build/arsenal/linux/flatpak                                                                                                               create.py:984
+                                                                                                                                                                      flatpak.py:168
+           [arsenal] Ensuring Flatpak runtime for the app is available...                                                                                             flatpak.py:168
+           Ensuring Flatpak runtime repo is registered... started                                                                                                     flatpak.py:174
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo                                                  subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_eng рабочий v2.4                                                                                                  subprocess.py:838
+[14:58:16] ошибка: Не удалось загрузить адрес https://flathub.org/repo/flathub.flatpakrepo: While fetching https://flathub.org/repo/flathub.flatpakrepo: [28]      subprocess.py:195
+           Timeout was reached                                                                                                                                                      
+                                                                                                                                                                   subprocess.py:195
+           >>> Return code: 1                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           Ensuring Flatpak runtime repo is registered... errored                                                                                                     flatpak.py:174
+                                                                                                                                                                      __main__.py:42
+           Unable to add Flatpak repo https://flathub.org/repo/flathub.flatpakrepo with alias flathub.                                                                __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/integrations/flatpak.py:152 in verify_repo                                                                                              │
+│                                                                                                                                                                                  │
+│   149 │   │   :param url: The URL of the Flatpak repo.                                                                                                                           │
+│   150 │   │   """                                                                                                                                                                │
+│   151 │   │   try:                                                                                                                                                               │
+│ ❱ 152 │   │   │   self.tools.subprocess.run(                                                                                                                                     │
+│   153 │   │   │   │   [                                                                                                                                                          │
+│   154 │   │   │   │   │   "flatpak",                                                                                                                                             │
+│   155 │   │   │   │   │   "remote-add",                                                                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────── locals ────────────────────────────────────╮                                                                                               │
+│ │ repo_alias = 'flathub'                                                         │                                                                                               │
+│ │       self = <briefcase.integrations.flatpak.Flatpak object at 0x7510b21eb0e0> │                                                                                               │
+│ │        url = 'https://flathub.org/repo/flathub.flatpakrepo'                    │                                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────╯                                                                                               │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:144 in inner                                                                                                 │
+│                                                                                                                                                                                  │
+│   141 │   │   │   with sub.tools.console.release_console_control():                                                                                                              │
+│   142 │   │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                              │
+│   143 │   │   else:                                                                                                                                                              │
+│ ❱ 144 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   145 │                                                                                                                                                                          │
+│   146 │   return inner                                                                                                                                                           │
+│   147                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────╮                                  │
+│ │                    args = ['flatpak', 'remote-add', '--user', '--if-not-exists', 'flathub', 'https://flathub.org/repo/flathub.flatpakrepo'] │                                  │
+│ │ remove_dynamic_elements = False                                                                                                             │                                  │
+│ │                     sub = <briefcase.integrations.subprocess.Subprocess object at 0x7510b21e8ec0>                                           │                                  │
+│ │            wrapped_args = ()                                                                                                                │                                  │
+│ │          wrapped_kwargs = {'check': True}                                                                                                   │                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                  │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:539 in run                                                                                                   │
+│                                                                                                                                                                                  │
+│   536 │   │   # caller sets stream_output=False, then ensure_console_is_safe() will                                                                                              │
+│   537 │   │   # disable any dynamic console elements while the command runs.                                                                                                     │
+│   538 │   │   if stream_output:                                                                                                                                                  │
+│ ❱ 539 │   │   │   return self._run_and_stream_output(args, filter_func=filter_func, **kwargs)                                                                                    │
+│   540 │   │                                                                                                                                                                      │
+│   541 │   │   # Can't filter non-streamed output.                                                                                                                                │
+│   542 │   │   if filter_func:                                                                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────╮                                            │
+│ │          args = ['flatpak', 'remote-add', '--user', '--if-not-exists', 'flathub', 'https://flathub.org/repo/flathub.flatpakrepo'] │                                            │
+│ │   filter_func = None                                                                                                              │                                            │
+│ │        kwargs = {'check': True}                                                                                                   │                                            │
+│ │          self = <briefcase.integrations.subprocess.Subprocess object at 0x7510b21e8ec0>                                           │                                            │
+│ │ stream_output = True                                                                                                              │                                            │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                            │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:615 in _run_and_stream_output                                                                                │
+│                                                                                                                                                                                  │
+│   612 │   │   self._log_return_code(return_code)                                                                                                                                 │
+│   613 │   │                                                                                                                                                                      │
+│   614 │   │   if check and return_code:                                                                                                                                          │
+│ ❱ 615 │   │   │   raise subprocess.CalledProcessError(return_code, args, stderr=stderr)                                                                                          │
+│   616 │   │                                                                                                                                                                      │
+│   617 │   │   return subprocess.CompletedProcess(args, return_code, stderr=stderr)                                                                                               │
+│   618                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────╮                                              │
+│ │        args = ['flatpak', 'remote-add', '--user', '--if-not-exists', 'flathub', 'https://flathub.org/repo/flathub.flatpakrepo'] │                                              │
+│ │       check = True                                                                                                              │                                              │
+│ │ filter_func = None                                                                                                              │                                              │
+│ │      kwargs = {'stdout': -1, 'stderr': -2, 'bufsize': 1}                                                                        │                                              │
+│ │     process = <Popen: returncode: 1 args: ['flatpak', 'remote-add', '--user', '--if-not-ex...>                                  │                                              │
+│ │ return_code = 1                                                                                                                 │                                              │
+│ │        self = <briefcase.integrations.subprocess.Subprocess object at 0x7510b21e8ec0>                                           │                                              │
+│ │      stderr = None                                                                                                              │                                              │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['flatpak', 'remote-add', '--user', '--if-not-exists', 'flathub', 'https://flathub.org/repo/flathub.flatpakrepo']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/__main__.py:27 in main                                                                                                                  │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────╮                                         │
+│ │       command = <briefcase.platforms.linux.flatpak.LinuxFlatpakPackageCommand object at 0x7510b246f770>                              │                                         │
+│ │       console = <briefcase.console.Console object at 0x7510b246e660>                                                                 │                                         │
+│ │             e = BriefcaseCommandError('Unable to add Flatpak repo https://flathub.org/repo/flathub.flatpakrepo with alias flathub.') │                                         │
+│ │ extra_cmdline = []                                                                                                                   │                                         │
+│ │       options = {'update': False, 'packaging_format': 'flatpak', 'adhoc_sign': False, 'identity': None}                              │                                         │
+│ │     overrides = {}                                                                                                                   │                                         │
+│ │        result = 200                                                                                                                  │                                         │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                         │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:204 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   201 │   │                                                                                                                                                                      │
+│   202 │   │   state = None                                                                                                                                                       │
+│   203 │   │   for _, app_obj in sorted(apps_to_package.items()):                                                                                                                 │
+│ ❱ 204 │   │   │   state = self._package_app(                                                                                                                                     │
+│   205 │   │   │   │   app_obj,                                                                                                                                                   │
+│   206 │   │   │   │   update=update,                                                                                                                                             │
+│   207 │   │   │   │   **full_options(state, options),                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │               _ = 'arsenal'                                                                               │                                                                    │
+│ │             app = None                                                                                    │                                                                    │
+│ │        app_name = None                                                                                    │                                                                    │
+│ │         app_obj = <com.arsenal.arsenal v2.4.1 AppConfig>                                                  │                                                                    │
+│ │ apps_to_package = {'arsenal': <com.arsenal.arsenal v2.4.1 AppConfig>}                                     │                                                                    │
+│ │         options = {'packaging_format': 'flatpak', 'adhoc_sign': False, 'identity': None}                  │                                                                    │
+│ │            self = <briefcase.platforms.linux.flatpak.LinuxFlatpakPackageCommand object at 0x7510b246f770> │                                                                    │
+│ │           state = None                                                                                    │                                                                    │
+│ │          update = False                                                                                   │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:104 in _package_app                                                                                                 │
+│                                                                                                                                                                                  │
+│   101 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   102 │   │   elif not template_file.exists():                                                                                                                                   │
+│   103 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│ ❱ 104 │   │   │   state = self.build_command(app, **full_options(state, options))                                                                                                │
+│   105 │   │   elif update:                                                                                                                                                       │
+│   106 │   │   │   # If we're updating for packaging, update everything.                                                                                                          │
+│   107 │   │   │   # This ensures everything in the packaged artefact is up to date,                                                                                              │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────╮                                               │
+│ │              app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                                      │                                               │
+│ │      binary_file = PosixPath('/home/shadrov/arsenal_project_eng рабочий v2.4/build/arsenal/linux/flatpak/com.arsenal.arsenal') │                                               │
+│ │          options = {'adhoc_sign': False, 'identity': None}                                                                     │                                               │
+│ │ packaging_format = 'flatpak'                                                                                                   │                                               │
+│ │             self = <briefcase.platforms.linux.flatpak.LinuxFlatpakPackageCommand object at 0x7510b246f770>                     │                                               │
+│ │            state = None                                                                                                        │                                               │
+│ │    template_file = PosixPath('/home/shadrov/arsenal_project_eng рабочий v2.4/build/arsenal/linux/flatpak')                     │                                               │
+│ │           update = False                                                                                                       │                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                               │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/build.py:154 in __call__                                                                                                       │
+│                                                                                                                                                                                  │
+│   151 │   │                                                                                                                                                                      │
+│   152 │   │   state = None                                                                                                                                                       │
+│   153 │   │   for _, app_obj in sorted(apps_to_build.items()):                                                                                                                   │
+│ ❱ 154 │   │   │   state = self._build_app(                                                                                                                                       │
+│   155 │   │   │   │   app_obj,                                                                                                                                                   │
+│   156 │   │   │   │   update=update,                                                                                                                                             │
+│   157 │   │   │   │   update_requirements=update_requirements,                                                                                                                   │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                  │
+│ │                   _ = 'arsenal'                                                                             │                                                                  │
+│ │                 app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                │                                                                  │
+│ │            app_name = None                                                                                  │                                                                  │
+│ │             app_obj = <com.arsenal.arsenal v2.4.1 AppConfig>                                                │                                                                  │
+│ │       apps_to_build = {'arsenal': <com.arsenal.arsenal v2.4.1 AppConfig>}                                   │                                                                  │
+│ │           no_update = False                                                                                 │                                                                  │
+│ │             options = {'adhoc_sign': False, 'identity': None}                                               │                                                                  │
+│ │                self = <briefcase.platforms.linux.flatpak.LinuxFlatpakBuildCommand object at 0x7510b1332120> │                                                                  │
+│ │               state = None                                                                                  │                                                                  │
+│ │           test_mode = False                                                                                 │                                                                  │
+│ │              update = False                                                                                 │                                                                  │
+│ │ update_requirements = False                                                                                 │                                                                  │
+│ │    update_resources = False                                                                                 │                                                                  │
+│ │         update_stub = False                                                                                 │                                                                  │
+│ │      update_support = False                                                                                 │                                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                  │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/build.py:90 in _build_app                                                                                                      │
+│                                                                                                                                                                                  │
+│    87 │   │                                                                                                                                                                      │
+│    88 │   │   self.verify_app(app)                                                                                                                                               │
+│    89 │   │                                                                                                                                                                      │
+│ ❱  90 │   │   state = self.build_app(app, **full_options(state, options))                                                                                                        │
+│    91 │   │                                                                                                                                                                      │
+│    92 │   │   qualifier = " (test mode)" if app.test_mode else ""                                                                                                                │
+│    93 │   │   self.console.info(                                                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                  │
+│ │                 app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                │                                                                  │
+│ │           no_update = False                                                                                 │                                                                  │
+│ │             options = {'adhoc_sign': False, 'identity': None}                                               │                                                                  │
+│ │                self = <briefcase.platforms.linux.flatpak.LinuxFlatpakBuildCommand object at 0x7510b1332120> │                                                                  │
+│ │               state = None                                                                                  │                                                                  │
+│ │              update = False                                                                                 │                                                                  │
+│ │ update_requirements = False                                                                                 │                                                                  │
+│ │    update_resources = False                                                                                 │                                                                  │
+│ │         update_stub = False                                                                                 │                                                                  │
+│ │      update_support = False                                                                                 │                                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                  │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/platforms/linux/flatpak.py:175 in build_app                                                                                             │
+│                                                                                                                                                                                  │
+│   172 │   │   flatpak_repo_alias, flatpak_repo_url = self.flatpak_runtime_repo(app)                                                                                              │
+│   173 │   │                                                                                                                                                                      │
+│   174 │   │   with self.console.wait_bar("Ensuring Flatpak runtime repo is registered..."):                                                                                      │
+│ ❱ 175 │   │   │   self.tools.flatpak.verify_repo(                                                                                                                                │
+│   176 │   │   │   │   repo_alias=flatpak_repo_alias,                                                                                                                             │
+│   177 │   │   │   │   url=flatpak_repo_url,                                                                                                                                      │
+│   178 │   │   │   )                                                                                                                                                              │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                   │
+│ │                app = <com.arsenal.arsenal v2.4.1 AppConfig>                                                │                                                                   │
+│ │ flatpak_repo_alias = 'flathub'                                                                             │                                                                   │
+│ │   flatpak_repo_url = 'https://flathub.org/repo/flathub.flatpakrepo'                                        │                                                                   │
+│ │             kwargs = {'adhoc_sign': False, 'identity': None}                                               │                                                                   │
+│ │               self = <briefcase.platforms.linux.flatpak.LinuxFlatpakBuildCommand object at 0x7510b1332120> │                                                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                   │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/flatpak.py:165 in verify_repo                                                                                              │
+│                                                                                                                                                                                  │
+│   162 │   │   │   │   check=True,                                                                                                                                                │
+│   163 │   │   │   )                                                                                                                                                              │
+│   164 │   │   except subprocess.CalledProcessError as e:                                                                                                                         │
+│ ❱ 165 │   │   │   raise BriefcaseCommandError(                                                                                                                                   │
+│   166 │   │   │   │   f"Unable to add Flatpak repo {url} with alias {repo_alias}."                                                                                               │
+│   167 │   │   │   ) from e                                                                                                                                                       │
+│   168                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────── locals ────────────────────────────────────╮                                                                                               │
+│ │ repo_alias = 'flathub'                                                         │                                                                                               │
+│ │       self = <briefcase.integrations.flatpak.Flatpak object at 0x7510b21eb0e0> │                                                                                               │
+│ │        url = 'https://flathub.org/repo/flathub.flatpakrepo'                    │                                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────╯                                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Unable to add Flatpak repo https://flathub.org/repo/flathub.flatpakrepo with alias flathub.
