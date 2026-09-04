@@ -16,13 +16,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'  # Изменено на 3.11 для 100% совместимости бинарных wheels на macOS
 
       - name: Install System Dependencies (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
-          # Добавлен rpm для сборки .rpm пакетов на базе Ubuntu хоста
           sudo apt install -y python3-dev python3-pip build-essential libffi-dev git \
                              gfortran libopenblas-dev pkg-config rpm
 
@@ -31,15 +30,15 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install briefcase
           
-          # Для сборки deb/rpm на Linux ставим briefcase также в системный питон хоста
+          # ИСПРАВЛЕНО: добавлен флаг --ignore-installed для обхода конфликта с пакетами Debian/Ubuntu
           if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-            sudo python3 -m pip install briefcase --break-system-packages
+            sudo python3 -m pip install briefcase --break-system-packages --ignore-installed
           fi
 
       - name: Build App (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
-          # 1. Собираем AppImage (использует установленный setup-python)
+          # 1. Собираем AppImage
           python -m briefcase update linux appimage --no-input
           python -m briefcase package linux appimage --no-input --no-docker
           
