@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # Изменено на 3.11 для 100% совместимости бинарных wheels на macOS
+          python-version: '3.12'  # Возвращаем 3.12, так как библиотеки требуют свежий синтаксис
 
       - name: Install System Dependencies (Linux)
         if: matrix.os == 'ubuntu-latest'
@@ -30,7 +30,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install briefcase
           
-          # ИСПРАВЛЕНО: добавлен флаг --ignore-installed для обхода конфликта с пакетами Debian/Ubuntu
           if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
             sudo python3 -m pip install briefcase --break-system-packages --ignore-installed
           fi
