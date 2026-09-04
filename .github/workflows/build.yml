@@ -50,10 +50,10 @@ jobs:
       - name: Build App (macOS)
         if: matrix.os == 'macos-latest'
         run: |
-          # Полностью очищаем сборочные папки приложения на Mac, чтобы стереть кэш требований scikit-learn>=1.5.0
-          python -m briefcase clean macOS app --no-input
+          # Принудительно удаляем локальную папку сборки, чтобы полностью уничтожить старый кэш зависимостей
+          rm -rf build/
           
-          # Создаем шаблон заново и упаковываем
+          # Создаем проект с нуля и упаковываем в .dmg
           python -m briefcase create macOS app --no-input
           python -m briefcase build macOS app --no-input
           python -m briefcase package macOS app --no-input --adhoc-sign
