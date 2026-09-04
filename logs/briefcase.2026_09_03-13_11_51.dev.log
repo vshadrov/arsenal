@@ -1,0 +1,664 @@
+Date/Time:       2026-09-03 13:11:51 
+Command line:    /home/shadrov/arsenal_project_eng_2.5/.venv/bin/briefcase dev
+
+OS Release:      Linux 7.0.0-30-generic
+OS Version:      #30-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 18:22:54 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-30-generic-x86_64-with-glibc2.43
+
+Python exe:      /home/shadrov/arsenal_project_eng_2.5/.venv/bin/python3
+Python version:  3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.4.4
+Target platform: linux
+Target format:   system
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DEEPSEEK_API_KEY=********************
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=en
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	KMP_DUPLICATE_LIB_OK=True
+	KMP_INIT_AT_FORK=FALSE
+	LANG=en_NZ.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	OPENAI_API_KEY=********************
+	OPENAI_BASE_URL=https://api.selectel.ru/aig/v1
+	OPENAI_MODEL=deepseek/deepseek-v4-pro
+	PATH=/home/shadrov/arsenal_project_eng_2.5/.venv/bin:/home/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ 
+	PWD=/home/shadrov/arsenal_project_eng_2.5
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644
+	SHELL=/bin/bash
+	SHLVL=2
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VIRTUAL_ENV=/home/shadrov/arsenal_project_eng_2.5/.venv
+	VIRTUAL_ENV_PROMPT=.venv
+	VTE_VERSION=8400
+	WINDOWID=54656871
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xfce4:/usr/share/xubuntu:/usr/share/gnome:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/home/shadrov/arsenal_project_eng_2.5/.venv/bin/briefcase
+
+pyproject.toml:
+# This project was generated with 0.4.1 using template: https://github.com/beeware/briefcase-template @ v0.4.1
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.5.0"
+url = "https://github.com/vshadrov/arsenal"
+license.file = "LICENSE"
+author = "Arsenal"
+author_email = "shadrov@pbstin.ru"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Arsenal"
+description = "Arsenal"
+long_description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders, primarily those undergoing compulsory treatment and involuntarily hospitalized. The main focus of the technique is to identify targets for therapeutic intervention and track the changes that were achieved during this intervention."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+console_app = true
+main_module = "arsenal.app"
+main_function = "main"
+
+requires = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "pandas>=3.0.5",
+    "plotext>=6.0.0",
+    "scikit-learn>=1.9.0",
+    "scipy>=1.18.1",
+]
+
+test_requires = [
+    "pytest>=9.1.1",
+]
+
+icon = "resources/arsenal"
+
+[tool.briefcase.app.arsenal.macOS]
+icon = "resources/arsenal"
+universal_build = true
+requires = [
+    # Add your macOS-specific app requirements here
+]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux]
+icon = "resources/images/arsenal"
+categories = ["Office"]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.appimage]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.system.debian]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.rhel]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.suse]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.arch]
+icon = "resources/images/arsenal"
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.flatpak]
+icon = "resources/images/arsenal"
+flatpak_runtime = "org.freedesktop.Platform"
+flatpak_runtime_version = "24.08"
+flatpak_sdk = "org.freedesktop.Sdk"
+
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+icon = "resources/arsenal"
+requires = [
+    # Add your Windows-specific app requirements here
+]
+console = true
+categories = ["Office"]
+
+# Mobile deployments
+[tool.briefcase.app.arsenal.iOS]
+supported = false
+
+[tool.briefcase.app.arsenal.android]
+supported = false
+
+# Web deployments
+[tool.briefcase.app.arsenal.web]
+supported = false
+
+Briefcase Log:
+[13:10:40]                                                                                                                                                            console.py:367
+           ********************************************************************************                                                                           console.py:367
+           **           WARNING: 'arsenal' uses PEP 621 `license.file` format            **                                                                           console.py:367
+           ********************************************************************************                                                                           console.py:367
+                                                                                                                                                                      console.py:367
+             Briefcase now uses PEP 639 format for license definitions.                                                                                               console.py:367
+                                                                                                                                                                      console.py:367
+             PEP 639 requires the definition of both `license` and `license-files`. The                                                                               console.py:367
+             value for `license.file` will be used to populate the PEP 639 `license-                                                                                  console.py:367
+             files` setting.                                                                                                                                          console.py:367
+                                                                                                                                                                      console.py:367
+             The license has been identified as 'GPL-3.0+'.                                                                                                           console.py:367
+                                                                                                                                                                      console.py:367
+             Update your configuration to use PEP 639 format:                                                                                                         console.py:367
+                                                                                                                                                                      console.py:367
+                 license = "GPL-3.0+"                                                                                                                                 console.py:367
+                 license-files = ["LICENSE"]                                                                                                                          console.py:367
+                                                                                                                                                                      console.py:367
+             You should not release your project without resolving this warning.                                                                                      console.py:367
+                                                                                                                                                                      console.py:367
+           ********************************************************************************                                                                           console.py:367
+                                                                                                                                                                       system.py:213
+           [arsenal] Finalizing application configuration...                                                                                                           system.py:213
+           Targeting ubuntu:resolute (Vendor base debian)                                                                                                              system.py:225
+           Targeting glibc 2.43                                                                                                                                        system.py:261
+           Targeting Python3.14                                                                                                                                        system.py:265
+                                                                                                                                                                          dev.py:301
+           [arsenal] Activating dev environment...                                                                                                                        dev.py:301
+           Creating virtual environment (dev.cpython-314-x86_64-linux-gnu)... started                                                                                 std_venv.py:45
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5/.venv/bin/python3 -m venv                                                                                 subprocess.py:844
+           /home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu                                                                                
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+[13:10:43] >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu/bin/python -u -X utf8 -m pip install --upgrade pip    subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Environment Overrides:                                                                                                                              subprocess.py:844
+           >>>                                                                                                                                                     subprocess.py:844
+           PATH=/home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu/bin:/home/shadrov/arsenal_project_eng_2.5/.venv/bin:/hom                  
+           e/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/                  
+           home/shadrov/.local/bin:/home/shadrov/.local/bin                                                                                                                         
+           >>>     VIRTUAL_ENV=/home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu                                           subprocess.py:844
+[13:10:44] Requirement already satisfied: pip in ./.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu/lib/python3.14/site-packages (25.1.1)                       subprocess.py:196
+           Collecting pip                                                                                                                                          subprocess.py:196
+             Using cached pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)                                                                                            subprocess.py:196
+           Using cached pip-26.2.1-py3-none-any.whl (1.8 MB)                                                                                                       subprocess.py:196
+           Installing collected packages: pip                                                                                                                      subprocess.py:196
+             Attempting uninstall: pip                                                                                                                             subprocess.py:196
+               Found existing installation: pip 25.1.1                                                                                                             subprocess.py:196
+               Uninstalling pip-25.1.1:                                                                                                                            subprocess.py:196
+                 Successfully uninstalled pip-25.1.1                                                                                                               subprocess.py:196
+[13:10:45] Successfully installed pip-26.2.1                                                                                                                       subprocess.py:196
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           Creating virtual environment (dev.cpython-314-x86_64-linux-gnu)... done                                                                                    std_venv.py:45
+                                                                                                                                                                          dev.py:309
+           [arsenal] Installing requirements...                                                                                                                           dev.py:309
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     dpkg -s python3-dev                                                                                                                             subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Command Output:                                                                                                                                     subprocess.py:844
+           >>>     Package: python3-dev                                                                                                                            subprocess.py:844
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:844
+           >>>     Priority: optional                                                                                                                              subprocess.py:844
+           >>>     Section: python                                                                                                                                 subprocess.py:844
+           >>>     Installed-Size: 149                                                                                                                             subprocess.py:844
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:844
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:844
+           >>>     Multi-Arch: allowed                                                                                                                             subprocess.py:844
+           >>>     Source: python3-defaults                                                                                                                        subprocess.py:844
+           >>>     Version: 3.14.3-0ubuntu2                                                                                                                        subprocess.py:844
+           >>>     Replaces: python3 (<< 3.9.2-1~), python3.1 (<< 3.1.2+20100706-3)                                                                                subprocess.py:844
+           >>>     Depends: python3 (= 3.14.3-0ubuntu2), libpython3-dev (= 3.14.3-0ubuntu2), python3.14-dev (>= 3.14.3), libjs-sphinxdoc (>= 8.2)                  subprocess.py:844
+           >>>     Breaks: python3 (<< 3.9.2-1~)                                                                                                                   subprocess.py:844
+           >>>     Description: header files and a static library for Python (default)                                                                             subprocess.py:844
+           >>>      Header files, a static library and development tools for building                                                                              subprocess.py:844
+           >>>      Python modules, extending the Python interpreter or embedding Python                                                                           subprocess.py:844
+           >>>      in applications.                                                                                                                               subprocess.py:844
+           >>>      .                                                                                                                                              subprocess.py:844
+           >>>      This package is a dependency package, which depends on Debian's default                                                                        subprocess.py:844
+           >>>      Python 3 version's headers (currently v3.14).                                                                                                  subprocess.py:844
+           >>>     Built-Using: sphinx (= 8.2.3-12)                                                                                                                subprocess.py:844
+           >>>     Homepage: https://www.python.org/                                                                                                               subprocess.py:844
+           >>>     Original-Maintainer: Matthias Klose <doko@debian.org>                                                                                           subprocess.py:844
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     dpkg -s dpkg-dev                                                                                                                                subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Command Output:                                                                                                                                     subprocess.py:844
+           >>>     Package: dpkg-dev                                                                                                                               subprocess.py:844
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:844
+           >>>     Priority: optional                                                                                                                              subprocess.py:844
+           >>>     Section: utils                                                                                                                                  subprocess.py:844
+           >>>     Installed-Size: 1767                                                                                                                            subprocess.py:844
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:844
+           >>>     Architecture: all                                                                                                                               subprocess.py:844
+           >>>     Multi-Arch: foreign                                                                                                                             subprocess.py:844
+           >>>     Source: dpkg                                                                                                                                    subprocess.py:844
+           >>>     Version: 1.23.7ubuntu1                                                                                                                          subprocess.py:844
+           >>>     Provides: dpkg-build-api (= 0), dpkg-build-api (= 1)                                                                                            subprocess.py:844
+           >>>     Depends: perl:any, libdpkg-perl (= 1.23.7ubuntu1), tar (>= 1.28-1), bzip2, xz-utils (>= 5.4.0), patch (>= 2.7), make (>= 4.4), binutils,        subprocess.py:844
+           lto-disabled-list                                                                                                                                                        
+           >>>     Recommends: build-essential, gcc | c-compiler, fakeroot, gnupg | sq | sqop | rsop | gosop | pgpainless-cli | gpg-sq, gpgv | sqv | sqopv | rsopv subprocess.py:844
+           | sopv | gosop | pgpainless-cli | gpgv-sq, libalgorithm-merge-perl                                                                                                       
+           >>>     Suggests: debian-keyring, debian-tag2upload-keyring                                                                                             subprocess.py:844
+           >>>     Breaks: debhelper (<< 10.10.1~), debian-keyring (<< 2025.04.25~), devuan-keyring (<< 2025.07.30~), gosop (<< 1.1.0~), libsop-java-java (<<      subprocess.py:844
+           4.0.7~), pgpainless-cli (<< 1.3.13~), rsop (<< 0.4.0~), sq (<< 0.40.0~), sqop (<< 0.27.2~), sqv (<< 1.3.0~)                                                              
+           >>>     Conffiles:                                                                                                                                      subprocess.py:844
+           >>>      /etc/dpkg/shlibs.default 1a2b9d0a869e2aa885ae3621c557fb95                                                                                      subprocess.py:844
+           >>>      /etc/dpkg/shlibs.override 84b1e69080569cc5c613a50887af5200                                                                                     subprocess.py:844
+           >>>     Description: Debian package development tools                                                                                                   subprocess.py:844
+           >>>      This package provides the development tools (including dpkg-source)                                                                            subprocess.py:844
+           >>>      required to unpack, build and upload Debian source packages.                                                                                   subprocess.py:844
+           >>>      .                                                                                                                                              subprocess.py:844
+           >>>      Most Debian source packages will require additional tools to build;                                                                            subprocess.py:844
+           >>>      for example, most packages need make and the C compiler gcc.                                                                                   subprocess.py:844
+           >>>     Homepage: https://wiki.debian.org/Teams/Dpkg                                                                                                    subprocess.py:844
+           >>>     Original-Maintainer: Dpkg Developers <debian-dpkg@lists.debian.org>                                                                             subprocess.py:844
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     dpkg -s g++                                                                                                                                     subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Command Output:                                                                                                                                     subprocess.py:844
+           >>>     Package: g++                                                                                                                                    subprocess.py:844
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:844
+           >>>     Priority: optional                                                                                                                              subprocess.py:844
+           >>>     Section: devel                                                                                                                                  subprocess.py:844
+           >>>     Installed-Size: 13                                                                                                                              subprocess.py:844
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:844
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:844
+           >>>     Source: gcc-defaults (1.230ubuntu1)                                                                                                             subprocess.py:844
+           >>>     Version: 4:15.2.0-5ubuntu1                                                                                                                      subprocess.py:844
+           >>>     Provides: c++-compiler                                                                                                                          subprocess.py:844
+           >>>     Depends: cpp (= 4:15.2.0-5ubuntu1), cpp-x86-64-linux-gnu (= 4:15.2.0-5ubuntu1), gcc (= 4:15.2.0-5ubuntu1), g++-15 (>= 15.2.0-2~),               subprocess.py:844
+           g++-x86-64-linux-gnu (= 4:15.2.0-5ubuntu1), gcc-15 (>= 15.2.0-2~)                                                                                                        
+           >>>     Suggests: g++-multilib                                                                                                                          subprocess.py:844
+           >>>     Description: GNU C++ compiler                                                                                                                   subprocess.py:844
+[13:10:46] >>>      This is the GNU C++ compiler, a fairly portable optimizing compiler for C++.                                                                   subprocess.py:844
+           >>>      .                                                                                                                                              subprocess.py:844
+           >>>      This is a dependency package providing the default GNU C++ compiler.                                                                           subprocess.py:844
+           >>>     Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>                                                                       subprocess.py:844
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     dpkg -s gcc                                                                                                                                     subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Command Output:                                                                                                                                     subprocess.py:844
+           >>>     Package: gcc                                                                                                                                    subprocess.py:844
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:844
+           >>>     Priority: optional                                                                                                                              subprocess.py:844
+           >>>     Section: devel                                                                                                                                  subprocess.py:844
+           >>>     Installed-Size: 37                                                                                                                              subprocess.py:844
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:844
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:844
+           >>>     Source: gcc-defaults (1.230ubuntu1)                                                                                                             subprocess.py:844
+           >>>     Version: 4:15.2.0-5ubuntu1                                                                                                                      subprocess.py:844
+           >>>     Provides: c-compiler                                                                                                                            subprocess.py:844
+           >>>     Depends: cpp (= 4:15.2.0-5ubuntu1), cpp-x86-64-linux-gnu (= 4:15.2.0-5ubuntu1), gcc-15 (>= 15.2.0-2~), gcc-x86-64-linux-gnu (=                  subprocess.py:844
+           4:15.2.0-5ubuntu1)                                                                                                                                                       
+           >>>     Recommends: libc6-dev | libc-dev                                                                                                                subprocess.py:844
+           >>>     Suggests: gcc-multilib, make, manpages-dev, autoconf, automake, libtool, flex, bison, gdb, gcc-doc                                              subprocess.py:844
+           >>>     Conflicts: gcc-doc (<< 1:2.95.3)                                                                                                                subprocess.py:844
+           >>>     Description: GNU C compiler                                                                                                                     subprocess.py:844
+           >>>      This is the GNU C compiler, a fairly portable optimizing compiler for C.                                                                       subprocess.py:844
+           >>>      .                                                                                                                                              subprocess.py:844
+           >>>      This is a dependency package providing the default GNU C compiler.                                                                             subprocess.py:844
+           >>>     Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>                                                                       subprocess.py:844
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     dpkg -s libc6-dev                                                                                                                               subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Command Output:                                                                                                                                     subprocess.py:844
+           >>>     Package: libc6-dev                                                                                                                              subprocess.py:844
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:844
+           >>>     Priority: optional                                                                                                                              subprocess.py:844
+           >>>     Section: libdevel                                                                                                                               subprocess.py:844
+           >>>     Installed-Size: 13792                                                                                                                           subprocess.py:844
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:844
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:844
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:844
+           >>>     Source: glibc                                                                                                                                   subprocess.py:844
+           >>>     Version: 2.43-2ubuntu2.3                                                                                                                        subprocess.py:844
+           >>>     Provides: libc-dev (= 2.43-2ubuntu2.3)                                                                                                          subprocess.py:844
+           >>>     Depends: libc6 (= 2.43-2ubuntu2.3), libc-dev-bin (= 2.43-2ubuntu2.3), linux-libc-dev, rpcsvc-proto                                              subprocess.py:844
+           >>>     Suggests: glibc-doc, manpages-dev                                                                                                               subprocess.py:844
+           >>>     Breaks: catch (<< 1.12.2-0.1), libc6-dev-amd64-cross (<< 2.43~), libdpkg-perl (<< 1.22.22), libmysqlclient-dev (<= 8.0.29-1)                    subprocess.py:844
+           >>>     Conflicts: libc0.3-dev, libc6.1-dev                                                                                                             subprocess.py:844
+           >>>     Description: GNU C Library: Development Libraries and Header Files                                                                              subprocess.py:844
+           >>>      Contains the symlinks, headers, and object files needed to compile                                                                             subprocess.py:844
+           >>>      and link programs which use the standard C library.                                                                                            subprocess.py:844
+           >>>     Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>                                                                       subprocess.py:844
+           >>>     Homepage: https://www.gnu.org/software/libc/libc.html                                                                                           subprocess.py:844
+           >>>     Original-Vcs-Browser: https://salsa.debian.org/glibc-team/glibc                                                                                 subprocess.py:844
+           >>>     Original-Vcs-Git: https://salsa.debian.org/glibc-team/glibc.git                                                                                 subprocess.py:844
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     dpkg -s make                                                                                                                                    subprocess.py:844
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Command Output:                                                                                                                                     subprocess.py:844
+           >>>     Package: make                                                                                                                                   subprocess.py:844
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:844
+           >>>     Priority: optional                                                                                                                              subprocess.py:844
+           >>>     Section: devel                                                                                                                                  subprocess.py:844
+           >>>     Installed-Size: 440                                                                                                                             subprocess.py:844
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:844
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:844
+           >>>     Multi-Arch: allowed                                                                                                                             subprocess.py:844
+           >>>     Source: make-dfsg                                                                                                                               subprocess.py:844
+           >>>     Version: 4.4.1-3                                                                                                                                subprocess.py:844
+           >>>     Replaces: make-guile                                                                                                                            subprocess.py:844
+           >>>     Depends: libc6 (>= 2.38)                                                                                                                        subprocess.py:844
+           >>>     Suggests: make-doc                                                                                                                              subprocess.py:844
+           >>>     Conflicts: make-guile                                                                                                                           subprocess.py:844
+           >>>     Description: utility for directing compilation                                                                                                  subprocess.py:844
+           >>>      GNU Make is a utility which controls the generation of executables                                                                             subprocess.py:844
+           >>>      and other target files of a program from the program's source                                                                                  subprocess.py:844
+           >>>      files. It determines automatically which pieces of a large program                                                                             subprocess.py:844
+           >>>      need to be (re)created, and issues the commands to (re)create                                                                                  subprocess.py:844
+           >>>      them. Make can be used to organize any task in which targets (files)                                                                           subprocess.py:844
+           >>>      are to be automatically updated based on input files whenever the                                                                              subprocess.py:844
+           >>>      corresponding input is newer --- it is not limited to building                                                                                 subprocess.py:844
+           >>>      computer programs. Indeed, Make is a general purpose dependency                                                                                subprocess.py:844
+           >>>      solver.                                                                                                                                        subprocess.py:844
+           >>>     Original-Maintainer: Stephen Kitt <skitt@debian.org>                                                                                            subprocess.py:844
+           >>>     Homepage: https://www.gnu.org/software/make/                                                                                                    subprocess.py:844
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           Installing dev requirements... started                                                                                                                         dev.py:111
+                                                                                                                                                                   subprocess.py:844
+           >>> Running Command:                                                                                                                                    subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu/bin/python -u -X utf8 -m pip install --upgrade        subprocess.py:844
+           'textual>=8.2.8' 'rich>=15.0.0' 'openpyxl>=3.1.5' 'matplotlib>=3.11.1' 'numpy>=2.5.2' 'pandas>=3.0.5' 'plotext>=6.0.0' 'scikit-learn>=1.9.0'                             
+           'scipy>=1.18.1' 'pytest>=9.1.1'                                                                                                                                          
+           >>> Working Directory:                                                                                                                                  subprocess.py:844
+           >>>     /home/shadrov/arsenal_project_eng_2.5                                                                                                           subprocess.py:844
+           >>> Environment Overrides:                                                                                                                              subprocess.py:844
+           >>>                                                                                                                                                     subprocess.py:844
+           PATH=/home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu/bin:/home/shadrov/arsenal_project_eng_2.5/.venv/bin:/hom                  
+           e/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/                  
+           home/shadrov/.local/bin:/home/shadrov/.local/bin                                                                                                                         
+           >>>     VIRTUAL_ENV=/home/shadrov/arsenal_project_eng_2.5/.briefcase/arsenal/dev.cpython-314-x86_64-linux-gnu                                           subprocess.py:844
+           Collecting textual>=8.2.8                                                                                                                               subprocess.py:196
+             Using cached textual-8.2.8-py3-none-any.whl.metadata (9.1 kB)                                                                                         subprocess.py:196
+           Collecting rich>=15.0.0                                                                                                                                 subprocess.py:196
+             Using cached rich-15.0.0-py3-none-any.whl.metadata (18 kB)                                                                                            subprocess.py:196
+           Collecting openpyxl>=3.1.5                                                                                                                              subprocess.py:196
+             Using cached openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)                                                                                    subprocess.py:196
+[13:10:47] Collecting matplotlib>=3.11.1                                                                                                                           subprocess.py:196
+             Using cached matplotlib-3.11.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (80 kB)                                           subprocess.py:196
+           Collecting numpy>=2.5.2                                                                                                                                 subprocess.py:196
+             Downloading numpy-2.5.2-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)                                                 subprocess.py:196
+           Collecting pandas>=3.0.5                                                                                                                                subprocess.py:196
+             Using cached pandas-3.0.5-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)                                                subprocess.py:196
+           Collecting plotext>=6.0.0                                                                                                                               subprocess.py:196
+             Downloading plotext-6.0.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.9 kB)                                                   subprocess.py:196
+[13:10:48] Collecting scikit-learn>=1.9.0                                                                                                                          subprocess.py:196
+             Downloading scikit_learn-1.9.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)                                           subprocess.py:196
+           Collecting scipy>=1.18.1                                                                                                                                subprocess.py:196
+             Downloading scipy-1.18.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)                                                 subprocess.py:196
+           Collecting pytest>=9.1.1                                                                                                                                subprocess.py:196
+             Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)                                                                                           subprocess.py:196
+           Collecting markdown-it-py>=2.1.0 (from markdown-it-py[linkify]>=2.1.0->textual>=8.2.8)                                                                  subprocess.py:196
+             Using cached markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)                                                                                  subprocess.py:196
+           Collecting mdit-py-plugins (from textual>=8.2.8)                                                                                                        subprocess.py:196
+             Using cached mdit_py_plugins-0.6.1-py3-none-any.whl.metadata (2.9 kB)                                                                                 subprocess.py:196
+           Collecting platformdirs<5,>=3.6.0 (from textual>=8.2.8)                                                                                                 subprocess.py:196
+             Using cached platformdirs-4.11.7-py3-none-any.whl.metadata (5.5 kB)                                                                                   subprocess.py:196
+           Collecting pygments<3.0.0,>=2.19.2 (from textual>=8.2.8)                                                                                                subprocess.py:196
+             Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)                                                                                       subprocess.py:196
+           Collecting typing-extensions<5.0.0,>=4.4.0 (from textual>=8.2.8)                                                                                        subprocess.py:196
+             Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)                                                                              subprocess.py:196
+           Collecting et-xmlfile (from openpyxl>=3.1.5)                                                                                                            subprocess.py:196
+             Using cached et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)                                                                                      subprocess.py:196
+           Collecting contourpy>=1.0.1 (from matplotlib>=3.11.1)                                                                                                   subprocess.py:196
+             Using cached contourpy-1.3.3-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.5 kB)                                            subprocess.py:196
+           Collecting cycler>=0.10 (from matplotlib>=3.11.1)                                                                                                       subprocess.py:196
+             Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)                                                                                         subprocess.py:196
+[13:10:49] Collecting fonttools>=4.28.2 (from matplotlib>=3.11.1)                                                                                                  subprocess.py:196
+             Downloading fonttools-4.64.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (123 kB)                                             subprocess.py:196
+           Collecting kiwisolver>=1.3.1 (from matplotlib>=3.11.1)                                                                                                  subprocess.py:196
+             Downloading kiwisolver-1.5.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)                                             subprocess.py:196
+           Collecting packaging>=20.0 (from matplotlib>=3.11.1)                                                                                                    subprocess.py:196
+             Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)                                                                                        subprocess.py:196
+[13:10:50] Collecting pillow>=9 (from matplotlib>=3.11.1)                                                                                                          subprocess.py:196
+             Using cached pillow-12.3.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)                                              subprocess.py:196
+           Collecting pyparsing>=3 (from matplotlib>=3.11.1)                                                                                                       subprocess.py:196
+             Using cached pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)                                                                                       subprocess.py:196
+           Collecting python-dateutil>=2.7 (from matplotlib>=3.11.1)                                                                                               subprocess.py:196
+             Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)                                                                       subprocess.py:196
+           Collecting joblib>=1.4.0 (from scikit-learn>=1.9.0)                                                                                                     subprocess.py:196
+             Downloading joblib-1.6.0-py3-none-any.whl.metadata (6.5 kB)                                                                                           subprocess.py:196
+           Collecting narwhals>=2.0.1 (from scikit-learn>=1.9.0)                                                                                                   subprocess.py:196
+             Downloading narwhals-2.25.0-py3-none-any.whl.metadata (15 kB)                                                                                         subprocess.py:196
+           Collecting threadpoolctl>=3.5.0 (from scikit-learn>=1.9.0)                                                                                              subprocess.py:196
+             Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)                                                                                     subprocess.py:196
+           Collecting iniconfig>=1.0.1 (from pytest>=9.1.1)                                                                                                        subprocess.py:196
+             Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)                                                                                        subprocess.py:196
+           Collecting pluggy<2,>=1.5 (from pytest>=9.1.1)                                                                                                          subprocess.py:196
+             Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)                                                                                           subprocess.py:196
+[13:10:51] Collecting cloudpickle>=3.0 (from joblib>=1.4.0->scikit-learn>=1.9.0)                                                                                   subprocess.py:196
+             Downloading cloudpickle-3.1.2-py3-none-any.whl.metadata (7.1 kB)                                                                                      subprocess.py:196
+           Collecting mdurl~=0.1 (from markdown-it-py>=2.1.0->markdown-it-py[linkify]>=2.1.0->textual>=8.2.8)                                                      subprocess.py:196
+             Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)                                                                                           subprocess.py:196
+           Collecting linkify-it-py<3,>=1 (from markdown-it-py[linkify]>=2.1.0->textual>=8.2.8)                                                                    subprocess.py:196
+             Downloading linkify_it_py-2.2.0-py3-none-any.whl.metadata (8.6 kB)                                                                                    subprocess.py:196
+           Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib>=3.11.1)                                                                                     subprocess.py:196
+             Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)                                                                                        subprocess.py:196
+           Using cached textual-8.2.8-py3-none-any.whl (731 kB)                                                                                                    subprocess.py:196
+           Using cached platformdirs-4.11.7-py3-none-any.whl (23 kB)                                                                                               subprocess.py:196
+           Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)                                                                                                  subprocess.py:196
+           Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)                                                                                          subprocess.py:196
+           Using cached rich-15.0.0-py3-none-any.whl (310 kB)                                                                                                      subprocess.py:196
+           Using cached openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)                                                                                               subprocess.py:196
+           Downloading matplotlib-3.11.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (11.1 MB)                                                     subprocess.py:196
+[13:10:55]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 2.5 MB/s  0:00:04                                                                              subprocess.py:196
+           Downloading numpy-2.5.2-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)                                                           subprocess.py:196
+[13:11:00]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 3.4 MB/s  0:00:04                                                                              subprocess.py:196
+           Downloading pandas-3.0.5-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.0 MB)                                                          subprocess.py:196
+[13:11:04]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.0/11.0 MB 3.2 MB/s  0:00:03                                                                              subprocess.py:196
+           Downloading plotext-6.0.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (473 kB)                                                              subprocess.py:196
+           Downloading scikit_learn-1.9.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (9.1 MB)                                                     subprocess.py:196
+[13:11:07]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.1/9.1 MB 3.1 MB/s  0:00:02                                                                                subprocess.py:196
+           Downloading scipy-1.18.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)                                                          subprocess.py:196
+[13:11:21]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 2.6 MB/s  0:00:13                                                                              subprocess.py:196
+           Downloading pytest-9.1.1-py3-none-any.whl (386 kB)                                                                                                      subprocess.py:196
+           Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)                                                                                                       subprocess.py:196
+           Downloading contourpy-1.3.3-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (363 kB)                                                        subprocess.py:196
+           Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)                                                                                                     subprocess.py:196
+           Downloading fonttools-4.64.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.3 MB)                                                        subprocess.py:196
+[13:11:23]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 3.8 MB/s  0:00:01                                                                                subprocess.py:196
+           Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)                                                                                                   subprocess.py:196
+           Downloading joblib-1.6.0-py3-none-any.whl (306 kB)                                                                                                      subprocess.py:196
+           Downloading cloudpickle-3.1.2-py3-none-any.whl (22 kB)                                                                                                  subprocess.py:196
+           Downloading kiwisolver-1.5.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)                                                        subprocess.py:196
+              ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 3.9 MB/s  0:00:00                                                                                subprocess.py:196
+           Using cached markdown_it_py-4.2.0-py3-none-any.whl (91 kB)                                                                                              subprocess.py:196
+[13:11:24] Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)                                                                                                     subprocess.py:196
+           Downloading linkify_it_py-2.2.0-py3-none-any.whl (21 kB)                                                                                                subprocess.py:196
+           Downloading narwhals-2.25.0-py3-none-any.whl (467 kB)                                                                                                   subprocess.py:196
+           Using cached packaging-26.3-py3-none-any.whl (129 kB)                                                                                                   subprocess.py:196
+           Downloading pillow-12.3.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)                                                          subprocess.py:196
+[13:11:26]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 3.8 MB/s  0:00:01                                                                                subprocess.py:196
+           Using cached pyparsing-3.3.2-py3-none-any.whl (122 kB)                                                                                                  subprocess.py:196
+           Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)                                                                                  subprocess.py:196
+           Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)                                                                                                    subprocess.py:196
+           Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)                                                                                                subprocess.py:196
+           Using cached et_xmlfile-2.0.0-py3-none-any.whl (18 kB)                                                                                                  subprocess.py:196
+           Using cached mdit_py_plugins-0.6.1-py3-none-any.whl (66 kB)                                                                                             subprocess.py:196
+           Installing collected packages: typing-extensions, threadpoolctl, six, pyparsing, pygments, pluggy, plotext, platformdirs, pillow, packaging, numpy,     subprocess.py:196
+           narwhals, mdurl, linkify-it-py, kiwisolver, iniconfig, fonttools, et-xmlfile, cycler, cloudpickle, scipy, python-dateutil, pytest, openpyxl,                             
+           markdown-it-py, joblib, contourpy, scikit-learn, rich, pandas, mdit-py-plugins, matplotlib, textual                                                                      
+[13:11:51]                                                                                                                                                         subprocess.py:196
+           Successfully installed cloudpickle-3.1.2 contourpy-1.3.3 cycler-0.12.1 et-xmlfile-2.0.0 fonttools-4.64.0 iniconfig-2.3.0 joblib-1.6.0 kiwisolver-1.5.1  subprocess.py:196
+           linkify-it-py-2.2.0 markdown-it-py-4.2.0 matplotlib-3.11.1 mdit-py-plugins-0.6.1 mdurl-0.1.2 narwhals-2.25.0 numpy-2.5.2 openpyxl-3.1.5 packaging-26.3                   
+           pandas-3.0.5 pillow-12.3.0 platformdirs-4.11.7 plotext-6.0.0 pluggy-1.6.0 pygments-2.21.0 pyparsing-3.3.2 pytest-9.1.1 python-dateutil-2.9.0.post0                       
+           rich-15.0.0 scikit-learn-1.9.0 scipy-1.18.1 six-1.17.0 textual-8.2.8 threadpoolctl-3.6.0 typing-extensions-4.16.0                                                        
+           >>> Return code: 0                                                                                                                                      subprocess.py:844
+                                                                                                                                                                   subprocess.py:844
+           Installing dev requirements... done                                                                                                                            dev.py:111
+                                                                                                                                                                          dev.py:329
+           [arsenal] Starting in dev mode...                                                                                                                              dev.py:329
+           Saving log... started                                                                                                                                      console.py:566
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/shadrov/arsenal_project_eng_2.5/.venv/lib/python3.14/site-packages/briefcase/__main__.py:27 in main                                                                        │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────╮                                    │
+│ │       command = <briefcase.platforms.linux.system.LinuxSystemDevCommand object at 0x7175f9777230>                                         │                                    │
+│ │       console = <briefcase.console.Console object at 0x7175f9776900>                                                                      │                                    │
+│ │ extra_cmdline = []                                                                                                                        │                                    │
+│ │       options = {'appname': None, 'update_requirements': False, 'isolated': True, 'run_app': True, 'test_mode': False, 'passthrough': []} │                                    │
+│ │     overrides = {}                                                                                                                        │                                    │
+│ │        result = 0                                                                                                                         │                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                    │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project_eng_2.5/.venv/lib/python3.14/site-packages/briefcase/commands/dev.py:330 in __call__                                                               │
+│                                                                                                                                                                                  │
+│   327 │   │   │   │   │   )                                                                                                                                                      │
+│   328 │   │   │   │   else:                                                                                                                                                      │
+│   329 │   │   │   │   │   self.console.info("Starting in dev mode...", prefix=app.app_name)                                                                                      │
+│ ❱ 330 │   │   │   │   return self.run_dev_app(                                                                                                                                   │
+│   331 │   │   │   │   │   app,                                                                                                                                                   │
+│   332 │   │   │   │   │   env=self.get_environment(app),                                                                                                                         │
+│   333 │   │   │   │   │   venv=venv,                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                  │
+│ │                 app = <com.arsenal.arsenal v2.5.0 LinuxSystemAppConfig>                                                     │                                                  │
+│ │             appname = None                                                                                                  │                                                  │
+│ │           finalized = {'arsenal': <com.arsenal.arsenal v2.5.0 LinuxSystemAppConfig>}                                        │                                                  │
+│ │            isolated = True                                                                                                  │                                                  │
+│ │             options = {}                                                                                                    │                                                  │
+│ │         passthrough = []                                                                                                    │                                                  │
+│ │             run_app = True                                                                                                  │                                                  │
+│ │                self = <briefcase.platforms.linux.system.LinuxSystemDevCommand object at 0x7175f9777230>                     │                                                  │
+│ │           test_mode = False                                                                                                 │                                                  │
+│ │ update_requirements = False                                                                                                 │                                                  │
+│ │                venv = <briefcase.integrations.virtual_environment.std_venv.VenvVirtualEnvironment object at 0x7175f968fb60> │                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                  │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project_eng_2.5/.venv/lib/python3.14/site-packages/briefcase/commands/dev.py:132 in run_dev_app                                                            │
+│                                                                                                                                                                                  │
+│   129 │   │   :param env: environment dictionary for sub command                                                                                                                 │
+│   130 │   │   :param passthrough: A list of arguments to pass to the app                                                                                                         │
+│   131 │   │   """                                                                                                                                                                │
+│ ❱ 132 │   │   main_module = app.main_module()                                                                                                                                    │
+│   133 │   │                                                                                                                                                                      │
+│   134 │   │   # Add in the environment settings to get Python in the state we want.                                                                                              │
+│   135 │   │   # If an environment variable is already defined, don't overwrite it.                                                                                               │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────╮                                                          │
+│ │         app = <com.arsenal.arsenal v2.5.0 LinuxSystemAppConfig>                                                     │                                                          │
+│ │         env = {'PYTHONPATH': '/home/shadrov/arsenal_project_eng_2.5/src'}                                           │                                                          │
+│ │     options = {}                                                                                                    │                                                          │
+│ │ passthrough = []                                                                                                    │                                                          │
+│ │        self = <briefcase.platforms.linux.system.LinuxSystemDevCommand object at 0x7175f9777230>                     │                                                          │
+│ │        venv = <briefcase.integrations.virtual_environment.std_venv.VenvVirtualEnvironment object at 0x7175f968fb60> │                                                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+TypeError: 'str' object is not callable

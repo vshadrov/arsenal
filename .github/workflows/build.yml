@@ -6,37 +6,53 @@ jobs:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false  # Одна упавшая ОС не прервет сборку остальных
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
-      
+
+      # КРИТИЧЕСКИЙ ШАГ: Гарантируем наличие Python нужной версии на всех ОС
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'  # Задайте версию, под которую оптимизирован проект
+
       - name: Install System Dependencies (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
-          # Добавлены flatpak и flatpak-builder для сборки Flatpak
-          sudo apt install -y python3-dev python3-pip build-essential libffi-dev git flatpak flatpak-builder
-          # Подключаем официальный репозиторий Flathub
+          # Добавлены gfortran, libopenblas-dev и pkg-config для компиляции scipy/numpy/pandas
+          sudo apt install -y python3-dev python3-pip build-essential libffi-dev git \
+                             flatpak flatpak-builder gfortran libopenblas-dev pkg-config
+          # Подключаем официальный репозиторий Flathub с использованием --sysroot/--user, если нужно
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org
-      
+
       - name: Install Briefcase
         run: |
-          python3 -m pip install briefcase --break-system-packages
+          # Используем pip из установленного setup-python (флаг --break-system-packages больше не нужен)
+          python -m pip install --upgrade pip
+          python -m pip install briefcase
 
       - name: Build App
         run: |
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            # Собираем Linux форматы
-            python3 -m briefcase package linux appimage --no-input --no-docker
-            python3 -m briefcase package linux system --no-input
-            # Добавлена сборка Flatpak
-            python3 -m briefcase package linux flatpak --no-input
+            # Сначала обновляем зависимости внутри создаваемых шаблонов
+            python -m briefcase update linux appimage --no-input
+            python -m briefcase package linux appimage --no-input --no-docker
+            
+            python -m briefcase update linux system --no-input
+            python -m briefcase package linux system --no-input
+            
+            # Для flatpak может потребоваться рантаим, briefcase скачает его сам
+            python -m briefcase update linux flatpak --no-input
+            python -m briefcase package linux flatpak --no-input
           elif [ "${{ matrix.os }}" = "windows-latest" ]; then
-            briefcase package windows app --no-input
+            # ИСПРАВЛЕНО: на Windows вызываем через 'python -m briefcase' во избежание проблем с PATH
+            python -m briefcase package windows app --no-input
           else
-            python3 -m briefcase package macOS app --no-input --adhoc-sign
+            python -m briefcase package macOS app --no-input --adhoc-sign
           fi
         shell: bash
 
@@ -44,4 +60,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: arsenal-dist-${{ matrix.os }}
-          path: dist/*
+          # ИСПРАВЛЕНО: пути поиска артефактов для разных ОС и типов сборки
+          path: |
+            dist/*.AppImage
+            dist/*.msi
+            dist/*.dmg
+            dist/*.flatpak
+            dist/*.deb
+            dist/*.rpm
+          if-no-files-found: warn

@@ -1,0 +1,240 @@
+Date/Time:       2026-09-04 08:31:13 
+Command line:    /home/shadrov/arsenal_project_eng_2.5/.venv/bin/briefcase dev
+
+OS Release:      Linux 7.0.0-30-generic
+OS Version:      #30-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 18:22:54 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-30-generic-x86_64-with-glibc2.43
+
+Python exe:      /home/shadrov/arsenal_project_eng_2.5/.venv/bin/python3
+Python version:  3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.4.4
+Target platform: linux
+Target format:   system
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DEEPSEEK_API_KEY=********************
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=en
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	KMP_DUPLICATE_LIB_OK=True
+	KMP_INIT_AT_FORK=FALSE
+	LANG=en_NZ.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	OPENAI_API_KEY=********************
+	OPENAI_BASE_URL=https://api.selectel.ru/aig/v1
+	OPENAI_MODEL=deepseek/deepseek-v4-pro
+	PATH=/home/shadrov/arsenal_project_eng_2.5/.venv/bin:/home/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PS1=(.venv) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ 
+	PWD=/home/shadrov/arsenal_project_eng_2.5
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644
+	SHELL=/bin/bash
+	SHLVL=2
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VIRTUAL_ENV=/home/shadrov/arsenal_project_eng_2.5/.venv
+	VIRTUAL_ENV_PROMPT=.venv
+	VTE_VERSION=8400
+	WINDOWID=54656871
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xfce4:/usr/share/xubuntu:/usr/share/gnome:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/home/shadrov/arsenal_project_eng_2.5/.venv/bin/briefcase
+
+pyproject.toml:
+[project]
+name = "arsenal"
+version = "2.5.0"
+description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders."
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Arsenal", email = "shadrov@pbstin.ru" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "pandas>=3.0.5",
+    "plotext>=6.0.0",
+    "scikit-learn>=1.9.0",
+    "scipy>=1.18.1",
+]
+
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.5.0"
+url = "https://github.com/vshadrov/arsenal"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Arsenal"
+description = "Arsenal"
+long_description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+
+main_module = "arsenal.app"
+main_function = "main"
+
+console_app = true
+icon = "resources/images/arsenal"
+
+requires = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "pandas>=3.0.5",
+    "plotext>=6.0.0",
+    "scikit-learn>=1.9.0",
+    "scipy>=1.18.1",
+]
+
+test_requires = [
+    "pytest>=9.1.1",
+]
+
+[tool.briefcase.app.arsenal.macOS]
+universal_build = true
+
+[tool.briefcase.app.arsenal.linux]
+categories = ["Office"]
+terminal = true
+
+[tool.briefcase.app.arsenal.linux.appimage]
+
+[tool.briefcase.app.arsenal.linux.flatpak]
+flatpak_runtime = "org.freedesktop.Platform"
+flatpak_runtime_version = "24.08"
+flatpak_sdk = "org.freedesktop.Sdk"
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+console = true
+
+Briefcase Log:
+[08:31:13]                                                                                                                                                             system.py:213
+           [arsenal] Finalizing application configuration...                                                                                                           system.py:213
+           Targeting ubuntu:resolute (Vendor base debian)                                                                                                              system.py:225
+           Targeting glibc 2.43                                                                                                                                        system.py:261
+           Targeting Python3.14                                                                                                                                        system.py:265
+                                                                                                                                                                          dev.py:301
+           [arsenal] Activating dev environment...                                                                                                                        dev.py:301
+                                                                                                                                                                          dev.py:329
+           [arsenal] Starting in dev mode...                                                                                                                              dev.py:329
+           Saving log... started                                                                                                                                      console.py:566
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/shadrov/arsenal_project_eng_2.5/.venv/lib/python3.14/site-packages/briefcase/__main__.py:27 in main                                                                        │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────╮                                    │
+│ │       command = <briefcase.platforms.linux.system.LinuxSystemDevCommand object at 0x71f2db97b230>                                         │                                    │
+│ │       console = <briefcase.console.Console object at 0x71f2db97a900>                                                                      │                                    │
+│ │ extra_cmdline = []                                                                                                                        │                                    │
+│ │       options = {'appname': None, 'update_requirements': False, 'isolated': True, 'run_app': True, 'test_mode': False, 'passthrough': []} │                                    │
+│ │     overrides = {}                                                                                                                        │                                    │
+│ │        result = 0                                                                                                                         │                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                    │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project_eng_2.5/.venv/lib/python3.14/site-packages/briefcase/commands/dev.py:330 in __call__                                                               │
+│                                                                                                                                                                                  │
+│   327 │   │   │   │   │   )                                                                                                                                                      │
+│   328 │   │   │   │   else:                                                                                                                                                      │
+│   329 │   │   │   │   │   self.console.info("Starting in dev mode...", prefix=app.app_name)                                                                                      │
+│ ❱ 330 │   │   │   │   return self.run_dev_app(                                                                                                                                   │
+│   331 │   │   │   │   │   app,                                                                                                                                                   │
+│   332 │   │   │   │   │   env=self.get_environment(app),                                                                                                                         │
+│   333 │   │   │   │   │   venv=venv,                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                  │
+│ │                 app = <com.arsenal.arsenal v2.5.0 LinuxSystemAppConfig>                                                     │                                                  │
+│ │             appname = None                                                                                                  │                                                  │
+│ │           finalized = {'arsenal': <com.arsenal.arsenal v2.5.0 LinuxSystemAppConfig>}                                        │                                                  │
+│ │            isolated = True                                                                                                  │                                                  │
+│ │             options = {}                                                                                                    │                                                  │
+│ │         passthrough = []                                                                                                    │                                                  │
+│ │             run_app = True                                                                                                  │                                                  │
+│ │                self = <briefcase.platforms.linux.system.LinuxSystemDevCommand object at 0x71f2db97b230>                     │                                                  │
+│ │           test_mode = False                                                                                                 │                                                  │
+│ │ update_requirements = False                                                                                                 │                                                  │
+│ │                venv = <briefcase.integrations.virtual_environment.std_venv.VenvVirtualEnvironment object at 0x71f2db89f8c0> │                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                  │
+│                                                                                                                                                                                  │
+│ /home/shadrov/arsenal_project_eng_2.5/.venv/lib/python3.14/site-packages/briefcase/commands/dev.py:132 in run_dev_app                                                            │
+│                                                                                                                                                                                  │
+│   129 │   │   :param env: environment dictionary for sub command                                                                                                                 │
+│   130 │   │   :param passthrough: A list of arguments to pass to the app                                                                                                         │
+│   131 │   │   """                                                                                                                                                                │
+│ ❱ 132 │   │   main_module = app.main_module()                                                                                                                                    │
+│   133 │   │                                                                                                                                                                      │
+│   134 │   │   # Add in the environment settings to get Python in the state we want.                                                                                              │
+│   135 │   │   # If an environment variable is already defined, don't overwrite it.                                                                                               │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────╮                                                          │
+│ │         app = <com.arsenal.arsenal v2.5.0 LinuxSystemAppConfig>                                                     │                                                          │
+│ │         env = {'PYTHONPATH': '/home/shadrov/arsenal_project_eng_2.5/src'}                                           │                                                          │
+│ │     options = {}                                                                                                    │                                                          │
+│ │ passthrough = []                                                                                                    │                                                          │
+│ │        self = <briefcase.platforms.linux.system.LinuxSystemDevCommand object at 0x71f2db97b230>                     │                                                          │
+│ │        venv = <briefcase.integrations.virtual_environment.std_venv.VenvVirtualEnvironment object at 0x71f2db89f8c0> │                                                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+TypeError: 'str' object is not callable
