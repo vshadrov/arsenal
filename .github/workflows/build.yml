@@ -50,8 +50,13 @@ jobs:
       - name: Build App (macOS)
         if: matrix.os == 'macos-latest'
         run: |
+          # Разрешаем pip компилировать бинарные пакеты из исходников (sdist), 
+          # если не найден готовый wheel под конкретную минорную версию Python от BeeWare
+          export PIP_NO_BINARY=scikit-learn,scipy,numpy
+          
           python -m briefcase update macOS app --no-input
           python -m briefcase package macOS app --no-input --adhoc-sign
+
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
