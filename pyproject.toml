@@ -16,7 +16,7 @@ dependencies = [
     "numpy>=2.4.0",
     "pandas>=2.2.0",
     "plotext>=5.2.8,<6.0.0",
-    "scikit-learn>=1.5.0",
+    "scikit-learn==1.6.1",  # Фиксируем версию с готовыми wheels под macOS arm64
     "scipy>=1.14.0",
 ]
 
@@ -43,17 +43,16 @@ main_function = "main"
 console_app = true
 icon = "resources/images/arsenal"
 
-# СМЯГЧЕННЫЕ ВЕРСИИ ДЛЯ КРОСС-ПЛАТФОРМЕННОЙ СБОРКИ BEEWARE:
 requires = [
     "textual>=8.2.8",
     "rich>=15.0.0",
     "openpyxl>=3.1.5",
     "matplotlib>=3.11.1",
-    "numpy",
+    "numpy>=2.4.0",
     "pandas>=2.2.0",
     "plotext>=5.2.8,<6.0.0",
-    "scikit-learn",
-    "scipy",
+    "scikit-learn==1.6.1",  # Синхронизируем для сборщика
+    "scipy>=1.14.0",
 ]
 
 test_requires = [

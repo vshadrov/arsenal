@@ -50,14 +50,10 @@ jobs:
       - name: Build App (macOS)
         if: matrix.os == 'macos-latest'
         run: |
-          # Принудительно удаляем локальную папку сборки, чтобы полностью уничтожить старый кэш зависимостей
           rm -rf build/
-          
-          # Создаем проект с нуля и упаковываем в .dmg
           python -m briefcase create macOS app --no-input
           python -m briefcase build macOS app --no-input
           python -m briefcase package macOS app --no-input --adhoc-sign
-
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
