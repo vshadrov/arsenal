@@ -50,11 +50,12 @@ jobs:
       - name: Build App (macOS)
         if: matrix.os == 'macos-latest'
         run: |
-          # Разрешаем pip компилировать бинарные пакеты из исходников (sdist), 
-          # если не найден готовый wheel под конкретную минорную версию Python от BeeWare
-          export PIP_NO_BINARY=scikit-learn,scipy,numpy
+          # Полностью очищаем сборочные папки приложения на Mac, чтобы стереть кэш требований scikit-learn>=1.5.0
+          python -m briefcase clean macOS app --no-input
           
-          python -m briefcase update macOS app --no-input
+          # Создаем шаблон заново и упаковываем
+          python -m briefcase create macOS app --no-input
+          python -m briefcase build macOS app --no-input
           python -m briefcase package macOS app --no-input --adhoc-sign
 
 
