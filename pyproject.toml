@@ -71,13 +71,13 @@ terminal = true
 [tool.briefcase.app.arsenal.linux.appimage]
 manylinux = "manylinux2014"
 system_requires = [
-    "pkgconfig",
-    "freetype-devel",
-    "libpng-devel",
-    "openblas-devel",
+    "gcc",
     "gcc-c++",
-    "gfortran"
+    "gcc-gfortran",
+    "freetype-devel",
+    "libpng-devel"
 ]
+
 
 [tool.briefcase.app.arsenal.linux.system.debian]
 categories = ["Office"]
