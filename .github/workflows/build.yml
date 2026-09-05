@@ -62,7 +62,8 @@ jobs:
           name: arsenal-dist-${{ matrix.os }}
           path: |
             dist/*.AppImage
-            dist/*.dmg
+            dist/*.pkg
             dist/*.deb
             dist/*.rpm
           if-no-files-found: warn
+
