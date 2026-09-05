@@ -37,11 +37,11 @@ jobs:
       - name: Build App (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
-          # 1. Собираем AppImage локально с флагом --no-docker
+          # 1. Собираем AppImage
           python -m briefcase update linux appimage --no-input
           python -m briefcase package linux appimage --no-input --no-docker
           
-          # 2. Собираем Системные пакеты (.deb и .rpm)
+          # 2. Собираем Системные пакеты (.deb и .rpm) через системный python3
           /usr/bin/python3 -m briefcase create linux system --no-input
           /usr/bin/python3 -m briefcase build linux system --no-input
           /usr/bin/python3 -m briefcase package linux system --no-input
@@ -49,8 +49,9 @@ jobs:
 
       - name: Build App (macOS)
         if: matrix.os == 'macos-latest'
+        env:
+          MACOSX_DEPLOYMENT_TARGET: "12.0"
         run: |
-          # Создаем, собираем и упаковываем в формат .pkg
           python -m briefcase create macOS app --no-input
           python -m briefcase build macOS app --no-input
           python -m briefcase package macOS app --packaging-format pkg --no-input --adhoc-sign
