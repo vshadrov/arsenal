@@ -37,11 +37,11 @@ jobs:
       - name: Build App (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
-          # 1. Собираем AppImage
+          # 1. Собираем AppImage ВНУТРИ контейнера manylinux2_24 (Флаг --no-docker убран!)
           python -m briefcase update linux appimage --no-input
-          python -m briefcase package linux appimage --no-input --no-docker
+          python -m briefcase package linux appimage --no-input
           
-          # 2. Собираем Системные пакеты (.deb и .rpm) через системный python3
+          # 2. Собираем Системные пакеты (.deb и .rpm) локально для текущей ubuntu-latest
           /usr/bin/python3 -m briefcase create linux system --no-input
           /usr/bin/python3 -m briefcase build linux system --no-input
           /usr/bin/python3 -m briefcase package linux system --no-input

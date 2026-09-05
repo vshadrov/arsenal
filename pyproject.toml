@@ -69,6 +69,7 @@ categories = ["Office"]
 terminal = true
 
 [tool.briefcase.app.arsenal.linux.appimage]
+manylinux = "manylinux2_24"
 
 [tool.briefcase.app.arsenal.linux.system.debian]
 categories = ["Office"]
