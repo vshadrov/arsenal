@@ -62,7 +62,7 @@ test_requires = [
 
 # ИСПРАВЛЕННЫЙ БЛОК MACOS:
 [tool.briefcase.app.arsenal.macOS]
-universal_build = true
+# universal_build = true
 supported_versions = ["12.0"]  # Позволяет скачивать wheels с тегом macosx_12_0_arm64
 
 [tool.briefcase.app.arsenal.linux]

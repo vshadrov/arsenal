@@ -50,10 +50,10 @@ jobs:
       - name: Build App (macOS)
         if: matrix.os == 'macos-latest'
         run: |
-          rm -rf build/
+          # Создаем, собираем и упаковываем в формат .pkg
           python -m briefcase create macOS app --no-input
           python -m briefcase build macOS app --no-input
-          python -m briefcase package macOS app --no-input --adhoc-sign
+          python -m briefcase package macOS app --packaging-format pkg --no-input --adhoc-sign
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
