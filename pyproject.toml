@@ -16,7 +16,7 @@ dependencies = [
     "numpy>=2.4.0",
     "pandas>=2.2.0",
     "plotext>=5.2.8,<6.0.0",
-    "scikit-learn==1.6.1",  # Фиксируем версию с готовыми wheels под macOS arm64
+    "scikit-learn>=1.5.2",
     "scipy>=1.14.0",
 ]
 
@@ -51,7 +51,7 @@ requires = [
     "numpy>=2.4.0",
     "pandas>=2.2.0",
     "plotext>=5.2.8,<6.0.0",
-    "scikit-learn==1.6.1",  # Синхронизируем для сборщика
+    "scikit-learn>=1.5.2",
     "scipy>=1.14.0",
 ]
 
@@ -59,8 +59,10 @@ test_requires = [
     "pytest>=9.1.1",
 ]
 
+# ИСПРАВЛЕННЫЙ БЛОК MACOS:
 [tool.briefcase.app.arsenal.macOS]
 universal_build = true
+supported_versions = ["12.0"]  # Позволяет скачивать wheels с тегом macosx_12_0_arm64
 
 [tool.briefcase.app.arsenal.linux]
 categories = ["Office"]
