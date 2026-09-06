@@ -1,6 +1,6 @@
 [project]
 name = "arsenal"
-version = "2.5.0"
+version = "2.5.2"
 description = "Arsenal methodology is for assessing the dynamics of the risk of dangerous behavior and the commission of repeated socially dangerous acts by patients with mental disorders."
 license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
@@ -23,7 +23,7 @@ dependencies = [
 [tool.briefcase]
 project_name = "arsenal"
 bundle = "com.arsenal"
-version = "2.5.0"
+version = "2.5.2"
 url = "https://github.com/vshadrov/arsenal"
 
 [tool.briefcase.app.arsenal]
@@ -41,7 +41,6 @@ main_module = "arsenal.app"
 main_function = "main"
 
 console_app = true
-icon = "resources/images/arsenal"
 
 requires = [
     "textual>=8.2.8",
@@ -61,10 +60,12 @@ test_requires = [
 
 [tool.briefcase.app.arsenal.macOS]
 universal_build = true
+icon = "resources/arsenal"
 
 [tool.briefcase.app.arsenal.linux]
 categories = ["Office"]
 terminal = true
+icon = "resources/images"
 
 [tool.briefcase.app.arsenal.linux.appimage]
 
@@ -76,3 +77,4 @@ categories = ["Office"]
 
 [tool.briefcase.app.arsenal.windows]
 console = true
+icon = "resources/arsenal"

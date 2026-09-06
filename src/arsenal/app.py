@@ -9019,32 +9019,97 @@ class OutcomesMainScreen(Screen):
         return today
 
     def get_documents_dir(self) -> Path:
-        """Определяет путь к папке Документы"""
+        """Определяет путь к папке Документы кросс-платформенно."""
         import platform
-
         system = platform.system()
         home = Path.home()
 
         if system == "Windows":
+            # Способ 1: через реестр Windows (самый надежный)
+            try:
+                import winreg
+                # Открываем ключ с путями пользовательских папок
+                key = winreg.OpenKey(
+                    winreg.HKEY_CURRENT_USER,
+                    r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
+                )
+                # Получаем путь к папке Documents (Personal)
+                personal, _ = winreg.QueryValueEx(key, "Personal")
+                # Заменяем переменные окружения (например, %USERPROFILE%)
+                personal = os.path.expandvars(personal)
+                docs_path = Path(personal)
+                if docs_path.exists():
+                    return docs_path
+            except (ImportError, FileNotFoundError, OSError, WindowsError):
+                pass
+
+            # Способ 2: через переменную окружения USERPROFILE
+            userprofile = os.environ.get('USERPROFILE')
+            if userprofile:
+                docs_path = Path(userprofile) / "Documents"
+                if docs_path.exists():
+                    return docs_path
+
+                # Для русской Windows может быть "Мои документы"
+                docs_path_ru = Path(userprofile) / "Мои документы"
+                if docs_path_ru.exists():
+                    return docs_path_ru
+
+            # Способ 3: через стандартный путь от home
+            docs_path = home / "Documents"
+            if docs_path.exists():
+                return docs_path
+
+            docs_path_ru = home / "Мои документы"
+            if docs_path_ru.exists():
+                return docs_path_ru
+
+            # Способ 4: если ничего не найдено, создаем папку Documents
+            docs_path = home / "Documents"
+            try:
+                docs_path.mkdir(parents=True, exist_ok=True)
+            except (OSError, PermissionError):
+                # Если не можем создать, используем временную папку
+                docs_path = Path(tempfile.gettempdir()) / "Арсенал_Документы"
+                docs_path.mkdir(parents=True, exist_ok=True)
+            return docs_path
+
+        elif system == "Darwin":  # macOS
             docs = home / "Documents"
             if docs.exists():
                 return docs
-            return home / "Мои документы"
-        elif system == "Darwin":
-            return home / "Documents"
-        else:
+            # Если нет, создаем
+            docs.mkdir(parents=True, exist_ok=True)
+            return docs
+
+        else:  # Linux и другие Unix
             try:
+                # Пробуем получить через xdg-user-dir
                 import subprocess
-                result = subprocess.run(['xdg-user-dir', 'DOCUMENTS'],
-                                        capture_output=True, text=True)
+                result = subprocess.run(
+                    ['xdg-user-dir', 'DOCUMENTS'],
+                    capture_output=True, text=True, timeout=2
+                )
                 if result.returncode == 0:
                     docs = Path(result.stdout.strip())
                     if docs.exists():
                         return docs
-            except (FileNotFoundError, subprocess.SubprocessError):
+            except (FileNotFoundError, subprocess.SubprocessError, OSError):
                 pass
-            return home / "Документы"
 
+            # Стандартный путь
+            docs = home / "Документы"
+            if docs.exists():
+                return docs
+
+            docs = home / "Documents"
+            if docs.exists():
+                return docs
+
+            # Создаем если нет
+            docs = home / "Documents"
+            docs.mkdir(parents=True, exist_ok=True)
+            return docs
 
 class OutcomesScreen(Screen):
     """Экран управления исходами пациентов"""
@@ -10679,30 +10744,97 @@ class OpinionsMainScreen(Screen):
         return normalized if is_valid else None
 
     def get_documents_dir(self) -> Path:
-        """Определяет путь к папке Документы"""
+        """Определяет путь к папке Документы кросс-платформенно."""
         import platform
         system = platform.system()
         home = Path.home()
 
         if system == "Windows":
+            # Способ 1: через реестр Windows (самый надежный)
+            try:
+                import winreg
+                # Открываем ключ с путями пользовательских папок
+                key = winreg.OpenKey(
+                    winreg.HKEY_CURRENT_USER,
+                    r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
+                )
+                # Получаем путь к папке Documents (Personal)
+                personal, _ = winreg.QueryValueEx(key, "Personal")
+                # Заменяем переменные окружения (например, %USERPROFILE%)
+                personal = os.path.expandvars(personal)
+                docs_path = Path(personal)
+                if docs_path.exists():
+                    return docs_path
+            except (ImportError, FileNotFoundError, OSError, WindowsError):
+                pass
+
+            # Способ 2: через переменную окружения USERPROFILE
+            userprofile = os.environ.get('USERPROFILE')
+            if userprofile:
+                docs_path = Path(userprofile) / "Documents"
+                if docs_path.exists():
+                    return docs_path
+
+                # Для русской Windows может быть "Мои документы"
+                docs_path_ru = Path(userprofile) / "Мои документы"
+                if docs_path_ru.exists():
+                    return docs_path_ru
+
+            # Способ 3: через стандартный путь от home
+            docs_path = home / "Documents"
+            if docs_path.exists():
+                return docs_path
+
+            docs_path_ru = home / "Мои документы"
+            if docs_path_ru.exists():
+                return docs_path_ru
+
+            # Способ 4: если ничего не найдено, создаем папку Documents
+            docs_path = home / "Documents"
+            try:
+                docs_path.mkdir(parents=True, exist_ok=True)
+            except (OSError, PermissionError):
+                # Если не можем создать, используем временную папку
+                docs_path = Path(tempfile.gettempdir()) / "Арсенал_Документы"
+                docs_path.mkdir(parents=True, exist_ok=True)
+            return docs_path
+
+        elif system == "Darwin":  # macOS
             docs = home / "Documents"
             if docs.exists():
                 return docs
-            return home / "Мои документы"
-        elif system == "Darwin":
-            return home / "Documents"
-        else:
+            # Если нет, создаем
+            docs.mkdir(parents=True, exist_ok=True)
+            return docs
+
+        else:  # Linux и другие Unix
             try:
+                # Пробуем получить через xdg-user-dir
                 import subprocess
-                result = subprocess.run(['xdg-user-dir', 'DOCUMENTS'],
-                                        capture_output=True, text=True)
+                result = subprocess.run(
+                    ['xdg-user-dir', 'DOCUMENTS'],
+                    capture_output=True, text=True, timeout=2
+                )
                 if result.returncode == 0:
                     docs = Path(result.stdout.strip())
                     if docs.exists():
                         return docs
-            except (FileNotFoundError, subprocess.SubprocessError):
+            except (FileNotFoundError, subprocess.SubprocessError, OSError):
                 pass
-            return home / "Документы"
+
+            # Стандартный путь
+            docs = home / "Документы"
+            if docs.exists():
+                return docs
+
+            docs = home / "Documents"
+            if docs.exists():
+                return docs
+
+            # Создаем если нет
+            docs = home / "Documents"
+            docs.mkdir(parents=True, exist_ok=True)
+            return docs
 
     def action_go_back_to_data(self) -> None:
         self.app.pop_screen()
@@ -12049,35 +12181,97 @@ class DataScreen(Screen):
         return None
 
     def get_documents_dir(self) -> Path:
-        """Определяет путь к папке Документы в зависимости от ОС"""
+        """Определяет путь к папке Документы кросс-платформенно."""
         import platform
-
         system = platform.system()
         home = Path.home()
 
         if system == "Windows":
-            # В Windows Documents обычно находится в профиле пользователя
+            # Способ 1: через реестр Windows (самый надежный)
+            try:
+                import winreg
+                # Открываем ключ с путями пользовательских папок
+                key = winreg.OpenKey(
+                    winreg.HKEY_CURRENT_USER,
+                    r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
+                )
+                # Получаем путь к папке Documents (Personal)
+                personal, _ = winreg.QueryValueEx(key, "Personal")
+                # Заменяем переменные окружения (например, %USERPROFILE%)
+                personal = os.path.expandvars(personal)
+                docs_path = Path(personal)
+                if docs_path.exists():
+                    return docs_path
+            except (ImportError, FileNotFoundError, OSError, WindowsError):
+                pass
+
+            # Способ 2: через переменную окружения USERPROFILE
+            userprofile = os.environ.get('USERPROFILE')
+            if userprofile:
+                docs_path = Path(userprofile) / "Documents"
+                if docs_path.exists():
+                    return docs_path
+
+                # Для русской Windows может быть "Мои документы"
+                docs_path_ru = Path(userprofile) / "Мои документы"
+                if docs_path_ru.exists():
+                    return docs_path_ru
+
+            # Способ 3: через стандартный путь от home
+            docs_path = home / "Documents"
+            if docs_path.exists():
+                return docs_path
+
+            docs_path_ru = home / "Мои документы"
+            if docs_path_ru.exists():
+                return docs_path_ru
+
+            # Способ 4: если ничего не найдено, создаем папку Documents
+            docs_path = home / "Documents"
+            try:
+                docs_path.mkdir(parents=True, exist_ok=True)
+            except (OSError, PermissionError):
+                # Если не можем создать, используем временную папку
+                docs_path = Path(tempfile.gettempdir()) / "Арсенал_Документы"
+                docs_path.mkdir(parents=True, exist_ok=True)
+            return docs_path
+
+        elif system == "Darwin":  # macOS
             docs = home / "Documents"
             if docs.exists():
                 return docs
-            # Альтернативный вариант
-            return home / "Мои документы"
-        elif system == "Darwin":  # macOS
-            return home / "Documents"
-        else:  # Linux
-            # Пробуем xdg-user-dir
+            # Если нет, создаем
+            docs.mkdir(parents=True, exist_ok=True)
+            return docs
+
+        else:  # Linux и другие Unix
             try:
+                # Пробуем получить через xdg-user-dir
                 import subprocess
-                result = subprocess.run(['xdg-user-dir', 'DOCUMENTS'],
-                                        capture_output=True, text=True)
+                result = subprocess.run(
+                    ['xdg-user-dir', 'DOCUMENTS'],
+                    capture_output=True, text=True, timeout=2
+                )
                 if result.returncode == 0:
                     docs = Path(result.stdout.strip())
                     if docs.exists():
                         return docs
-            except (FileNotFoundError, subprocess.SubprocessError):
+            except (FileNotFoundError, subprocess.SubprocessError, OSError):
                 pass
-            # По умолчанию
-            return home / "Документы"
+
+            # Стандартный путь
+            docs = home / "Документы"
+            if docs.exists():
+                return docs
+
+            docs = home / "Documents"
+            if docs.exists():
+                return docs
+
+            # Создаем если нет
+            docs = home / "Documents"
+            docs.mkdir(parents=True, exist_ok=True)
+            return docs
 
     def notify_success(self, message: str):
         """Показать уведомление об успехе"""
@@ -12818,7 +13012,7 @@ class DataScreen(Screen):
 
 # Словарь описаний для левой панели
 SETBUTTON_DESCRIPTIONS = {
-    "btn_info": "[bold $accent]Версия программы v2.5.0[/]\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство No 2026619934.\nПрямая ссылка (клик при нажатом Ctrl) https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич\n\n[bold $accent]Автор выражает глубочайшую благодарность всем специалистам, оказавшим содействие в создании и развитии методики Арсенал и программы для нее и не может не перечислить следующих людей с особой признательностью.[/]\n\n[bold $accent]Александр Николаевич Колесник [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Анастасия Александровна Ульянич [/](Санкт-Петербургский государственный университет)\n[bold $accent]Анна Сергеевна Шадрова  [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Гаянэ Аршалуисовна Вартанян [/](Санкт-Петербургский государственный университет)\n[bold $accent]Иван Станиславович Григорьев [/](ПБ Святого Николая Чудотворца)\n[bold $accent]Игорь Иванович Чижиков [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Лидия Николаевна Казакова [/](Санкт-Петербургский государственный университет)\n[bold $accent]Талия Станиславовна Богомолова [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Audrey Gordon [/](University of Saskatchewan)\n[bold $accent]Carlo C. DiClemente [/](University of Rhode Island, UMBC)\n[bold $accent]James O. Prochaska [/](University of Rhode Island)\n[bold $accent]Liang Wenfeng [/](DeepSeek AI)\n[bold $accent]Stephen Wong [/](University of Nottingham, University of Saskatchewan)\n[bold $accent]Will McGugan [/](Textualize)",
+    "btn_info": "[bold $accent]Версия программы v2.5.2[/]\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство No 2026619934.\nПрямая ссылка (клик при нажатом Ctrl) https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич\n\n[bold $accent]Автор выражает глубочайшую благодарность всем специалистам, оказавшим содействие в создании и развитии методики Арсенал и программы для нее и не может не перечислить следующих людей с особой признательностью.[/]\n\n[bold $accent]Александр Николаевич Колесник [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Анастасия Александровна Ульянич [/](Санкт-Петербургский государственный университет)\n[bold $accent]Анна Сергеевна Шадрова  [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Гаянэ Аршалуисовна Вартанян [/](Санкт-Петербургский государственный университет)\n[bold $accent]Иван Станиславович Григорьев [/](ПБ Святого Николая Чудотворца)\n[bold $accent]Игорь Иванович Чижиков [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Лидия Николаевна Казакова [/](Санкт-Петербургский государственный университет)\n[bold $accent]Талия Станиславовна Богомолова [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Audrey Gordon [/](University of Saskatchewan)\n[bold $accent]Carlo C. DiClemente [/](University of Rhode Island, UMBC)\n[bold $accent]James O. Prochaska [/](University of Rhode Island)\n[bold $accent]Liang Wenfeng [/](DeepSeek AI)\n[bold $accent]Stephen Wong [/](University of Nottingham, University of Saskatchewan)\n[bold $accent]Will McGugan [/](Textualize)",
     "btn_themeLT": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[teal on #ffffff]╭─ [/][bold teal on #ffffff]Просмотр темы[/][teal on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][teal on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][teal on #ffffff]│ [/][bold teal on #ffffff]1. Кнопка в фокусе[/][teal on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][teal on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][teal on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][teal on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][teal on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][teal on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Личностные установки            │ 1 ▒   ▁     пре │ [/][teal on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Окружение, быт и планы          │ 0 ▏             │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][teal on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][teal on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][teal on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][teal on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #008080 on #DCDCDC] esc [/][bold black on #DCDCDC]Выход  [/][bold #008080 on #DCDCDC]f2 [/][bold black on #DCDCDC]Назад  [/][bold #008080 on #DCDCDC]f3 [/][bold black on #DCDCDC]Вперед                                                     [/]",
     "btn_themeLB": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[blue on #ffffff]╭─ [/][bold blue on #ffffff]Просмотр темы[/][blue on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][blue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][blue on #ffffff]│ [/][bold blue on #ffffff]1. Кнопка в фокусе[/][blue on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][blue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][blue on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][blue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][blue on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][blue on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Личностные установки            │ 1 ▒   ▁     пре │ [/][blue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Окружение, быт и планы          │ 0 ▏             │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][blue on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][blue on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][blue on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][blue on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #0000FF on #b5b5b5] esc [/][bold black on #b5b5b5]Выход  [/][bold #0000FF on #b5b5b5]f2 [/][bold black on #b5b5b5]Назад  [/][bold #0000FF on #b5b5b5]f3 [/][bold black on #b5b5b5]Вперед                                                     [/]",
     "btn_themeLS": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[steelblue on #ffffff]╭─ [/][bold steelblue on #ffffff]Просмотр темы[/][steelblue on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][steelblue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][steelblue on #ffffff]│ [/][bold steelblue on #ffffff]1. Кнопка в фокусе[/][steelblue on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][steelblue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][steelblue on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][steelblue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][steelblue on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][steelblue on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Личностные установки            │ 1 ▒   ▁     пре │ [/][steelblue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Окружение, быт и планы          │ 0 ▏             │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][steelblue on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][steelblue on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][steelblue on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][steelblue on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #4682B4 on #DCDCDC] esc [/][bold black on #DCDCDC]Выход  [/][bold #4682B4 on #DCDCDC]f2 [/][bold black on #DCDCDC]Назад  [/][bold #4682B4 on #DCDCDC]f3 [/][bold black on #DCDCDC]Вперед                                                     [/]",
