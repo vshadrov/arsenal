@@ -1,6 +1,6 @@
 [project]
 name = "arsenal"
-version = "2.5.2"
+version = "2.5.3"
 description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
 license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
@@ -23,7 +23,7 @@ dependencies = [
 [tool.briefcase]
 project_name = "arsenal"
 bundle = "com.arsenal"
-version = "2.5.2"
+version = "2.5.3"
 url = "https://github.com/vshadrov/arsenal"
 
 [tool.briefcase.app.arsenal]
