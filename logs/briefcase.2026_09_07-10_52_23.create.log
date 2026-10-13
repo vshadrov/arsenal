@@ -1,0 +1,470 @@
+Date/Time:       2026-09-07 10:52:24 
+Command line:    /usr/bin/briefcase create linux appimage --no-input
+
+OS Release:      Linux 7.0.0-30-generic
+OS Version:      #30-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 18:22:54 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-30-generic-x86_64-with-glibc2.43
+
+Python exe:      /usr/bin/python3
+Python version:  3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]
+Virtual env:     False
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   appimage
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DEEPSEEK_API_KEY=********************
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=en
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	LANG=en_NZ.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	OPENAI_API_KEY=********************
+	OPENAI_BASE_URL=https://api.selectel.ru/aig/v1
+	OPENAI_MODEL=deepseek/deepseek-v4-pro
+	PATH=/home/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PWD=/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644
+	SHELL=/bin/bash
+	SHLVL=1
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VTE_VERSION=8400
+	WINDOWID=94384048
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xfce4:/usr/share/xubuntu:/usr/share/gnome:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/usr/bin/briefcase
+
+pyproject.toml:
+[project]
+name = "arsenal"
+version = "2.5.2"
+description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Шадров Василий Валерьевич", email = "shadrov@pbstin.ru" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "matplotlib>=3.8.0,<3.9.0",
+    "numpy>=1.26.0,<2.0.0",
+    "pandas>=2.1.0,<2.2.0",
+    "plotext>=5.2.8,<6.0.0",
+    "scikit-learn>=1.3.0,<1.4.0",
+    "scipy>=1.11.0,<1.12.0",
+]
+
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.5.2"
+url = "https://github.com/vshadrov/arsenal"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Арсенал"
+description = "МОДРОП Арсенал"
+long_description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+
+main_module = "arsenal.app"
+main_function = "main"
+
+console_app = true
+
+requires = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "matplotlib>=3.8.0,<3.9.0",
+    "numpy>=1.26.0,<2.0.0",
+    "pandas>=2.1.0,<2.2.0",
+    "plotext>=5.2.8,<6.0.0",
+    "scikit-learn>=1.3.0,<1.4.0",
+    "scipy>=1.11.0,<1.12.0",
+]
+
+test_requires = [
+    "pytest>=9.1.1",
+]
+
+[tool.briefcase.app.arsenal.macOS]
+supported_versions = ["12.0"]
+min_os_version = "12.0"
+icon = "resources/arsenal"
+
+[tool.briefcase.app.arsenal.linux]
+categories = ["Office"]
+terminal = true
+icon = "resources/images/arsenal"
+
+[tool.briefcase.app.arsenal.linux.appimage]
+
+[tool.briefcase.app.arsenal.linux.system.debian]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.rhel]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+console = true
+icon = "resources/arsenal"
+
+Briefcase Log:
+[10:52:23]                                                                                                                                                             config.py:666
+           *************************************************************************                                                                                   config.py:666
+           ** WARNING: License Definition for the Project is Deprecated           **                                                                                   config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       config.py:666
+               Briefcase now uses PEP 621 format for license definitions.                                                                                              config.py:666
+                                                                                                                                                                       config.py:666
+               Previously, the name of the license was assigned to the 'license'                                                                                       config.py:666
+               field in pyproject.toml. For PEP 621, the name of the license is                                                                                        config.py:666
+               assigned to 'license.text' or the name of the file containing the                                                                                       config.py:666
+               license is assigned to 'license.file'.                                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+               The current configuration for the Project has a 'license' field                                                                                         config.py:666
+               that is specified as a string:                                                                                                                          config.py:666
+                                                                                                                                                                       config.py:666
+                   license = "GPL-3.0-or-later"                                                                                                                        config.py:666
+                                                                                                                                                                       config.py:666
+               To use the PEP 621 format (and to remove this warning), specify that                                                                                    config.py:666
+               the LICENSE file contains the license for the Project:                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+                   license.file = "LICENSE"                                                                                                                            config.py:666
+                                                                                                                                                                       config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker --version                                                                                                                                subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5                                                                                        subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Docker version 29.1.3, build 29.1.3-0ubuntu4.1                                                                                                  subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker info                                                                                                                                     subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5                                                                                        subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Client:                                                                                                                                         subprocess.py:838
+           >>>      Version:    29.1.3                                                                                                                             subprocess.py:838
+           >>>      Context:    default                                                                                                                            subprocess.py:838
+           >>>      Debug Mode: false                                                                                                                              subprocess.py:838
+           >>>      Plugins:                                                                                                                                       subprocess.py:838
+           >>>       trust: Manage trust on Docker images (Docker Inc.)                                                                                            subprocess.py:838
+           >>>         Version:  29.1.3                                                                                                                            subprocess.py:838
+           >>>         Path:     /usr/libexec/docker/cli-plugins/docker-trust                                                                                      subprocess.py:838
+           >>>                                                                                                                                                     subprocess.py:838
+           >>>     Server:                                                                                                                                         subprocess.py:838
+           >>>     permission denied while trying to connect to the docker API at unix:///var/run/docker.sock                                                      subprocess.py:838
+           >>> Return code: 1                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                      __main__.py:42
+           Docker has been installed, but Briefcase is unable to invoke                                                                                               __main__.py:43
+           Docker commands. It is possible that your user does not have                                                                                               __main__.py:43
+           permissions to invoke Docker.                                                                                                                              __main__.py:43
+                                                                                                                                                                      __main__.py:43
+           See https://docs.docker.com/engine/install/linux-postinstall/                                                                                              __main__.py:43
+           for details on configuring access to your Docker installation.                                                                                             __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/integrations/docker.py:207 in _user_access                                                                                              │
+│                                                                                                                                                                                  │
+│    204 │   │   │   # Invoke a docker command to check if the daemon is running,                                                                                                  │
+│    205 │   │   │   # and the user has sufficient permissions.                                                                                                                    │
+│    206 │   │   │   # We don't care about the output, just that it succeeds.                                                                                                      │
+│ ❱  207 │   │   │   tools.subprocess.check_output(                                                                                                                                │
+│    208 │   │   │   │   ["docker", "info"],                                                                                                                                       │
+│    209 │   │   │   │   env=cls.subprocess_env(),                                                                                                                                 │
+│    210 │   │   │   │   quiet=1,                                                                                                                                                  │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                 │
+│ │ failure_output = 'Client:\n Version:    29.1.3\n Context:    default\n Debug Mode: false\n Plugins:\n  '+231 │                                                                 │
+│ │          tools = <briefcase.integrations.base.ToolCache object at 0x7c86fcd44440>                            │                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                 │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:124 in inner                                                                                                 │
+│                                                                                                                                                                                  │
+│   121 │   │   """                                                                                                                                                                │
+│   122 │   │   # Just run the command if no dynamic elements are active                                                                                                           │
+│   123 │   │   if not sub.tools.console.is_console_controlled:                                                                                                                    │
+│ ❱ 124 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   125 │   │                                                                                                                                                                      │
+│   126 │   │   remove_dynamic_elements = False                                                                                                                                    │
+│   127                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────── locals ─────────────────────────────────────────╮                                                                                     │
+│ │           args = ['docker', 'info']                                                      │                                                                                     │
+│ │            sub = <briefcase.integrations.subprocess.Subprocess object at 0x7c86fcd45010> │                                                                                     │
+│ │   wrapped_args = ()                                                                      │                                                                                     │
+│ │ wrapped_kwargs = {'env': {'DOCKER_CLI_HINTS': 'false'}, 'quiet': 1}                      │                                                                                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────╯                                                                                     │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:652 in check_output                                                                                          │
+│                                                                                                                                                                                  │
+│   649 │   │   │   self._log_environment(kwargs.get("env"))                                                                                                                       │
+│   650 │   │                                                                                                                                                                      │
+│   651 │   │   try:                                                                                                                                                               │
+│ ❱ 652 │   │   │   cmd_output = self._subprocess.check_output(                                                                                                                    │
+│   653 │   │   │   │   [str(arg) for arg in args], **self.final_kwargs(**kwargs)                                                                                                  │
+│   654 │   │   │   )                                                                                                                                                              │
+│   655 │   │   except subprocess.CalledProcessError as e:                                                                                                                         │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────── locals ─────────────────────────────────────╮                                                                                             │
+│ │   args = ['docker', 'info']                                                      │                                                                                             │
+│ │ kwargs = {'env': {'DOCKER_CLI_HINTS': 'false'}, 'stderr': -2}                    │                                                                                             │
+│ │  quiet = 1                                                                       │                                                                                             │
+│ │   self = <briefcase.integrations.subprocess.Subprocess object at 0x7c86fcd45010> │                                                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────╯                                                                                             │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3.14/subprocess.py:473 in check_output                                                                                                                            │
+│                                                                                                                                                                                  │
+│    470 │   │   │   empty = b''                                                                                                                                                   │
+│    471 │   │   kwargs['input'] = empty                                                                                                                                           │
+│    472 │                                                                                                                                                                         │
+│ ❱  473 │   return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,                                                                                                      │
+│    474 │   │   │      **kwargs).stdout                                                                                                                                           │
+│    475                                                                                                                                                                           │
+│    476                                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────── locals ─────────────────────────────────────────────────╮                                                                      │
+│ │        kw = 'check'                                                                                     │                                                                      │
+│ │    kwargs = {                                                                                           │                                                                      │
+│ │             │   'stderr': -2,                                                                           │                                                                      │
+│ │             │   'env': {                                                                                │                                                                      │
+│ │             │   │   'SHELL': '/bin/bash',                                                               │                                                                      │
+│ │             │   │   'SESSION_MANAGER': 'local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644', │                                                                      │
+│ │             │   │   'WINDOWID': '94384048',                                                             │                                                                      │
+│ │             │   │   'QT_ACCESSIBILITY': '1',                                                            │                                                                      │
+│ │             │   │   'COLORTERM': 'truecolor',                                                           │                                                                      │
+│ │             │   │   'XDG_CONFIG_DIRS': '/etc/xdg/xdg-xubuntu:/etc/xdg',                                 │                                                                      │
+│ │             │   │   'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0',                     │                                                                      │
+│ │             │   │   'XDG_MENU_PREFIX': 'xfce-',                                                         │                                                                      │
+│ │             │   │   'GTK_IM_MODULE': 'ibus',                                                            │                                                                      │
+│ │             │   │   'CLUTTER_BACKEND': 'x11',                                                           │                                                                      │
+│ │             │   │   ... +50                                                                             │                                                                      │
+│ │             │   },                                                                                      │                                                                      │
+│ │             │   'text': True,                                                                           │                                                                      │
+│ │             │   'encoding': 'UTF-8',                                                                    │                                                                      │
+│ │             │   'errors': 'backslashreplace'                                                            │                                                                      │
+│ │             }                                                                                           │                                                                      │
+│ │ popenargs = (['docker', 'info'],)                                                                       │                                                                      │
+│ │   timeout = None                                                                                        │                                                                      │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                      │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3.14/subprocess.py:578 in run                                                                                                                                     │
+│                                                                                                                                                                                  │
+│    575 │   │   │   raise                                                                                                                                                         │
+│    576 │   │   retcode = process.poll()                                                                                                                                          │
+│    577 │   │   if check and retcode:                                                                                                                                             │
+│ ❱  578 │   │   │   raise CalledProcessError(retcode, process.args,                                                                                                               │
+│    579 │   │   │   │   │   │   │   │   │    output=stdout, stderr=stderr)                                                                                                        │
+│    580 │   return CompletedProcess(process.args, retcode, stdout, stderr)                                                                                                        │
+│    581                                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                 │
+│ │ capture_output = False                                                                                       │                                                                 │
+│ │          check = True                                                                                        │                                                                 │
+│ │          input = None                                                                                        │                                                                 │
+│ │         kwargs = {                                                                                           │                                                                 │
+│ │                  │   'stdout': -1,                                                                           │                                                                 │
+│ │                  │   'stderr': -2,                                                                           │                                                                 │
+│ │                  │   'env': {                                                                                │                                                                 │
+│ │                  │   │   'SHELL': '/bin/bash',                                                               │                                                                 │
+│ │                  │   │   'SESSION_MANAGER': 'local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644', │                                                                 │
+│ │                  │   │   'WINDOWID': '94384048',                                                             │                                                                 │
+│ │                  │   │   'QT_ACCESSIBILITY': '1',                                                            │                                                                 │
+│ │                  │   │   'COLORTERM': 'truecolor',                                                           │                                                                 │
+│ │                  │   │   'XDG_CONFIG_DIRS': '/etc/xdg/xdg-xubuntu:/etc/xdg',                                 │                                                                 │
+│ │                  │   │   'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0',                     │                                                                 │
+│ │                  │   │   'XDG_MENU_PREFIX': 'xfce-',                                                         │                                                                 │
+│ │                  │   │   'GTK_IM_MODULE': 'ibus',                                                            │                                                                 │
+│ │                  │   │   'CLUTTER_BACKEND': 'x11',                                                           │                                                                 │
+│ │                  │   │   ... +50                                                                             │                                                                 │
+│ │                  │   },                                                                                      │                                                                 │
+│ │                  │   'text': True,                                                                           │                                                                 │
+│ │                  │   'encoding': 'UTF-8',                                                                    │                                                                 │
+│ │                  │   'errors': 'backslashreplace'                                                            │                                                                 │
+│ │                  }                                                                                           │                                                                 │
+│ │      popenargs = (['docker', 'info'],)                                                                       │                                                                 │
+│ │        process = <Popen: returncode: 1 args: ['docker', 'info']>                                             │                                                                 │
+│ │        retcode = 1                                                                                           │                                                                 │
+│ │         stderr = None                                                                                        │                                                                 │
+│ │         stdout = 'Client:\n Version:    29.1.3\n Context:    default\n Debug Mode: false\n Plugins:\n  '+231 │                                                                 │
+│ │        timeout = None                                                                                        │                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['docker', 'info']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/__main__.py:27 in main                                                                                                                  │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────╮ │
+│ │       command = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7c86fcfd78c0>                                                                     │ │
+│ │       console = <briefcase.console.Console object at 0x7c86fcfd67b0>                                                                                                         │ │
+│ │             e = BriefcaseCommandError('Docker has been installed, but Briefcase is unable to invoke\nDocker commands. It is possible that your user does not                 │ │
+│ │                 have\npermissions to invoke Docker.\n\nSee https://docs.docker.com/engine/install/linux-postinstall/\nfor details on configuring access to your Docker       │ │
+│ │                 installation.\n')                                                                                                                                            │ │
+│ │ extra_cmdline = ['--no-input']                                                                                                                                               │ │
+│ │       options = {}                                                                                                                                                           │ │
+│ │     overrides = {}                                                                                                                                                           │ │
+│ │        result = 200                                                                                                                                                          │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:1010 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   1007 │   ) -> dict | None:                                                                                                                                                     │
+│   1008 │   │   # Confirm host compatibility, that all required tools are available,                                                                                              │
+│   1009 │   │   # and that the app configuration is finalized.                                                                                                                    │
+│ ❱ 1010 │   │   self.finalize(app)                                                                                                                                                │
+│   1011 │   │                                                                                                                                                                     │
+│   1012 │   │   if app_name:                                                                                                                                                      │
+│   1013 │   │   │   try:                                                                                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────── locals ───────────────────────────────────────────────╮                                                                          │
+│ │      app = None                                                                                     │                                                                          │
+│ │ app_name = None                                                                                     │                                                                          │
+│ │  options = {}                                                                                       │                                                                          │
+│ │     self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7c86fcfd78c0> │                                                                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                          │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/base.py:701 in finalize                                                                                                        │
+│                                                                                                                                                                                  │
+│    698 │   │   │   to finalize. By default, all apps will be finalized.                                                                                                          │
+│    699 │   │   """                                                                                                                                                               │
+│    700 │   │   self.verify_host()                                                                                                                                                │
+│ ❱  701 │   │   self.verify_tools()                                                                                                                                               │
+│    702 │   │                                                                                                                                                                     │
+│    703 │   │   apps = self.apps.values() if app is None else [app]                                                                                                               │
+│    704 │   │   for app in apps:                                                                                                                                                  │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ───────────────────────────────────────────────╮                                                                         │
+│ │       app = None                                                                                     │                                                                         │
+│ │      self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7c86fcfd78c0> │                                                                         │
+│ │ test_mode = False                                                                                    │                                                                         │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                         │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/platforms/linux/appimage.py:144 in verify_tools                                                                                         │
+│                                                                                                                                                                                  │
+│   141 │   │   """If we're using docker, verify that it is available."""                                                                                                          │
+│   142 │   │   super().verify_tools()                                                                                                                                             │
+│   143 │   │   if self.use_docker:                                                                                                                                                │
+│ ❱ 144 │   │   │   Docker.verify(tools=self.tools)                                                                                                                                │
+│   145 │                                                                                                                                                                          │
+│   146 │   def verify_app_tools(self, app: AppConfig):                                                                                                                            │
+│   147 │   │   """Verify App environment is prepared and available.                                                                                                               │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ─────────────────────────────────────────────╮                                                                              │
+│ │ self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7c86fcfd78c0> │                                                                              │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                              │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/base.py:78 in verify                                                                                                       │
+│                                                                                                                                                                                  │
+│    75 │   ) -> ToolT:                                                                          ╭───────────────────────────────── locals ──────────────────────────────────╮     │
+│    76 │   │   """Confirm the tool is available and usable on the host platform."""             │    app = None                                                             │     │
+│    77 │   │   cls.verify_host(tools=tools)                                                     │ kwargs = {}                                                               │     │
+│ ❱  78 │   │   tool = cls.verify_install(tools=tools, app=app, **kwargs)                        │  tools = <briefcase.integrations.base.ToolCache object at 0x7c86fcd44440> │     │
+│    79 │   │   return tool                                                                      ╰───────────────────────────────────────────────────────────────────────────╯     │
+│    80 │                                                                                                                                                                          │
+│    81 │   @classmethod                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/docker.py:157 in verify_install                                                                                            │
+│                                                                                                                                                                                  │
+│    154 │   │   │   return tools.docker                                                          ╭─────────────────────────────────── locals ───────────────────────────────────╮ │
+│    155 │   │                                                                                    │ image_tag = None                                                             │ │
+│    156 │   │   cls._version_compat(tools=tools)                                                 │    kwargs = {'app': None}                                                    │ │
+│ ❱  157 │   │   cls._user_access(tools=tools)                                                    │     tools = <briefcase.integrations.base.ToolCache object at 0x7c86fcd44440> │ │
+│    158 │   │   cls._buildx_installed(tools=tools)                                               ╰──────────────────────────────────────────────────────────────────────────────╯ │
+│    159 │   │                                                                                                                                                                     │
+│    160 │   │   tools.docker = Docker(tools=tools, image_tag=image_tag)                                                                                                           │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/docker.py:215 in _user_access                                                                                              │
+│                                                                                                                                                                                  │
+│    212 │   │   except subprocess.CalledProcessError as e:                                                                                                                        │
+│    213 │   │   │   failure_output = e.output                                                                                                                                     │
+│    214 │   │   │   if "permission denied while trying to connect" in failure_output:                                                                                             │
+│ ❱  215 │   │   │   │   raise BriefcaseCommandError(cls.LACKS_PERMISSION_ERROR) from e                                                                                            │
+│    216 │   │   │   elif (                                                                                                                                                        │
+│    217 │   │   │   │   # error message on Ubuntu                                                                                                                                 │
+│    218 │   │   │   │   "Is the docker daemon running?" in failure_output                                                                                                         │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                 │
+│ │ failure_output = 'Client:\n Version:    29.1.3\n Context:    default\n Debug Mode: false\n Plugins:\n  '+231 │                                                                 │
+│ │          tools = <briefcase.integrations.base.ToolCache object at 0x7c86fcd44440>                            │                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Docker has been installed, but Briefcase is unable to invoke
+Docker commands. It is possible that your user does not have
+permissions to invoke Docker.
+
+See https://docs.docker.com/engine/install/linux-postinstall/
+for details on configuring access to your Docker installation.
+

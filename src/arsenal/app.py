@@ -1481,7 +1481,7 @@ class Rate1Screen(Screen):
 
             # Используем данные из form_data без дополнительной обработки
             summary.append(f"[bold $accent]Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.[/]")
-            summary.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+            summary.append("────────────────────────────────────────────────────────────────────────────────")
             summary.append(f"Первичную оценку провел(а) {rater} {current_date}.")
             summary.append("")
             summary.append("     М О Д Р О П   А р с е н а л    ╭────" + current_date + "───╮")
@@ -2028,7 +2028,7 @@ class Rate1Screen(Screen):
         if not filepath.exists():
             # Используем данные как есть, без дополнительной обработки
             content.append(f"Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.")
-        content.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+        content.append("────────────────────────────────────────────────────────────────────────────────")
         content.append(f"Первичную оценку провел(а) {rater} {datetime.now().strftime('%Y.%m.%d')}.")
         content.append("")
         content.append("     М О Д Р О П   А р с е н а л    ╭────" + datetime.now().strftime('%Y.%m.%d') + "───╮")
@@ -2071,7 +2071,7 @@ class Rate1Screen(Screen):
             wrapped = textwrap.fill(self.form_data["conclusion"], width=76)
             content.append(f"[9] {wrapped}")
 
-        content.append("╰──────────────────────────────────────────────────────────────────────────────╯")
+        content.append("────────────────────────────────────────────────────────────────────────────────")
 
         # Если файл существует, добавляем пустую строку для разделения оценок
         if filepath.exists():
@@ -3082,7 +3082,7 @@ class Rate2Screen(Screen):
         summary.append("(Если схема отображается некорректно, сделайте окно программы шире или уменьшите размер шрифта с помощью сочетания клавиш [bold $accent]Ctrl -[/] (на MacOS [bold $accent]Cmd -[/]) так, чтобы линия ниже умещалась на одной строке.)")
         summary.append("")
         summary.append(f"[bold $accent]Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.[/]")
-        summary.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+        summary.append("────────────────────────────────────────────────────────────────────────────────")
         summary.append(f"Повторную оценку провел(а) {rater} {current_date}.")
         summary.append("")
         summary.append("     М О Д Р О П   А р с е н а л    ╭────" + primary_date + "───╮╭─────" + current_date + "─────╮")
@@ -3646,7 +3646,7 @@ class Rate2Screen(Screen):
         # Если файл НЕ существует, добавляем информацию о первичной оценке в начале
         if not filepath.exists():
             content.append(f"Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.")
-            content.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+            content.append("────────────────────────────────────────────────────────────────────────────────")
             content.append(f"Первичную оценку провел(а) {primary.get('rater', '')} {primary_date}.")
             content.append("")
             content.append("     М О Д Р О П   А р с е н а л    ╭────" + primary_date + "───╮")
@@ -3698,14 +3698,14 @@ class Rate2Screen(Screen):
                 wrapped = textwrap.fill(primary.get("conclusion", ""), width=76)
                 content.append(f"[9] {wrapped}")
 
-            content.append("╰──────────────────────────────────────────────────────────────────────────────╯")
+            content.append("────────────────────────────────────────────────────────────────────────────────")
 
         else:
             # Если файл существует, добавляем пустую строку для разделения
             content.append("")  # Добавляем пустую строку в начало новой оценки
 
         # Добавляем повторную оценку
-        content.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+        content.append("────────────────────────────────────────────────────────────────────────────────")
         content.append(f"Повторную оценку провел(а) {rater} {current_date}.")
         content.append("")
         content.append("     М О Д Р О П   А р с е н а л    ╭────" + primary_date + "───╮╭─────" + current_date + "─────╮")
@@ -3781,7 +3781,7 @@ class Rate2Screen(Screen):
             wrapped = textwrap.fill(self.form_data["conclusion"], width=76)
             content.append(f"[9] {wrapped}")
 
-        content.append("╰──────────────────────────────────────────────────────────────────────────────╯")
+        content.append("────────────────────────────────────────────────────────────────────────────────")
 
         return "\n".join(content)
 
@@ -4525,6 +4525,7 @@ class LookScreen(Screen):
         Binding("1", "press_open", "Открыть", show=False),
         Binding("2", "press_restore", "Записать", show=False),
         Binding("3", "press_draft", "Черновик", show=False),
+        Binding("4", "press_back_to_search", "К поиску", show=False),
     ]
 
     def action_press_open(self):
@@ -4580,6 +4581,7 @@ class LookScreen(Screen):
         self._form_counter = 0
         # Флаг: фокус на левой панели
         self._is_on_list = True
+        self._saved_list_index = 0
 
     def on_mouse_move(self, event: events.MouseMove) -> None:
         """При движении мыши подсвечиваем кнопку под курсором в режиме просмотра"""
@@ -5005,6 +5007,20 @@ class LookScreen(Screen):
         else:
             base_id = field_id
 
+        # Если значение поля совпадает с уже сохранённым — событие порождено
+        # программным пересозданием формы поиска при возврате.
+        # Пропускаем, чтобы не сбрасывать позицию в списке на первый пункт.
+        current_value = {
+            "search_last_name": self._search_last_name,
+            "search_first_name": self._search_first_name,
+            "search_patronymic": self._search_patronymic,
+            "search_year": self._search_year,
+            "search_rater": self._search_rater,
+        }.get(base_id)
+
+        if current_value == event.value:
+            return
+
         if base_id == "search_last_name":
             self._search_last_name = event.value
         elif base_id == "search_first_name":
@@ -5229,6 +5245,9 @@ class LookScreen(Screen):
         if self.selected_index >= len(self.filtered_assessments):
             return
 
+        # Сохраняем текущую позицию для возврата
+        self._saved_list_index = self.selected_index
+
         selected = self.filtered_assessments[self.selected_index]
         self.current_view_data = selected
         self.current_view_assessment = selected["assessment"]
@@ -5290,7 +5309,7 @@ class LookScreen(Screen):
             self.view_buttons.append(btn_draft_id)
 
             btn_back_id = self._get_unique_id("btn_back")
-            btn_back = Button("Esc. Назад к поиску        ", variant="default", id=btn_back_id)
+            btn_back = Button("4. Назад к поиску          ", variant="default", id=btn_back_id)
             buttons_container.mount(btn_back)
             self.view_buttons.append(btn_back_id)
 
@@ -5325,7 +5344,7 @@ class LookScreen(Screen):
         content.append(f"Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.")
         if assessment_type == "первичная":
             # Первичная оценка
-            content.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+            content.append("────────────────────────────────────────────────────────────────────────────────")
             content.append(f"Первичную оценку провел(а) {rater} {date}.")
             content.append("")
             content.append("     М О Д Р О П   А р с е н а л    ╭────" + date + "───╮")
@@ -5383,7 +5402,7 @@ class LookScreen(Screen):
         else:  # повторная оценка
             if primary:
                 primary_date = primary.get("date", "")
-                content.append("╭──────────────────────────────────────────────────────────────────────────────╮")
+                content.append("────────────────────────────────────────────────────────────────────────────────")
                 content.append(f"Повторную оценку провел(а) {rater} {date}.")
                 content.append("")
                 content.append("     М О Д Р О П   А р с е н а л    ╭────" + primary_date + "───╮╭─────" + date + "─────╮")
@@ -5474,7 +5493,7 @@ class LookScreen(Screen):
             else:
                 content.append("ОШИБКА: Для повторной оценки не найдена первичная оценка")
 
-        content.append("╰──────────────────────────────────────────────────────────────────────────────╯")
+        content.append("────────────────────────────────────────────────────────────────────────────────")
 
         return "\n".join(content)
 
@@ -5720,7 +5739,10 @@ class LookScreen(Screen):
         self.app.custom_notify(f"Оценка восстановлена в файл:\n{filename}", severity="success")
 
     def handle_back_to_search(self):
-        """Возврат к режиму поиска"""
+        """Возврат к режиму поиска с сохранением позиции"""
+        # Сохраняем текущий индекс перед переключением
+        saved_index = self.selected_index
+
         # Восстанавливаем левую панель - список оценок
         try:
             list_panel = self.query_one("#look_list_panel")
@@ -5740,10 +5762,24 @@ class LookScreen(Screen):
             # Показываем форму поиска
             self.show_search_form()
 
-            # Устанавливаем фокус на список
+            # Устанавливаем фокус на список и восстанавливаем позицию
             if list_view.children:
+                # Проверяем, что сохраненный индекс валиден
+                if saved_index >= len(list_view.children):
+                    saved_index = 0
+
+                list_view.index = saved_index
+                self.selected_index = saved_index
+
+                # Обновляем маркеры вручную, т.к. программное изменение index
+                # может не вызвать событие Highlighted
+                for i, child in enumerate(list_view.children):
+                    if hasattr(child, 'children') and child.children:
+                        label = child.children[0]
+                        if isinstance(label, ListLabel):
+                            label.is_highlighted = (i == saved_index)
+
                 list_view.focus()
-                list_view.index = self.selected_index if self.selected_index < len(list_view.children) else 0
 
         except NoMatches:
             pass
@@ -5752,6 +5788,20 @@ class LookScreen(Screen):
         """Возврат в главное меню"""
         self.app.pop_screen()
 
+    def action_press_back_to_search(self):
+        """Нажатие 4 - возврат к поиску"""
+        if self.mode == "view":
+            self.handle_back_to_search()
+        else:
+            # Если мы в режиме поиска, клавиша 4 ничего не делает
+            pass
+
+    def action_go_back_from_view(self) -> None:
+        """Обработка Esc: если в режиме просмотра - возврат к поиску, иначе - выход в меню"""
+        if self.mode == "view":
+            self.handle_back_to_search()
+        else:
+            self.app.pop_screen()
 
 
 class StatsScreen(Screen):
@@ -9782,7 +9832,7 @@ class OutcomesScreen(Screen):
 
         lines = []
         lines.append(f"Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.")
-        lines.append("╭" + "─" * 78 + "╮")
+        lines.append("─" * 80)
         lines.append(f"Данные об опасных проявлениях на {current_date}")
         lines.append("")
 
@@ -9805,8 +9855,8 @@ class OutcomesScreen(Screen):
         else:
             lines.append("Нет зарегистрированных исходов.")
 
-        lines.append("")
-        lines.append("╰" + "─" * 78 + "╯")
+        # lines.append("")
+        lines.append("─" * 80)
 
         return "\n".join(lines)
 
@@ -11478,7 +11528,7 @@ class OpinionsScreen(Screen):
 
         lines = []
         lines.append(f"Пациент {last_name} {first_name} {patronymic} {birth_year} г.р.")
-        lines.append("╭" + "─" * 78 + "╮")
+        lines.append("─" * 80)
         lines.append(f"Данные о прогнозах специалистов на {current_date}")
         lines.append("")
 
@@ -11500,8 +11550,8 @@ class OpinionsScreen(Screen):
         else:
             lines.append("Нет зарегистрированных прогнозов.")
 
-        lines.append("")
-        lines.append("╰" + "─" * 78 + "╯")
+        # lines.append("")
+        lines.append("─" * 80)
 
         return "\n".join(lines)
 
@@ -13012,7 +13062,7 @@ class DataScreen(Screen):
 
 # Словарь описаний для левой панели
 SETBUTTON_DESCRIPTIONS = {
-    "btn_info": "[bold $accent]Версия программы v2.5.2[/]\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство No 2026619934.\nПрямая ссылка (клик при нажатом Ctrl) https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич\n\n[bold $accent]Автор выражает глубочайшую благодарность всем специалистам, оказавшим содействие в создании и развитии методики Арсенал и программы для нее и не может не перечислить следующих людей с особой признательностью.[/]\n\n[bold $accent]Александр Николаевич Колесник [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Анастасия Александровна Ульянич [/](Санкт-Петербургский государственный университет)\n[bold $accent]Анна Сергеевна Шадрова  [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Гаянэ Аршалуисовна Вартанян [/](Санкт-Петербургский государственный университет)\n[bold $accent]Иван Станиславович Григорьев [/](ПБ Святого Николая Чудотворца)\n[bold $accent]Игорь Иванович Чижиков [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Лидия Николаевна Казакова [/](Санкт-Петербургский государственный университет)\n[bold $accent]Талия Станиславовна Богомолова [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Audrey Gordon [/](University of Saskatchewan)\n[bold $accent]Carlo C. DiClemente [/](University of Rhode Island, UMBC)\n[bold $accent]James O. Prochaska [/](University of Rhode Island)\n[bold $accent]Liang Wenfeng [/](DeepSeek AI)\n[bold $accent]Stephen Wong [/](University of Nottingham, University of Saskatchewan)\n[bold $accent]Will McGugan [/](Textualize)",
+    "btn_info": "[bold $accent]Версия программы 2.5.3[/]\n\nПрограмма методики оценки динамики риска опасного поведения «МОДРОП Арсенал» разработана для компьютеров с операционными системами Linux, Windows и MacOS, распространяется под лицензией GNU General Public License v3.0, либо любой более поздней версии, то есть может свободно копироваться, использоваться и изменяться со ссылкой на автора и сохранением открытой лицензии. Полный текст лицензии размещен на сайте https://www.gnu.org/licenses/\n\nДанные о государственной регистрации программы доступны на сайте Федерального института промышленной собственности https://fips.ru, свидетельство No 2026619934.\nПрямая ссылка (клик при нажатом Ctrl) https://fips.ru/EGD/bcbdf1ab-a333-4286-a6ac-2d5a54a750fb\n\nПо всем вопросам, касающимся установки, настройки и работы с программой, приветствуется обращение к автору по адресам электронной почты shadrov@pbstin.ru, shadrovv@gmail.com.\n\n(c) 2024-2026 Шадров Василий Валерьевич\n\n[bold $accent]Автор выражает глубочайшую благодарность всем специалистам, оказавшим содействие в создании и развитии методики Арсенал и программы для нее и не может не перечислить следующих людей с особой признательностью.[/]\n\n[bold $accent]Александр Николаевич Колесник [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Анастасия Александровна Ульянич [/](Санкт-Петербургский государственный университет)\n[bold $accent]Анна Сергеевна Шадрова  [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Гаянэ Аршалуисовна Вартанян [/](Санкт-Петербургский государственный университет)\n[bold $accent]Иван Станиславович Григорьев [/](ПБ Святого Николая Чудотворца)\n[bold $accent]Игорь Иванович Чижиков [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Лидия Николаевна Казакова [/](Санкт-Петербургский государственный университет)\n[bold $accent]Талия Станиславовна Богомолова [/](Санкт-Петербургская ПБСТИН)\n[bold $accent]Audrey Gordon [/](University of Saskatchewan)\n[bold $accent]Carlo C. DiClemente [/](University of Rhode Island, UMBC)\n[bold $accent]James O. Prochaska [/](University of Rhode Island)\n[bold $accent]Liang Wenfeng [/](DeepSeek AI)\n[bold $accent]Stephen Wong [/](University of Nottingham, University of Saskatchewan)\n[bold $accent]Will McGugan [/](Textualize)",
     "btn_themeLT": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[teal on #ffffff]╭─ [/][bold teal on #ffffff]Просмотр темы[/][teal on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][teal on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][teal on #ffffff]│ [/][bold teal on #ffffff]1. Кнопка в фокусе[/][teal on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][teal on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][teal on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][teal on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][teal on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][teal on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Личностные установки            │ 1 ▒   ▁     пре │ [/][teal on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Окружение, быт и планы          │ 0 ▏             │[/][teal on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][teal on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][teal on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][teal on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][teal on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #008080 on #DCDCDC] esc [/][bold black on #DCDCDC]Выход  [/][bold #008080 on #DCDCDC]f2 [/][bold black on #DCDCDC]Назад  [/][bold #008080 on #DCDCDC]f3 [/][bold black on #DCDCDC]Вперед                                                     [/]",
     "btn_themeLB": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[blue on #ffffff]╭─ [/][bold blue on #ffffff]Просмотр темы[/][blue on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][blue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][blue on #ffffff]│ [/][bold blue on #ffffff]1. Кнопка в фокусе[/][blue on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][blue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][blue on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][blue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][blue on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][blue on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Личностные установки            │ 1 ▒   ▁     пре │ [/][blue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Окружение, быт и планы          │ 0 ▏             │[/][blue on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][blue on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][blue on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][blue on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][blue on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #0000FF on #b5b5b5] esc [/][bold black on #b5b5b5]Выход  [/][bold #0000FF on #b5b5b5]f2 [/][bold black on #b5b5b5]Назад  [/][bold #0000FF on #b5b5b5]f3 [/][bold black on #b5b5b5]Вперед                                                     [/]",
     "btn_themeLS": "Отображение цветов зависит от вашего терминала. Если они отображаются некорректно, попробуйте изменить настройку цветовых схем или отображения жирного шрифта ярким цветом в параметрах терминала.\n\n[steelblue on #ffffff]╭─ [/][bold steelblue on #ffffff]Просмотр темы[/][steelblue on #ffffff] ──────────────────────────────────────────────────────────────────╮\n│                                                                                  │\n│      [/][black on #ffffff]М О Д Р О П   А р с е н а л    ╭────2025.05.25───╮ [/][steelblue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]Факторы                             │ оцен  стад      │ [/][steelblue on #ffffff]│ [/][bold steelblue on #ffffff]1. Кнопка в фокусе[/][steelblue on #ffffff]   │ │\n│ [/][black on #ffffff]\\[1] Агрессия                        │ 0 ▏             │ [/][steelblue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[2] Когнитивные и другие симптомы   │ 1 ▒   ▁     пре │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]\\[3] Контроль над эмоциями           │ 2 ▓▓  ▁▂    обд │   [/][bold #666666 on #ffffff]2. Кнопка вне фокуса[/][steelblue on #ffffff]   │\n│ [/][black on #ffffff]\\[4] Контроль над поведением         │ 3 ███ ▁▂▄   под │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]\\[5] Злоупотребление веществами      │ 3 ███ ▁▂▄▆  дей │ [/][steelblue on #ffffff]╭──────────────────────╮ │\n│ [/][black on #ffffff]\\[6] Приверженность режиму и лечению │ 2 ▓▓  ▁▂▄▆█ уде │[/][steelblue on #ffffff] │ [/][black on #ffffff]Поле ввода текста[/][steelblue on #ffffff]    │ │\n│ [/][black on #ffffff]\\[7] Личностные установки            │ 1 ▒   ▁     пре │ [/][steelblue on #ffffff]╰──────────────────────╯ │\n│ [/][black on #ffffff]\\[8] Окружение, быт и планы          │ 0 ▏             │[/][steelblue on #ffffff]                          │\n│ [/][black on #ffffff]                                    ╰─────────────────╯                          [/][steelblue on #ffffff]│\n│   [/][bold black on #ffffff] █ Выделенный пункт списка[/][black on #ffffff]        ╭────┬────────────────────────╮[/][steelblue on #ffffff]              │\n│    [/][black on #ffffff]Не выделенный пункт списка       │ 12 │████████████            │ [/][steelblue on #ffffff]             │\n│                                     [/][black on #ffffff]╰────┴────────────────────────╯[/][steelblue on #ffffff]              │\n╰──────────────────────────────────────────────────────────────────────────────────╯\n[/][bold #4682B4 on #DCDCDC] esc [/][bold black on #DCDCDC]Выход  [/][bold #4682B4 on #DCDCDC]f2 [/][bold black on #DCDCDC]Назад  [/][bold #4682B4 on #DCDCDC]f3 [/][bold black on #DCDCDC]Вперед                                                     [/]",
@@ -13191,7 +13241,7 @@ BUTTON_DESCRIPTIONS = {
     "btn_manual": "Методика Арсенал разработана для оценки динамики риска опасного поведения у пациентов с психическими расстройствами.\n\nВ меню справа собраны основные разделы программы для работы с методикой.\n\nПри работе с программой используйте сочетания клавиш:\n[bold $accent]Ctrl -[/] и [bold $accent]Ctrl +[/] (на MacOS [bold $accent]Cmd -[/] и [bold $accent]Cmd +[/]) для изменения масштаба отображения,\n[bold $accent]стрелки[/] для навигации и пролистывания,\n[bold $accent]Tab[/] и [bold $accent]Shift Tab[/] для перемещения фокуса вперед и назад,\n[bold $accent]PgUp[/] и [bold $accent]PgDn[/] для быстрого пролистывания,\n[bold $accent]Enter[/] для выбора, открытия,\n[bold $accent]цифры 1 - 9[/] для быстрого нажатия на соответствующие пронумерованные кнопки без перемещения фокуса,\n[bold $accent]Esc[/] для выхода.\n\nПрименимые на конкретном экране клавиши и их сочетания указаны на нижней панели, они также срабатывают по нажатию кнопкой мыши.",
     "btn_rate1": "Раздел для проведения первичной оценки. Она включает в себя оценку представленности у пациента восьми факторов риска, стадии изменения по каждому из них, составление комментариев и заключения.\n\nЧтобы провести оценку вам нужно собрать информацию о пациенте и провести его расспрос. Для удобства можете сформировать и распечатать форму для заметок.\n\nПри проведении оценки вам будут даны инструкции к каждому шагу, но, возможно, сначала стоит ознакомиться с полным руководством к методике.",
     "btn_rate2": "Раздел для проведения повторной оценки.\n\nПри каждой повторной оценке специалисту необходимо сначала ознакомиться с заключением по первичной оценке. В том случае, если у пациента произошло значимое ухудшение по какому-либо из факторов, например совершено новое ООД или обнаружились новые проблемы по факторам, которые первично оценены как отсутствующие, то стоит еще раз провести первичную оценку и заново определить представленность всех факторов и стадий изменения по ним. Если такого значимого ухудшения нет, достаточно провести повторную оценку только стадий изменения по факторам, первично определенным как присутствующие, на основании данных о текущем состоянии и поведении пациента и его прицельного расспроса. Каждая такая оценка сопровождается комментарием, в котором следует указать, на основании каких наблюдений она установлена.\n\nЧтобы провести повторную оценку вам потребуются сохраненные данные о первичной оценке и расспрос пациента. Для удобства можете сформировать и распечатать форму для заметок.\n\nПри проведении оценки вам будут даны инструкции к каждому шагу, но, возможно, сначала стоит ознакомиться с полным руководством к методике.",
-    "btn_list": "Раздел для просмотра сохраненных оценок по каждому пациенту.\n\nДанная функция позволяет просматривать именно сохраненные файлы пациентов с внесенными в него оценками. Есть возможность открыть файл во внешнем редакторе для печати или удалить. При редактировании заключений имейте в виду, что вы вносите изменение только в файл пациента, а исходные данные оценки, остаются неизменными.\n\nНе удаляйте заключения, созданные в самых ранних выпусках программы версии v0.x, т. к. не все данные по этим оценкам могут быть сохранены в журнале.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
+    "btn_list": "Раздел для просмотра сохраненных оценок по каждому пациенту.\n\nДанная функция позволяет просматривать именно сохраненные файлы пациентов с внесенными в них оценками. Есть возможность открыть файл во внешнем редакторе для печати или удалить. При редактировании заключений имейте в виду, что вы вносите изменение только в файл пациента, а исходные данные оценки, остаются неизменными.\n\nНе удаляйте заключения, созданные в самых ранних выпусках программы версии v0.x, т. к. не все данные по этим оценкам могут быть сохранены в журнале.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
     "btn_look": "Функция просмотра и поиска всех проведенных оценок.\n\nВ отличие от функции просмотра файлов пациентов эта функция отображает все записи об оценках, которые сохранены в журнале (базе данных). Эти данные доступны для просмотра и открытия для печати во внешнем редакторе.\n\nЕсли выбранная оценка не внесена в файл пациента, ее можно сохранить в него.\n\nПодробнее о способах обработки данных смотрите в разделе руководства \"Программа - работа с данными\".",
     "btn_form": "Функция создания формы для ведения заметок во время сбора информации о пациенте и его расспроса. Можно создать форму на одну или на две страницы. Форма открывается во внешнем редакторе, там ее можно изменить и распечатать.",
     "btn_data": "Раздел с функциями обработки данных.\n\nДоступны продолжение проведения оценок, сохраненных как черновики, перенос данных между компьютерами, вывод таблицы с данными о всех оценках, а также исследовательские функции статистики и анализа данных.",

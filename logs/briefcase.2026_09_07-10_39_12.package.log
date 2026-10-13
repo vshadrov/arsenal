@@ -1,0 +1,398 @@
+Date/Time:       2026-09-07 10:39:13 
+Command line:    /usr/bin/briefcase package linux appimage --no-input --no-docker
+
+OS Release:      Linux 7.0.0-30-generic
+OS Version:      #30-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 18:22:54 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-30-generic-x86_64-with-glibc2.43
+
+Python exe:      /usr/bin/python3
+Python version:  3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]
+Virtual env:     False
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   appimage
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DEEPSEEK_API_KEY=********************
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=en
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	LANG=en_NZ.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	OPENAI_API_KEY=********************
+	OPENAI_BASE_URL=https://api.selectel.ru/aig/v1
+	OPENAI_MODEL=deepseek/deepseek-v4-pro
+	PATH=/home/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PIP_ONLY_BINARY=:all:
+	PIP_PLATFORM=manylinux2014_x86_64
+	PWD=/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644
+	SHELL=/bin/bash
+	SHLVL=1
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VTE_VERSION=8400
+	WINDOWID=94384048
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xfce4:/usr/share/xubuntu:/usr/share/gnome:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/usr/bin/briefcase
+
+pyproject.toml:
+[project]
+name = "arsenal"
+version = "2.5.2"
+description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Шадров Василий Валерьевич", email = "shadrov@pbstin.ru" }
+]
+requires-python = ">=3.11,<3.12"
+
+dependencies = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "numpy==1.24.3",
+    "scipy==1.10.1",
+    "matplotlib==3.7.1",
+    "scikit-learn==1.2.2",
+    "pandas==2.0.3",
+    "plotext>=5.2.8,<6.0.0",
+]
+
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.5.2"
+url = "https://github.com/vshadrov/arsenal"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Арсенал"
+description = "МОДРОП Арсенал"
+long_description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+sources = ["src/arsenal"]
+test_sources = ["tests"]
+main_module = "arsenal.app"
+main_function = "main"
+console_app = true
+
+# Явно просим Briefcase скачать пакет поддержки именно для Python 3.11
+support_package = "https://github.com/vshadrov/arsenal"
+
+requires = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "numpy==1.24.3",
+    "scipy==1.10.1",
+    "matplotlib==3.7.1",
+    "scikit-learn==1.2.2",
+    "pandas==2.0.3",
+    "plotext>=5.2.8,<6.0.0",
+]
+
+test_requires = ["pytest>=9.1.1"]
+
+[tool.briefcase.app.arsenal.linux]
+categories = ["Office"]
+terminal = true
+icon = "resources/images/arsenal"
+
+[tool.briefcase.app.arsenal.linux.appimage]
+
+Briefcase Log:
+[10:39:10]                                                                                                                                                             config.py:666
+           *************************************************************************                                                                                   config.py:666
+           ** WARNING: License Definition for the Project is Deprecated           **                                                                                   config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       config.py:666
+               Briefcase now uses PEP 621 format for license definitions.                                                                                              config.py:666
+                                                                                                                                                                       config.py:666
+               Previously, the name of the license was assigned to the 'license'                                                                                       config.py:666
+               field in pyproject.toml. For PEP 621, the name of the license is                                                                                        config.py:666
+               assigned to 'license.text' or the name of the file containing the                                                                                       config.py:666
+               license is assigned to 'license.file'.                                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+               The current configuration for the Project has a 'license' field                                                                                         config.py:666
+               that is specified as a string:                                                                                                                          config.py:666
+                                                                                                                                                                       config.py:666
+                   license = "GPL-3.0-or-later"                                                                                                                        config.py:666
+                                                                                                                                                                       config.py:666
+               To use the PEP 621 format (and to remove this warning), specify that                                                                                    config.py:666
+               the LICENSE file contains the license for the Project:                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+                   license.file = "LICENSE"                                                                                                                            config.py:666
+                                                                                                                                                                       config.py:666
+           *************************************************************************                                                                                   config.py:666
+[10:39:11] *************************************************************************                                                                                  appimage.py:97
+           ** WARNING: Building a Local AppImage!                                 **                                                                                  appimage.py:97
+           *************************************************************************                                                                                  appimage.py:97
+                                                                                                                                                                      appimage.py:97
+               You are building an AppImage outside Docker. The resulting AppImage                                                                                    appimage.py:97
+               will work, but will not be as portable as a Docker-based AppImage.                                                                                     appimage.py:97
+               Any `manylinux` setting will be ignored.                                                                                                               appimage.py:97
+                                                                                                                                                                      appimage.py:97
+           *************************************************************************                                                                                  appimage.py:97
+           *************************************************************************                                                                                 appimage.py:111
+           ** WARNING: Use of AppImage is not recommended!                        **                                                                                 appimage.py:111
+           *************************************************************************                                                                                 appimage.py:111
+                                                                                                                                                                     appimage.py:111
+               Briefcase supports AppImage in a best-effort capacity. It has proven                                                                                  appimage.py:111
+               to be highly unreliable as a distribution platform. AppImages cannot                                                                                  appimage.py:111
+               use pre-compiled binary wheels, and has significant problems with                                                                                     appimage.py:111
+               most commonly used GUI toolkits (including GTK and PySide).                                                                                           appimage.py:111
+                                                                                                                                                                     appimage.py:111
+               Consider using system packages or Flatpak for Linux app                                                                                               appimage.py:111
+               distribution.                                                                                                                                         appimage.py:111
+                                                                                                                                                                     appimage.py:111
+           *************************************************************************                                                                                 appimage.py:111
+                                                                                                                                                                       create.py:937
+           [arsenal] Generating application template...                                                                                                                create.py:937
+           Using app template: https://github.com/beeware/briefcase-linux-appimage-template.git, branch v0.3.25                                                         base.py:1241
+           Using existing template (sha f970441e56f50b434b35b21892c4e8b43cbf7a45, updated Sun Aug 10 10:08:03 2025)                                                     base.py:1146
+                                                                                                                                                                       create.py:952
+           [arsenal] Installing support package...                                                                                                                     create.py:952
+           Using custom support package https://github.com/vshadrov/arsenal                                                                                            create.py:335
+[10:39:12] Downloading arsenal...                                                                                                                                        file.py:227
+           Unpacking support package... started                                                                                                                        create.py:281
+           Unpacking support package... errored                                                                                                                        create.py:281
+                                                                                                                                                                      __main__.py:42
+           Unable to unpack support package '/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal'.        __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:283 in _unpack_support_package                                                                                       │
+│                                                                                                                                                                                  │
+│    280 │   │   try:                                                                                                                                                              │
+│    281 │   │   │   with self.console.wait_bar("Unpacking support package..."):                                                                                                   │
+│    282 │   │   │   │   support_path.mkdir(parents=True, exist_ok=True)                                                                                                           │
+│ ❱  283 │   │   │   │   self.tools.file.unpack_archive(                                                                                                                           │
+│    284 │   │   │   │   │   support_file_path,                                                                                                                                    │
+│    285 │   │   │   │   │   extract_dir=support_path,                                                                                                                             │
+│    286 │   │   │   │   )                                                                                                                                                         │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────╮                             │
+│ │              self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7da04644b4d0>                                     │                             │
+│ │ support_file_path = PosixPath('/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal') │                             │
+│ │      support_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr')        │                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                             │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/file.py:161 in unpack_archive                                                                                              │
+│                                                                                                                                                                                  │
+│   158 │   │   else:  # pragma: no-cover-if-gte-py312                                                                                                                             │
+│   159 │   │   │   unpack_kwargs = {}                                                                                                                                             │
+│   160 │   │                                                                                                                                                                      │
+│ ❱ 161 │   │   self.tools.shutil.unpack_archive(                                                                                                                                  │
+│   162 │   │   │   filename=filename,                                                                                                                                             │
+│   163 │   │   │   extract_dir=extract_dir,                                                                                                                                       │
+│   164 │   │   │   **{                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────╮                                 │
+│ │   extract_dir = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr')        │                                 │
+│ │      filename = PosixPath('/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal') │                                 │
+│ │        is_zip = False                                                                                                                        │                                 │
+│ │        kwargs = {}                                                                                                                           │                                 │
+│ │          self = <briefcase.integrations.file.File object at 0x7da046448ec0>                                                                  │                                 │
+│ │ unpack_kwargs = {'filter': 'data'}                                                                                                           │                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                 │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3.14/shutil.py:1428 in unpack_archive                                                                                                                             │
+│                                                                                                                                                                                  │
+│   1425 │   │   # we need to look at the registered unpackers supported extensions                                                                                                │
+│   1426 │   │   format = _find_unpack_format(filename)                                                                                                                            │
+│   1427 │   │   if format is None:                                                                                                                                                │
+│ ❱ 1428 │   │   │   raise ReadError("Unknown archive format '{0}'".format(filename))                                                                                              │
+│   1429 │   │                                                                                                                                                                     │
+│   1430 │   │   func = _UNPACK_FORMATS[format][1]                                                                                                                                 │
+│   1431 │   │   kwargs = dict(_UNPACK_FORMATS[format][2]) | filter_kwargs                                                                                                         │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                        │
+│ │   extract_dir = '/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/app'+24 │                                                                        │
+│ │      filename = '/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9'+31 │                                                                        │
+│ │        filter = 'data'                                                                                │                                                                        │
+│ │ filter_kwargs = {'filter': 'data'}                                                                    │                                                                        │
+│ │        format = None                                                                                  │                                                                        │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ReadError: Unknown archive format '/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal'
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/__main__.py:27 in main                                                                                                                  │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────╮          │
+│ │       command = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7da0466db8c0>                                                           │          │
+│ │       console = <briefcase.console.Console object at 0x7da0466da7b0>                                                                                                │          │
+│ │             e = InvalidSupportPackage(PosixPath('/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal')) │          │
+│ │ extra_cmdline = ['--no-input', '--no-docker']                                                                                                                       │          │
+│ │       options = {'update': False, 'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}                                                            │          │
+│ │     overrides = {}                                                                                                                                                  │          │
+│ │        result = 200                                                                                                                                                 │          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯          │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:204 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   201 │   │                                                                                                                                                                      │
+│   202 │   │   state = None                                                                                                                                                       │
+│   203 │   │   for _, app_obj in sorted(apps_to_package.items()):                                                                                                                 │
+│ ❱ 204 │   │   │   state = self._package_app(                                                                                                                                     │
+│   205 │   │   │   │   app_obj,                                                                                                                                                   │
+│   206 │   │   │   │   update=update,                                                                                                                                             │
+│   207 │   │   │   │   **full_options(state, options),                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                  │
+│ │               _ = 'arsenal'                                                                                 │                                                                  │
+│ │             app = None                                                                                      │                                                                  │
+│ │        app_name = None                                                                                      │                                                                  │
+│ │         app_obj = <com.arsenal.arsenal v2.5.2 AppConfig>                                                    │                                                                  │
+│ │ apps_to_package = {'arsenal': <com.arsenal.arsenal v2.5.2 AppConfig>}                                       │                                                                  │
+│ │         options = {'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}                   │                                                                  │
+│ │            self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7da0466db8c0> │                                                                  │
+│ │           state = None                                                                                      │                                                                  │
+│ │          update = False                                                                                     │                                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                  │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:103 in _package_app                                                                                                 │
+│                                                                                                                                                                                  │
+│   100 │   │   │   # it will be necessary to confirm deletion of the old folder.                                                                                                  │
+│   101 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   102 │   │   elif not template_file.exists():                                                                                                                                   │
+│ ❱ 103 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   104 │   │   │   state = self.build_command(app, **full_options(state, options))                                                                                                │
+│   105 │   │   elif update:                                                                                                                                                       │
+│   106 │   │   │   # If we're updating for packaging, update everything.                                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────╮                          │
+│ │              app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                           │                          │
+│ │      binary_file = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал-2.5.2-x86_64.AppImage') │                          │
+│ │          options = {'adhoc_sign': False, 'identity': None}                                                                                          │                          │
+│ │ packaging_format = 'appimage'                                                                                                                       │                          │
+│ │             self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7da0466db8c0>                                        │                          │
+│ │    template_file = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage')                               │                          │
+│ │           update = False                                                                                                                            │                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                          │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:1026 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   1023 │   │                                                                                                                                                                     │
+│   1024 │   │   state = None                                                                                                                                                      │
+│   1025 │   │   for _, app_obj in sorted(apps_to_create.items()):                                                                                                                 │
+│ ❱ 1026 │   │   │   state = self.create_app(                                                                                                                                      │
+│   1027 │   │   │   │   app_obj,                                                                                                                                                  │
+│   1028 │   │   │   │   **full_options(state, options),                                                                                                                           │
+│   1029 │   │   │   )                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │              _ = 'arsenal'                                                                                │                                                                    │
+│ │            app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                   │                                                                    │
+│ │       app_name = None                                                                                     │                                                                    │
+│ │        app_obj = <com.arsenal.arsenal v2.5.2 AppConfig>                                                   │                                                                    │
+│ │ apps_to_create = {'arsenal': <com.arsenal.arsenal v2.5.2 AppConfig>}                                      │                                                                    │
+│ │        options = {'adhoc_sign': False, 'identity': None}                                                  │                                                                    │
+│ │           self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7da04644b4d0> │                                                                    │
+│ │          state = None                                                                                     │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:953 in create_app                                                                                                    │
+│                                                                                                                                                                                  │
+│    950 │   │   │   )                                                                                                                                                             │
+│    951 │   │   else:                                                                                                                                                             │
+│    952 │   │   │   self.console.info("Installing support package...", prefix=app.app_name)                                                                                       │
+│ ❱  953 │   │   │   self.install_app_support_package(app=app)                                                                                                                     │
+│    954 │   │   │                                                                                                                                                                 │
+│    955 │   │   │   try:                                                                                                                                                          │
+│    956 │   │   │   │   # If the platform uses a stub binary, the template will define a binary                                                                                   │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────╮                                                             │
+│ │         app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                             │                                                             │
+│ │ bundle_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage') │                                                             │
+│ │     options = {'adhoc_sign': False, 'identity': None}                                                            │                                                             │
+│ │        self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7da04644b4d0>           │                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                             │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:326 in install_app_support_package                                                                                   │
+│                                                                                                                                                                                  │
+│    323 │   │   │   self.console.info("No support package required.")                                                                                                             │
+│    324 │   │   else:                                                                                                                                                             │
+│    325 │   │   │   support_file_path = self._download_support_package(app)                                                                                                       │
+│ ❱  326 │   │   │   self._unpack_support_package(support_file_path, support_path)                                                                                                 │
+│    327 │                                                                                                                                                                         │
+│    328 │   def _download_support_package(self, app: AppConfig):                                                                                                                  │
+│    329 │   │   try:                                                                                                                                                              │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────╮                             │
+│ │               app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                       │                             │
+│ │              self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7da04644b4d0>                                     │                             │
+│ │ support_file_path = PosixPath('/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal') │                             │
+│ │      support_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr')        │                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                             │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:288 in _unpack_support_package                                                                                       │
+│                                                                                                                                                                                  │
+│    285 │   │   │   │   │   extract_dir=support_path,                                                                                                                             │
+│    286 │   │   │   │   )                                                                                                                                                         │
+│    287 │   │   except (shutil.ReadError, EOFError) as e:                                                                                                                         │
+│ ❱  288 │   │   │   raise InvalidSupportPackage(support_file_path) from e                                                                                                         │
+│    289 │                                                                                                                                                                         │
+│    290 │   def _cleanup_app_support_package(self, support_path):                                                                                                                 │
+│    291 │   │   """The internal implementation of the app support cleanup method.                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────╮                             │
+│ │              self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x7da04644b4d0>                                     │                             │
+│ │ support_file_path = PosixPath('/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal') │                             │
+│ │      support_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr')        │                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+InvalidSupportPackage: Unable to unpack support package '/home/shadrov/.cache/briefcase/support/7b2dcfe5293ac47bd735b3c2001c024faf59e58d9fe942d5273020b6335229d8/arsenal'.

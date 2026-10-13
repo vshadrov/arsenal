@@ -43,15 +43,16 @@ main_function = "main"
 console_app = true
 
 requires = [
-    "textual>=8.2.8",
-    "rich>=15.0.0",
-    "openpyxl>=3.1.5",
-    "matplotlib>=3.8.0,<3.9.0",
-    "numpy>=1.26.0,<2.0.0",
-    "pandas>=2.1.0,<2.2.0",
-    "plotext>=5.2.8,<6.0.0",
-    "scikit-learn>=1.3.0,<1.4.0",
-    "scipy>=1.11.0,<1.12.0",
+    "--find-links=/home/shadrov/astra_wheels/",
+    "textual",
+    "rich",
+    "openpyxl",
+    "plotext",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "scipy"
 ]
 
 test_requires = [
@@ -69,6 +70,8 @@ terminal = true
 icon = "resources/images/arsenal"
 
 [tool.briefcase.app.arsenal.linux.appimage]
+# Используем современный образ, чтобы не было проблем с GCC
+system_image = "ubuntu:24.04"
 
 [tool.briefcase.app.arsenal.linux.system.debian]
 categories = ["Office"]

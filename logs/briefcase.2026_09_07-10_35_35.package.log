@@ -1,0 +1,582 @@
+Date/Time:       2026-09-07 10:35:36 
+Command line:    /usr/bin/briefcase package linux appimage --no-input --no-docker
+
+OS Release:      Linux 7.0.0-30-generic
+OS Version:      #30-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 18:22:54 UTC 2026
+Architecture:    x86_64
+Platform:        Linux-7.0.0-30-generic-x86_64-with-glibc2.43
+
+Python exe:      /usr/bin/python3
+Python version:  3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]
+Virtual env:     False
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   appimage
+
+Environment Variables:
+	CLUTTER_BACKEND=x11
+	CLUTTER_IM_MODULE=ibus
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+	DEEPSEEK_API_KEY=********************
+	DESKTOP_SESSION=xubuntu
+	DISPLAY=:0.0
+	GDMSESSION=xubuntu
+	GDM_LANG=en
+	GNOME_KEYRING_CONTROL=********************
+	GOOGLE_CLOUD_PROJECT=arsenal2025
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK_IM_MODULE=ibus
+	GTK_OVERLAY_SCROLLING=0
+	HOME=/home/shadrov
+	IM_CONFIG_ENTRY=xsession-im-launch-success
+	LANG=en_NZ.UTF-8
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=shadrov
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
+	NLSPATH=/opt/cprocsp/share/locale/%L/LC_MESSAGES/%N
+	OPENAI_API_KEY=********************
+	OPENAI_BASE_URL=https://api.selectel.ru/aig/v1
+	OPENAI_MODEL=deepseek/deepseek-v4-pro
+	PATH=/home/shadrov/.npm-global/bin:/home/shadrov/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/shadrov/.local/bin:/home/shadrov/.local/bin
+	PIP_ONLY_BINARY=:all:
+	PIP_PLATFORM=manylinux2014_x86_64
+	PWD=/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5
+	QT_ACCESSIBILITY=1
+	QT_IM_MODULE=ibus
+	QT_QPA_PLATFORMTHEME=gtk2
+	SESSION_MANAGER=local/T480:@/tmp/.ICE-unix/2644,unix/T480:/tmp/.ICE-unix/2644
+	SHELL=/bin/bash
+	SHLVL=1
+	TERM=xterm-256color
+	TEXTDOMAIN=im-config
+	TEXTDOMAINDIR=/usr/share/locale/
+	USER=shadrov
+	VTE_VERSION=8400
+	WINDOWID=94384048
+	XAUTHORITY=/home/shadrov/.Xauthority
+	XDG_CACHE_HOME=/home/shadrov/.cache
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg
+	XDG_CONFIG_HOME=/home/shadrov/.config
+	XDG_CURRENT_DESKTOP=XFCE
+	XDG_DATA_DIRS=/usr/share/xfce4:/usr/share/xubuntu:/usr/share/gnome:/home/shadrov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/shadrov
+	XDG_MENU_PREFIX=xfce-
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=xubuntu
+	XDG_SESSION_ID=2
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	XMODIFIERS=@im=ibus
+	_=/usr/bin/briefcase
+
+pyproject.toml:
+[project]
+name = "arsenal"
+version = "2.5.2"
+description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Шадров Василий Валерьевич", email = "shadrov@pbstin.ru" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    # Фиксируем версии, которые поддерживают Python 3.11, 
+    # но имеют сборки manylinux2014 (glibc 2.17+)
+    "numpy==1.24.3",
+    "scipy==1.10.1",
+    "matplotlib==3.7.1",
+    "scikit-learn==1.2.2",
+    "pandas==2.0.3",
+    "plotext>=5.2.8,<6.0.0",
+]
+
+[tool.briefcase]
+project_name = "arsenal"
+bundle = "com.arsenal"
+version = "2.5.2"
+url = "https://github.com/vshadrov/arsenal"
+
+[tool.briefcase.app.arsenal]
+formal_name = "Арсенал"
+description = "МОДРОП Арсенал"
+long_description = "Программа предназначена для структурированной оценки специалистами в области психического здоровья динамики риска опасного поведения у пациентов с психическими расстройствами."
+sources = [
+    "src/arsenal",
+]
+test_sources = [
+    "tests",
+]
+
+main_module = "arsenal.app"
+main_function = "main"
+
+console_app = true
+
+requires = [
+    "textual>=8.2.8",
+    "rich>=15.0.0",
+    "openpyxl>=3.1.5",
+    "matplotlib>=3.8.0,<3.9.0",
+    "numpy>=1.26.0,<2.0.0",
+    "pandas>=2.1.0,<2.2.0",
+    "plotext>=5.2.8,<6.0.0",
+    "scikit-learn>=1.3.0,<1.4.0",
+    "scipy>=1.11.0,<1.12.0",
+]
+
+test_requires = [
+    "pytest>=9.1.1",
+]
+
+[tool.briefcase.app.arsenal.macOS]
+supported_versions = ["12.0"]
+min_os_version = "12.0"
+icon = "resources/arsenal"
+
+[tool.briefcase.app.arsenal.linux]
+categories = ["Office"]
+terminal = true
+icon = "resources/images/arsenal"
+
+[tool.briefcase.app.arsenal.linux.appimage]
+
+[tool.briefcase.app.arsenal.linux.system.debian]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.linux.system.rhel]
+categories = ["Office"]
+
+[tool.briefcase.app.arsenal.windows]
+console = true
+icon = "resources/arsenal"
+
+Briefcase Log:
+[10:35:23]                                                                                                                                                             config.py:666
+           *************************************************************************                                                                                   config.py:666
+           ** WARNING: License Definition for the Project is Deprecated           **                                                                                   config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       config.py:666
+               Briefcase now uses PEP 621 format for license definitions.                                                                                              config.py:666
+                                                                                                                                                                       config.py:666
+               Previously, the name of the license was assigned to the 'license'                                                                                       config.py:666
+               field in pyproject.toml. For PEP 621, the name of the license is                                                                                        config.py:666
+               assigned to 'license.text' or the name of the file containing the                                                                                       config.py:666
+               license is assigned to 'license.file'.                                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+               The current configuration for the Project has a 'license' field                                                                                         config.py:666
+               that is specified as a string:                                                                                                                          config.py:666
+                                                                                                                                                                       config.py:666
+                   license = "GPL-3.0-or-later"                                                                                                                        config.py:666
+                                                                                                                                                                       config.py:666
+               To use the PEP 621 format (and to remove this warning), specify that                                                                                    config.py:666
+               the LICENSE file contains the license for the Project:                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+                   license.file = "LICENSE"                                                                                                                            config.py:666
+                                                                                                                                                                       config.py:666
+           *************************************************************************                                                                                   config.py:666
+           *************************************************************************                                                                                  appimage.py:97
+           ** WARNING: Building a Local AppImage!                                 **                                                                                  appimage.py:97
+           *************************************************************************                                                                                  appimage.py:97
+                                                                                                                                                                      appimage.py:97
+               You are building an AppImage outside Docker. The resulting AppImage                                                                                    appimage.py:97
+               will work, but will not be as portable as a Docker-based AppImage.                                                                                     appimage.py:97
+               Any `manylinux` setting will be ignored.                                                                                                               appimage.py:97
+                                                                                                                                                                      appimage.py:97
+           *************************************************************************                                                                                  appimage.py:97
+           *************************************************************************                                                                                 appimage.py:111
+           ** WARNING: Use of AppImage is not recommended!                        **                                                                                 appimage.py:111
+           *************************************************************************                                                                                 appimage.py:111
+                                                                                                                                                                     appimage.py:111
+               Briefcase supports AppImage in a best-effort capacity. It has proven                                                                                  appimage.py:111
+               to be highly unreliable as a distribution platform. AppImages cannot                                                                                  appimage.py:111
+               use pre-compiled binary wheels, and has significant problems with                                                                                     appimage.py:111
+               most commonly used GUI toolkits (including GTK and PySide).                                                                                           appimage.py:111
+                                                                                                                                                                     appimage.py:111
+               Consider using system packages or Flatpak for Linux app                                                                                               appimage.py:111
+               distribution.                                                                                                                                         appimage.py:111
+                                                                                                                                                                     appimage.py:111
+           *************************************************************************                                                                                 appimage.py:111
+                                                                                                                                                                       create.py:937
+           [arsenal] Generating application template...                                                                                                                create.py:937
+           Using app template: https://github.com/beeware/briefcase-linux-appimage-template.git, branch v0.3.25                                                         base.py:1241
+[10:35:24] Using existing template (sha f970441e56f50b434b35b21892c4e8b43cbf7a45, updated Sun Aug 10 10:08:03 2025)                                                     base.py:1146
+[10:35:25]                                                                                                                                                             create.py:952
+           [arsenal] Installing support package...                                                                                                                     create.py:952
+           Using support package                                                                                                                                       create.py:366
+           https://github.com/astral-sh/python-build-standalone/releases/download/20250723/cpython-3.14.0rc1+20250723-x86_64-unknown-linux-gnu-install_only_stripped.t              
+           ar.gz                                                                                                                                                                    
+[10:35:26] Downloading cpython-3.14.0rc1+20250723-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz...                                                               file.py:227
+[10:35:29] Unpacking support package... started                                                                                                                        create.py:281
+[10:35:33] Unpacking support package... done                                                                                                                           create.py:281
+                                                                                                                                                                       create.py:970
+           [arsenal] Installing application code...                                                                                                                    create.py:970
+           Installing src/arsenal... started                                                                                                                           create.py:734
+           Installing src/arsenal... done                                                                                                                              create.py:734
+                                                                                                                                                                       create.py:973
+           [arsenal] Installing requirements...                                                                                                                        create.py:973
+           Installing app requirements... started                                                                                                                      create.py:660
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     /usr/bin/python3 -u -X utf8 -m pip install --disable-pip-version-check --upgrade --no-user                                                      subprocess.py:838
+           '--target=/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages' 'textual>=8.2.8'                        
+           'rich>=15.0.0' 'openpyxl>=3.1.5' numpy==1.24.3 scipy==1.10.1 matplotlib==3.7.1 scikit-learn==1.2.2 pandas==2.0.3 'plotext>=5.2.8,<6.0.0'                                 
+           'textual>=8.2.8' 'rich>=15.0.0' 'openpyxl>=3.1.5' 'matplotlib>=3.8.0,<3.9.0' 'numpy>=1.26.0,<2.0.0' 'pandas>=2.1.0,<2.2.0' 'plotext>=5.2.8,<6.0.0'                       
+           'scikit-learn>=1.3.0,<1.4.0' 'scipy>=1.11.0,<1.12.0'                                                                                                                     
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5                                                                                        subprocess.py:838
+[10:35:34] Collecting textual>=8.2.8                                                                                                                               subprocess.py:195
+             Using cached textual-8.2.8-py3-none-any.whl.metadata (9.1 kB)                                                                                         subprocess.py:195
+           Collecting rich>=15.0.0                                                                                                                                 subprocess.py:195
+             Using cached rich-15.0.0-py3-none-any.whl.metadata (18 kB)                                                                                            subprocess.py:195
+           Collecting openpyxl>=3.1.5                                                                                                                              subprocess.py:195
+             Using cached openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)                                                                                    subprocess.py:195
+[10:35:35] ERROR: Could not find a version that satisfies the requirement numpy==1.24.3 (from versions: none)                                                      subprocess.py:195
+           ERROR: No matching distribution found for numpy==1.24.3                                                                                                 subprocess.py:195
+           >>> Return code: 1                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           Installing app requirements... errored                                                                                                                      create.py:660
+                                                                                                                                                                      __main__.py:42
+           Unable to install requirements. This may be because one of your                                                                                            __main__.py:43
+           requirements is invalid, or because pip was unable to connect                                                                                              __main__.py:43
+           to the PyPI server.                                                                                                                                        __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:605 in _pip_install                                                                                                  │
+│                                                                                                                                                                                  │
+│    602 │   │   │   when invoking pip.                                                                                                                                            │
+│    603 │   │   """                                                                                                                                                               │
+│    604 │   │   try:                                                                                                                                                              │
+│ ❱  605 │   │   │   self.tools[app].app_context.run(                                                                                                                              │
+│    606 │   │   │   │   [                                                                                                                                                         │
+│    607 │   │   │   │   │   sys.executable,                                                                                                                                       │
+│    608 │   │   │   │   │   "-u",                                                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────────────────╮                       │
+│ │               app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                             │                       │
+│ │ app_packages_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages') │                       │
+│ │      install_hint = ''                                                                                                                                 │                       │
+│ │          pip_args = [                                                                                                                                  │                       │
+│ │                     │   'textual>=8.2.8',                                                                                                              │                       │
+│ │                     │   'rich>=15.0.0',                                                                                                                │                       │
+│ │                     │   'openpyxl>=3.1.5',                                                                                                             │                       │
+│ │                     │   'numpy==1.24.3',                                                                                                               │                       │
+│ │                     │   'scipy==1.10.1',                                                                                                               │                       │
+│ │                     │   'matplotlib==3.7.1',                                                                                                           │                       │
+│ │                     │   'scikit-learn==1.2.2',                                                                                                         │                       │
+│ │                     │   'pandas==2.0.3',                                                                                                               │                       │
+│ │                     │   'plotext>=5.2.8,<6.0.0',                                                                                                       │                       │
+│ │                     │   'textual>=8.2.8',                                                                                                              │                       │
+│ │                     │   ... +8                                                                                                                         │                       │
+│ │                     ]                                                                                                                                  │                       │
+│ │        pip_kwargs = {}                                                                                                                                 │                       │
+│ │              self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0>                                           │                       │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                       │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:144 in inner                                                                                                 │
+│                                                                                                                                                                                  │
+│   141 │   │   │   with sub.tools.console.release_console_control():                                                                                                              │
+│   142 │   │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                              │
+│   143 │   │   else:                                                                                                                                                              │
+│ ❱ 144 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   145 │                                                                                                                                                                          │
+│   146 │   return inner                                                                                                                                                           │
+│   147                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────╮                 │
+│ │                    args = ['/usr/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', ... +19] │                 │
+│ │ remove_dynamic_elements = False                                                                                                                              │                 │
+│ │                     sub = <briefcase.integrations.subprocess.Subprocess object at 0x75facc649010>                                                            │                 │
+│ │            wrapped_args = ()                                                                                                                                 │                 │
+│ │          wrapped_kwargs = {'check': True, 'encoding': 'UTF-8'}                                                                                               │                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                 │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:539 in run                                                                                                   │
+│                                                                                                                                                                                  │
+│   536 │   │   # caller sets stream_output=False, then ensure_console_is_safe() will                                                                                              │
+│   537 │   │   # disable any dynamic console elements while the command runs.                                                                                                     │
+│   538 │   │   if stream_output:                                                                                                                                                  │
+│ ❱ 539 │   │   │   return self._run_and_stream_output(args, filter_func=filter_func, **kwargs)                                                                                    │
+│   540 │   │                                                                                                                                                                      │
+│   541 │   │   # Can't filter non-streamed output.                                                                                                                                │
+│   542 │   │   if filter_func:                                                                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────────╮                           │
+│ │          args = ['/usr/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', ... +19] │                           │
+│ │   filter_func = None                                                                                                                               │                           │
+│ │        kwargs = {'check': True, 'encoding': 'UTF-8'}                                                                                               │                           │
+│ │          self = <briefcase.integrations.subprocess.Subprocess object at 0x75facc649010>                                                            │                           │
+│ │ stream_output = True                                                                                                                               │                           │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                           │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/integrations/subprocess.py:615 in _run_and_stream_output                                                                                │
+│                                                                                                                                                                                  │
+│   612 │   │   self._log_return_code(return_code)                                                                                                                                 │
+│   613 │   │                                                                                                                                                                      │
+│   614 │   │   if check and return_code:                                                                                                                                          │
+│ ❱ 615 │   │   │   raise subprocess.CalledProcessError(return_code, args, stderr=stderr)                                                                                          │
+│   616 │   │                                                                                                                                                                      │
+│   617 │   │   return subprocess.CompletedProcess(args, return_code, stderr=stderr)                                                                                               │
+│   618                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────────╮                             │
+│ │        args = ['/usr/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', ... +19] │                             │
+│ │       check = True                                                                                                                               │                             │
+│ │ filter_func = None                                                                                                                               │                             │
+│ │      kwargs = {'encoding': 'UTF-8', 'stdout': -1, 'stderr': -2, 'bufsize': 1}                                                                    │                             │
+│ │     process = <Popen: returncode: 1 args: ['/usr/bin/python3', '-u', '-X', 'utf8', '-m', '...>                                                   │                             │
+│ │ return_code = 1                                                                                                                                  │                             │
+│ │        self = <briefcase.integrations.subprocess.Subprocess object at 0x75facc649010>                                                            │                             │
+│ │      stderr = None                                                                                                                               │                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['/usr/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', '--target=/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages', 'textual>=8.2.8', 'rich>=15.0.0', 'openpyxl>=3.1.5', 'numpy==1.24.3', 'scipy==1.10.1', 'matplotlib==3.7.1', 'scikit-learn==1.2.2', 'pandas==2.0.3', 'plotext>=5.2.8,<6.0.0', 'textual>=8.2.8', 'rich>=15.0.0', 'openpyxl>=3.1.5', 'matplotlib>=3.8.0,<3.9.0', 'numpy>=1.26.0,<2.0.0', 'pandas>=2.1.0,<2.2.0', 'plotext>=5.2.8,<6.0.0', 'scikit-learn>=1.3.0,<1.4.0', 'scipy>=1.11.0,<1.12.0']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /usr/lib/python3/dist-packages/briefcase/__main__.py:27 in main                                                                                                                  │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │       command = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x75facc8db8c0> │                                                                    │
+│ │       console = <briefcase.console.Console object at 0x75facc8da7b0>                                      │                                                                    │
+│ │             e = RequirementsInstallError()                                                                │                                                                    │
+│ │ extra_cmdline = ['--no-input', '--no-docker']                                                             │                                                                    │
+│ │       options = {'update': False, 'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}  │                                                                    │
+│ │     overrides = {}                                                                                        │                                                                    │
+│ │        result = 200                                                                                       │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:204 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   201 │   │                                                                                                                                                                      │
+│   202 │   │   state = None                                                                                                                                                       │
+│   203 │   │   for _, app_obj in sorted(apps_to_package.items()):                                                                                                                 │
+│ ❱ 204 │   │   │   state = self._package_app(                                                                                                                                     │
+│   205 │   │   │   │   app_obj,                                                                                                                                                   │
+│   206 │   │   │   │   update=update,                                                                                                                                             │
+│   207 │   │   │   │   **full_options(state, options),                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                  │
+│ │               _ = 'arsenal'                                                                                 │                                                                  │
+│ │             app = None                                                                                      │                                                                  │
+│ │        app_name = None                                                                                      │                                                                  │
+│ │         app_obj = <com.arsenal.arsenal v2.5.2 AppConfig>                                                    │                                                                  │
+│ │ apps_to_package = {'arsenal': <com.arsenal.arsenal v2.5.2 AppConfig>}                                       │                                                                  │
+│ │         options = {'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}                   │                                                                  │
+│ │            self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x75facc8db8c0> │                                                                  │
+│ │           state = None                                                                                      │                                                                  │
+│ │          update = False                                                                                     │                                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                  │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/package.py:103 in _package_app                                                                                                 │
+│                                                                                                                                                                                  │
+│   100 │   │   │   # it will be necessary to confirm deletion of the old folder.                                                                                                  │
+│   101 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   102 │   │   elif not template_file.exists():                                                                                                                                   │
+│ ❱ 103 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   104 │   │   │   state = self.build_command(app, **full_options(state, options))                                                                                                │
+│   105 │   │   elif update:                                                                                                                                                       │
+│   106 │   │   │   # If we're updating for packaging, update everything.                                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────╮                          │
+│ │              app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                           │                          │
+│ │      binary_file = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал-2.5.2-x86_64.AppImage') │                          │
+│ │          options = {'adhoc_sign': False, 'identity': None}                                                                                          │                          │
+│ │ packaging_format = 'appimage'                                                                                                                       │                          │
+│ │             self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x75facc8db8c0>                                        │                          │
+│ │    template_file = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage')                               │                          │
+│ │           update = False                                                                                                                            │                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                          │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:1026 in __call__                                                                                                     │
+│                                                                                                                                                                                  │
+│   1023 │   │                                                                                                                                                                     │
+│   1024 │   │   state = None                                                                                                                                                      │
+│   1025 │   │   for _, app_obj in sorted(apps_to_create.items()):                                                                                                                 │
+│ ❱ 1026 │   │   │   state = self.create_app(                                                                                                                                      │
+│   1027 │   │   │   │   app_obj,                                                                                                                                                  │
+│   1028 │   │   │   │   **full_options(state, options),                                                                                                                           │
+│   1029 │   │   │   )                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │              _ = 'arsenal'                                                                                │                                                                    │
+│ │            app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                   │                                                                    │
+│ │       app_name = None                                                                                     │                                                                    │
+│ │        app_obj = <com.arsenal.arsenal v2.5.2 AppConfig>                                                   │                                                                    │
+│ │ apps_to_create = {'arsenal': <com.arsenal.arsenal v2.5.2 AppConfig>}                                      │                                                                    │
+│ │        options = {'adhoc_sign': False, 'identity': None}                                                  │                                                                    │
+│ │           self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0> │                                                                    │
+│ │          state = None                                                                                     │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:974 in create_app                                                                                                    │
+│                                                                                                                                                                                  │
+│    971 │   │   │   self.install_app_code(app=app)                                                                                                                                │
+│    972 │   │   │                                                                                                                                                                 │
+│    973 │   │   │   self.console.info("Installing requirements...", prefix=app.app_name)                                                                                          │
+│ ❱  974 │   │   │   self.install_app_requirements(app=app)                                                                                                                        │
+│    975 │   │   │                                                                                                                                                                 │
+│    976 │   │   │   self.console.info(                                                                                                                                            │
+│    977 │   │   │   │   "Installing application resources...", prefix=app.app_name                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────╮                                                             │
+│ │         app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                             │                                                             │
+│ │ bundle_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage') │                                                             │
+│ │     options = {'adhoc_sign': False, 'identity': None}                                                            │                                                             │
+│ │        self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0>           │                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                             │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:711 in install_app_requirements                                                                                      │
+│                                                                                                                                                                                  │
+│    708 │   │   else:                                                                                                                                                             │
+│    709 │   │   │   try:                                                                                                                                                          │
+│    710 │   │   │   │   app_packages_path = self.app_packages_path(app)                                                                                                           │
+│ ❱  711 │   │   │   │   self._install_app_requirements(app, requires, app_packages_path)                                                                                          │
+│    712 │   │   │   except KeyError as e:                                                                                                                                         │
+│    713 │   │   │   │   raise BriefcaseCommandError(                                                                                                                              │
+│    714 │   │   │   │   │   "Application path index file does not define "                                                                                                        │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────╮         │
+│ │                             app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                             │         │
+│ │               app_packages_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages') │         │
+│ │ requirement_installer_args_path = None                                                                                                                               │         │
+│ │               requirements_path = None                                                                                                                               │         │
+│ │                        requires = [                                                                                                                                  │         │
+│ │                                   │   'textual>=8.2.8',                                                                                                              │         │
+│ │                                   │   'rich>=15.0.0',                                                                                                                │         │
+│ │                                   │   'openpyxl>=3.1.5',                                                                                                             │         │
+│ │                                   │   'numpy==1.24.3',                                                                                                               │         │
+│ │                                   │   'scipy==1.10.1',                                                                                                               │         │
+│ │                                   │   'matplotlib==3.7.1',                                                                                                           │         │
+│ │                                   │   'scikit-learn==1.2.2',                                                                                                         │         │
+│ │                                   │   'pandas==2.0.3',                                                                                                               │         │
+│ │                                   │   'plotext>=5.2.8,<6.0.0',                                                                                                       │         │
+│ │                                   │   'textual>=8.2.8',                                                                                                              │         │
+│ │                                   │   ... +8                                                                                                                         │         │
+│ │                                   ]                                                                                                                                  │         │
+│ │                            self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0>                                           │         │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯         │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/platforms/linux/__init__.py:194 in _install_app_requirements                                                                            │
+│                                                                                                                                                                                  │
+│   191 │   │   │   │   │   │   ) from e                                                                                                                                           │
+│   192 │   │                                                                                                                                                                      │
+│   193 │   │   # Continue with the default app requirement handling.                                                                                                              │
+│ ❱ 194 │   │   return super()._install_app_requirements(                                                                                                                          │
+│   195 │   │   │   app,                                                                                                                                                           │
+│   196 │   │   │   requires=requires,                                                                                                                                             │
+│   197 │   │   │   app_packages_path=app_packages_path,                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────╮                 │
+│ │                     app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                             │                 │
+│ │       app_packages_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages') │                 │
+│ │                  kwargs = {}                                                                                                                                 │                 │
+│ │ local_requirements_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/_requirements')                   │                 │
+│ │             requirement = 'scipy>=1.11.0,<1.12.0'                                                                                                            │                 │
+│ │                requires = [                                                                                                                                  │                 │
+│ │                           │   'textual>=8.2.8',                                                                                                              │                 │
+│ │                           │   'rich>=15.0.0',                                                                                                                │                 │
+│ │                           │   'openpyxl>=3.1.5',                                                                                                             │                 │
+│ │                           │   'numpy==1.24.3',                                                                                                               │                 │
+│ │                           │   'scipy==1.10.1',                                                                                                               │                 │
+│ │                           │   'matplotlib==3.7.1',                                                                                                           │                 │
+│ │                           │   'scikit-learn==1.2.2',                                                                                                         │                 │
+│ │                           │   'pandas==2.0.3',                                                                                                               │                 │
+│ │                           │   'plotext>=5.2.8,<6.0.0',                                                                                                       │                 │
+│ │                           │   'textual>=8.2.8',                                                                                                              │                 │
+│ │                           │   ... +8                                                                                                                         │                 │
+│ │                           ]                                                                                                                                  │                 │
+│ │                    self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0>                                           │                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                 │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:661 in _install_app_requirements                                                                                     │
+│                                                                                                                                                                                  │
+│    658 │   │   # Install requirements                                                                                                                                            │
+│    659 │   │   if requires:                                                                                                                                                      │
+│    660 │   │   │   with self.console.wait_bar(progress_message):                                                                                                                 │
+│ ❱  661 │   │   │   │   self._pip_install(                                                                                                                                        │
+│    662 │   │   │   │   │   app,                                                                                                                                                  │
+│    663 │   │   │   │   │   app_packages_path=app_packages_path,                                                                                                                  │
+│    664 │   │   │   │   │   pip_args=(                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────────────────╮                       │
+│ │               app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                             │                       │
+│ │ app_packages_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages') │                       │
+│ │      install_hint = ''                                                                                                                                 │                       │
+│ │          pip_args = None                                                                                                                               │                       │
+│ │        pip_kwargs = None                                                                                                                               │                       │
+│ │  progress_message = 'Installing app requirements...'                                                                                                   │                       │
+│ │          requires = [                                                                                                                                  │                       │
+│ │                     │   'textual>=8.2.8',                                                                                                              │                       │
+│ │                     │   'rich>=15.0.0',                                                                                                                │                       │
+│ │                     │   'openpyxl>=3.1.5',                                                                                                             │                       │
+│ │                     │   'numpy==1.24.3',                                                                                                               │                       │
+│ │                     │   'scipy==1.10.1',                                                                                                               │                       │
+│ │                     │   'matplotlib==3.7.1',                                                                                                           │                       │
+│ │                     │   'scikit-learn==1.2.2',                                                                                                         │                       │
+│ │                     │   'pandas==2.0.3',                                                                                                               │                       │
+│ │                     │   'plotext>=5.2.8,<6.0.0',                                                                                                       │                       │
+│ │                     │   'textual>=8.2.8',                                                                                                              │                       │
+│ │                     │   ... +8                                                                                                                         │                       │
+│ │                     ]                                                                                                                                  │                       │
+│ │              self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0>                                           │                       │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                       │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3/dist-packages/briefcase/commands/create.py:627 in _pip_install                                                                                                  │
+│                                                                                                                                                                                  │
+│    624 │   │   │   │   **pip_kwargs,                                                                                                                                             │
+│    625 │   │   │   )                                                                                                                                                             │
+│    626 │   │   except subprocess.CalledProcessError as e:                                                                                                                        │
+│ ❱  627 │   │   │   raise RequirementsInstallError(install_hint=install_hint) from e                                                                                              │
+│    628 │                                                                                                                                                                         │
+│    629 │   def _install_app_requirements(                                                                                                                                        │
+│    630 │   │   self,                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────────────────╮                       │
+│ │               app = <com.arsenal.arsenal v2.5.2 AppConfig>                                                                                             │                       │
+│ │ app_packages_path = PosixPath('/home/shadrov/arsenal_project_ru_рабочий_MacOS_Linux_2.5/build/arsenal/linux/appimage/Арсенал.AppDir/usr/app_packages') │                       │
+│ │      install_hint = ''                                                                                                                                 │                       │
+│ │          pip_args = [                                                                                                                                  │                       │
+│ │                     │   'textual>=8.2.8',                                                                                                              │                       │
+│ │                     │   'rich>=15.0.0',                                                                                                                │                       │
+│ │                     │   'openpyxl>=3.1.5',                                                                                                             │                       │
+│ │                     │   'numpy==1.24.3',                                                                                                               │                       │
+│ │                     │   'scipy==1.10.1',                                                                                                               │                       │
+│ │                     │   'matplotlib==3.7.1',                                                                                                           │                       │
+│ │                     │   'scikit-learn==1.2.2',                                                                                                         │                       │
+│ │                     │   'pandas==2.0.3',                                                                                                               │                       │
+│ │                     │   'plotext>=5.2.8,<6.0.0',                                                                                                       │                       │
+│ │                     │   'textual>=8.2.8',                                                                                                              │                       │
+│ │                     │   ... +8                                                                                                                         │                       │
+│ │                     ]                                                                                                                                  │                       │
+│ │        pip_kwargs = {}                                                                                                                                 │                       │
+│ │              self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x75facc64b4d0>                                           │                       │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+RequirementsInstallError: Unable to install requirements. This may be because one of your
+requirements is invalid, or because pip was unable to connect
+to the PyPI server.
+
